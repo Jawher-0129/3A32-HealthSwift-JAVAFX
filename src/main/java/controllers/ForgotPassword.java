@@ -113,7 +113,7 @@ public class ForgotPassword {
         Content content = new Content("text/plain", bodyContent);
         Mail mail = new Mail(from, subject, to, content);
 
-        SendGrid sg = new SendGrid("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");
+        SendGrid sg = new SendGrid("");
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
