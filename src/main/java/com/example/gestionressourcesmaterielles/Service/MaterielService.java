@@ -3,6 +3,8 @@ package com.example.gestionressourcesmaterielles.Service;
 import com.example.gestionressourcesmaterielles.Model.IService;
 import com.example.gestionressourcesmaterielles.Model.Materiel;
 import com.example.gestionressourcesmaterielles.util.DataSource;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -111,4 +113,34 @@ public class MaterielService implements IService<Materiel> {
     public Materiel getById(int id) {
         return null;
     }
+
+
+    public ObservableList<Materiel> getMaterielByCategorie(int idCategorie) {
+        String requete = "SELECT * FROM materiel WHERE id_categorie=?";
+        ObservableList<Materiel> obList = FXCollections.observableArrayList();
+        try (PreparedStatement ps = cnx.prepareStatement(requete)) {
+            ps.setInt(1, idCategorie);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                obList.add(new Materiel(
+                        rs.getInt("id_materiel"),
+                        rs.getString("libelle"),
+                        rs.getString("description"),
+                        rs.getInt("disponibilite"),
+                        rs.getString("image"),
+                        rs.getDouble("prix")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return obList;
+    }
+
+
+
+
+
+
+
 }
