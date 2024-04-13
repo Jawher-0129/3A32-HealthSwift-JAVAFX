@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 import service.Usercrud;
+import service.SystemNotification;
 
 public class Registre {
 
@@ -112,9 +113,8 @@ public class Registre {
         Usercrud add = new Usercrud();
         add.addUser(newUser);
 
-        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-        successAlert.setContentText("Registration successful");
-        successAlert.show();
+        SystemNotification.showNotification("New User Registered", "A new user has been registered.");
+
         switchScene("/Login.fxml", event);
 
 

@@ -17,7 +17,7 @@
             <children>
             <Button layoutX="36.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Users" />
             <Button layoutX="36.0" layoutY="166.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Donations" />
-            <Button layoutX="36.0" layoutY="212.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Materiels" />
+            <Button layoutX="36.0" layoutY="212.0" mnemonicParsing="false" onAction="#Materiels" prefHeight="26.0" prefWidth="96.0" text="Materiels" />
             </children>
         </AnchorPane>
 
@@ -58,7 +58,7 @@
         <Button layoutX="481.0" layoutY="57.0" onAction="#sortAsc" text="Sort Asc" />
         <Button layoutX="401.0" layoutY="57.0" onAction="#sortDesc" text="Sort Desc" />
         <TextField fx:id="searchField" layoutX="427.0" layoutY="19.0" onKeyReleased="#search" promptText="Search..." />
-      <Button layoutX="551.0" layoutY="57.0" mnemonicParsing="false"  text="stat" />
+      <Button layoutX="551.0" layoutY="57.0" mnemonicParsing="false" text="stat" />
 
     </children>
 </AnchorPane>

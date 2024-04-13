@@ -230,7 +230,11 @@ public class AdminPage {
     }
 
 
+    @FXML
+    void Materiels(ActionEvent event) {
+        switchScene("/Materiels.fxml", event);
 
+    }
     // Method to calculate role count
 
 }
