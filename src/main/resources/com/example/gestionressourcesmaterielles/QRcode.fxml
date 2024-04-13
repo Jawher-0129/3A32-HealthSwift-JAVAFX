@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.gestionressourcesmaterielles.Controller.QRcodeController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Button fx:id="generateButton" layoutX="329.0" layoutY="356.0" mnemonicParsing="false" onAction="#generateQRCode" prefHeight="30.0" prefWidth="131.0" text="GENERATE" />
+        <ImageView fx:id="qrCodeImageView" fitHeight="287.0" fitWidth="319.0" layoutX="141.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
+        <ComboBox fx:id="tf_combobox" layoutX="141.0" layoutY="320.0" opacity="0.56" prefHeight="25.0" prefWidth="319.0" />
+    </children>
+
+</AnchorPane>

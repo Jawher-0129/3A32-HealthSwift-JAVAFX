@@ -8,7 +8,6 @@ public class Categorie {
         this.id = id;
         this.libelle = libelle;
     }
-
     public Categorie(String libelle) {
         this.libelle = libelle;
     }

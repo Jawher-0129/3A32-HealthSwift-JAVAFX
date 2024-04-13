@@ -1,0 +1,104 @@
+.root {
+    -fx-background-color: #2e2e2e;
+    -fx-text-fill: white;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.checkbox {
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.combo-box-base {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.list-view {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.menu-bar {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.menu-item {
+    -fx-text-fill: white;
+}
+
+.radio-button {
+    -fx-text-fill: white;
+}
+
+.text-area {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.scroll-pane {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.tab-pane {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.table-view {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.text-area {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.date-picker .arrow {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.date-picker .date-cell {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.date-picker .month-year-pane {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.date-picker .day-cell:hover {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+.date-picker .day-cell:hover .text {
+    -fx-text-fill: white;
+}

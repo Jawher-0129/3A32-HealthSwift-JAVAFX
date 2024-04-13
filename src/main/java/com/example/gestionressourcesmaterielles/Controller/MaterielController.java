@@ -221,7 +221,8 @@ public class MaterielController {
         prixTextField.setText("");
         disponibleRadioButton.setSelected(true); // Réinitialiser à Disponible
         imageView.setImage(null);
-        categorieChoiceBox.getSelectionModel().clearSelection(); // Effacer la sélection de la catégorie
+        categorieChoiceBox.getSelectionModel().clearSelection();
+        refreshTableView();
     }
 
     @FXML

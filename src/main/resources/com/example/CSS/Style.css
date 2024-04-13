@@ -1,0 +1,37 @@
+ /* Styles pour la VBox principale */
+.vbox {
+    -fx-background-color: #f0f0f0; /* Couleur de fond */
+}
+
+/* Styles pour les boutons de catégorie */
+.button {
+    -fx-background-color: #4CAF50; /* Couleur de fond */
+    -fx-text-fill: white; /* Couleur du texte */
+    -fx-font-size: 16px; /* Taille de la police */
+    -fx-font-family: "Arial"; /* Police de caractères */
+    -fx-padding: 10px 20px; /* Espacement intérieur */
+    -fx-border-radius: 5px; /* Rayon des coins */
+}
+
+.button:hover {
+    -fx-background-color: #45a049; /* Couleur de fond au survol */
+}
+
+/* Styles pour la ListView */
+.list-view {
+    -fx-background-color: white; /* Couleur de fond */
+}
+
+/* Styles pour le bouton "Afficher les matériels" */
+#afficherButton {
+    -fx-background-color: #008CBA; /* Couleur de fond */
+    -fx-text-fill: white; /* Couleur du texte */
+    -fx-font-size: 16px; /* Taille de la police */
+    -fx-font-family: "Arial"; /* Police de caractères */
+    -fx-padding: 10px 20px; /* Espacement intérieur */
+    -fx-border-radius: 5px; /* Rayon des coins */
+}
+
+#afficherButton:hover {
+    -fx-background-color: #005F6B; /* Couleur de fond au survol */
+}

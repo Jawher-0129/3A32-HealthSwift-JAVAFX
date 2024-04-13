@@ -5,11 +5,10 @@ import com.example.gestionressourcesmaterielles.Service.CategorieService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -28,6 +27,29 @@ public class CategorieController {
     private TextField newCategorieLibelleField;
     @FXML
     private Button newCategorieButton;
+    @FXML
+    private VBox vbox1;
+    @FXML
+    private ToggleButton switchModeButton;
+
+    @FXML
+    private AnchorPane rootAnchorPane;
+
+    private boolean isDarkMode = false;
+
+
+    @FXML
+    private void switchMode() {
+        if (isDarkMode){
+            rootAnchorPane.getStyleClass().remove("dark-mode");
+            rootAnchorPane.getStyleClass().add("light-mode");
+        } else {
+            rootAnchorPane.getStyleClass().remove("light-mode");
+            rootAnchorPane.getStyleClass().add("dark-mode");
+        }
+        isDarkMode = !isDarkMode;
+    }
+
 
     public CategorieController() {
     }
@@ -42,7 +64,6 @@ public class CategorieController {
             if (newSelection != null) {
                 this.populateFields(newSelection);
             }
-
         });
         this.configureTableView();
         this.refreshTableView();
@@ -68,7 +89,6 @@ public class CategorieController {
             this.refreshTableView();
             this.newCategorieLibelleField.clear();
         }
-
     }
 
     @FXML
@@ -85,9 +105,7 @@ public class CategorieController {
         } else {
             System.out.println("Veuillez sélectionner une catégorie à supprimer.");
         }
-
     }
-
 
     @FXML
     void handleUpdateCategorieButton() {
@@ -103,6 +121,4 @@ public class CategorieController {
             System.out.println("Veuillez sélectionner une catégorie et spécifier un nouveau libellé pour effectuer la modification.");
         }
     }
-
-
 }
