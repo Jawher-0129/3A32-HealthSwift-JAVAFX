@@ -4,6 +4,7 @@ import com.example.gestionressourcesmaterielles.Model.Categorie;
 import com.example.gestionressourcesmaterielles.Service.CategorieService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -92,7 +93,7 @@ public class CategorieController {
     }
 
     @FXML
-    void handleDeleteCategorieButton() {
+    void handleDeleteCategorieButton(ActionEvent event) {
         Categorie selectedCategorie = (Categorie)this.categorieTableView.getSelectionModel().getSelectedItem();
         if (selectedCategorie != null) {
             try {
@@ -108,7 +109,7 @@ public class CategorieController {
     }
 
     @FXML
-    void handleUpdateCategorieButton() {
+    void handleUpdateCategorieButton(ActionEvent event) {
         Categorie selectedCategorie = (Categorie)this.categorieTableView.getSelectionModel().getSelectedItem();
         String newLibelle = this.newCategorieLibelleField.getText().trim();
         if (selectedCategorie != null && !newLibelle.isEmpty()) {

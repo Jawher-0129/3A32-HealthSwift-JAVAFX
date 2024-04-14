@@ -33,8 +33,6 @@ public class QRcodeController implements Initializable {
     @FXML
     private ImageView qrCodeImageView;
 
-    @FXML
-    private Button RETURN;
 
     @FXML
     private ComboBox<Materiel> tf_combobox; // Assuming you have a ComboBox of Concours objects
@@ -44,14 +42,13 @@ public class QRcodeController implements Initializable {
         Materiel selectedEvenement = tf_combobox.getValue();
         if (selectedEvenement != null) {
             String data = selectedEvenement.getLibelleMateriel() + "\n"
-                    + selectedEvenement.getDescription() + selectedEvenement.getPrix()+selectedEvenement.getId_categorie()+selectedEvenement.getDisponibilite();
+                    + selectedEvenement.getDescription() + "\n"+ selectedEvenement.getPrix()+"\n"+selectedEvenement.getId_categorie()+"\n"+selectedEvenement.getDisponibilite();
             // Set the size of the QR code image
             int width = 300;
             int height = 300;
             try {
                 // Generate the QR code
                 BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, width, height);
-
                 // Convert the BitMatrix to an Image
                 Image qrCodeImage = toFXImage(bitMatrix);
 

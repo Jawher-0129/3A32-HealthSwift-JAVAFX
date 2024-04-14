@@ -8,12 +8,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -65,6 +68,19 @@ public class MaterielController {
 
     @FXML
     private TableColumn<Materiel,Integer> descriptionColumn;
+
+    @FXML
+    private Button qrcodeBtn;
+
+    @FXML
+    private TextField rechercheTextField;
+
+    @FXML
+    private Button rechercheButton;
+
+    @FXML
+    private Button PDFMaterielBtn;
+
 
     private void populateFields(Materiel materiel) {
         this.libelleMaterielTextField.setText(materiel.getLibelleMateriel());
@@ -174,7 +190,6 @@ public class MaterielController {
             alert.show();
             return;
         }
-
         double prix = Double.parseDouble(prixTextField.getText());
 
         if (prix<0) {
@@ -268,4 +283,35 @@ public class MaterielController {
             System.out.println("Veuillez sélectionner une catégorie et spécifier un nouveau libellé pour effectuer la modification.");
         }
     }
+
+    @FXML
+    void PageQrCode(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/QRcode.fxml"));
+            Parent root=loader.load();
+            qrcodeBtn.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void handleRecherche(ActionEvent event) {
+        String libelleRecherche = rechercheTextField.getText().trim();
+        if (!libelleRecherche.isEmpty()) {
+            List<Materiel> materiels = materielService.rechercherParLibelle(libelleRecherche);
+            ObservableList<Materiel> materielObservableList = FXCollections.observableArrayList(materiels);
+            materielTableView.setItems(materielObservableList);
+        } else {
+            refreshTableView();
+        }
+    }
+
+
+
+
+
+
+
+
 }
