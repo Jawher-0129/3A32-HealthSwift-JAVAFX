@@ -138,7 +138,29 @@ public class MaterielService implements IService<Materiel> {
     }
 
 
-
+    public List<Materiel> rechercherParLibelle(String libelle) {
+        String requete = "SELECT * FROM materiel WHERE libelle LIKE ?";
+        List<Materiel> list = new ArrayList<>();
+        try {
+            pst = cnx.prepareStatement(requete);
+            pst.setString(1, "%" + libelle + "%"); // Utilisation du joker '%' pour trouver des correspondances partielles
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(new Materiel(
+                        rs.getInt("id_materiel"),
+                        rs.getString("libelle"),
+                        rs.getString("description"),
+                        rs.getInt("disponibilite"),
+                        rs.getString("image"),
+                        rs.getDouble("prix"),
+                        rs.getInt("id_categorie")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
 
 
 

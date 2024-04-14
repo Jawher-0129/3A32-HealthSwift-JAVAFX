@@ -16,7 +16,7 @@ public class Categorie {
         return this.id;
     }
 
-    public void setId(int id) {
+        public void setId(int id) {
         this.id = id;
     }
 
