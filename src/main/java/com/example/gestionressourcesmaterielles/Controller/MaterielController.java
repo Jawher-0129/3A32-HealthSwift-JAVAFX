@@ -26,6 +26,8 @@ public class MaterielController {
     private final MaterielService materielService=new MaterielService();
 
     @FXML
+    private Button bouttonStatMateriel;
+    @FXML
     private Button choisirImageButton;
 
     @FXML
@@ -306,6 +308,27 @@ public class MaterielController {
             refreshTableView();
         }
     }
+
+    @FXML
+    void PageStatMateriel(ActionEvent event)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/StatMateriel.fxml"));
+            Parent root=loader.load();
+            qrcodeBtn.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 
 
