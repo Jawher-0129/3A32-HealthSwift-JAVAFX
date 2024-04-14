@@ -89,5 +89,6 @@
    <Button fx:id="qrcodeBtn" layoutX="268.0" layoutY="424.0" mnemonicParsing="false" onAction="#PageQrCode" prefHeight="26.0" prefWidth="91.0" text="QR CODE" />
    <Button fx:id="rechercheButton" layoutX="685.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleRecherche" prefHeight="30.0" prefWidth="105.0" text="Rechercher" />
    <TextField fx:id="libelleMaterielTextField" layoutX="381.0" layoutY="507.0" prefHeight="30.0" prefWidth="181.0" styleClass="text-field" />
+   <Button fx:id="bouttonStatMateriel" layoutX="268.0" layoutY="461.0" mnemonicParsing="false" onAction="#PageStatMateriel" prefHeight="26.0" prefWidth="91.0" text="Statistique" />
 
 </AnchorPane>
