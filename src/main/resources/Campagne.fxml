@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CampagneController">
+    <children>
+        <AnchorPane fx:id="left_main" prefHeight="500.0" prefWidth="335.0">
+            <children>
+                <Label layoutX="43.0" layoutY="20.0" text="Titre:">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="titreField" layoutX="103.0" layoutY="15.0" prefHeight="28.0" prefWidth="220.0"/>
+
+                <Label layoutX="43.0" layoutY="55.0" text="Description:">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="descriptionField" layoutX="103.0" layoutY="50.0" prefHeight="28.0" prefWidth="220.0"/>
+
+                <Label layoutX="43.0" layoutY="90.0" text="Date Début:">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="dateDebutField" layoutX="103.0" layoutY="85.0" />
+
+                <Label layoutX="43.0" layoutY="125.0" text="Date Fin:">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="dateFinField" layoutX="103.0" layoutY="120.0" />
+
+                <Label layoutX="43.0" layoutY="195.0" text="Image:">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="imageField" layoutX="103.0" layoutY="160.0" prefWidth="220.0" prefHeight="25.0"/>
+                <Button fx:id="chooseImageButton" layoutX="103.0" layoutY="190.0" text="Choose Image" onAction="#chooseImage"/>
+                <ImageView fx:id="imageView" layoutX="103.0" layoutY="225.0" fitHeight="100.0" fitWidth="200.0" preserveRatio="true"/>
+
+                <Button fx:id="insertButton" layoutX="19.0" layoutY="350.0" mnemonicParsing="false" onAction="#insert" prefHeight="46.0" prefWidth="87.0" text="Insert" />
+                <Button fx:id="updateButton" layoutX="112.0" layoutY="350.0" mnemonicParsing="false" onAction="#update" prefHeight="46.0" prefWidth="87.0" text="Update" />
+                <Button fx:id="clearButton" layoutX="205.0" layoutY="350.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="46.0" prefWidth="87.0" text="Clear" />
+                <Button fx:id="deleteButton" layoutX="112.0" layoutY="407.0" mnemonicParsing="false" onAction="#delete" prefHeight="46.0" prefWidth="87.0" text="Delete" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="335.0" layoutY="0" prefHeight="500.0" prefWidth="465.0">
+            <Separator layoutX="11.0" layoutY="14.0" orientation="VERTICAL" prefHeight="475.0" prefWidth="1.0" />
+            <TableView fx:id="tableView" layoutX="12.0" layoutY="14.0" prefHeight="475.0" prefWidth="453.0">
+                <columns>
+                    <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                    <TableColumn fx:id="colTitre" prefWidth="90.0" text="Titre" />
+                    <TableColumn fx:id="colDescription" prefWidth="135.0" text="Description" />
+                    <TableColumn fx:id="colDateDebut" prefWidth="90.0" text="Date Début" />
+                    <TableColumn fx:id="colDateFin" prefWidth="90.0" text="Date Fin" />
+                    <TableColumn fx:id="colImage" prefWidth="90.0" text="Image URL" />
+                </columns>
+            </TableView>
+        </AnchorPane>
+    </children>
+</AnchorPane>

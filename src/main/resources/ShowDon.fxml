@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DonController">
+   <children>
+      <TableView fx:id="table" layoutX="159.0" layoutY="86.0" prefHeight="200.0" prefWidth="272.0">
+        <columns>
+          <TableColumn fx:id="type_s" prefWidth="75.0" text="type" />
+          <TableColumn fx:id="montant_s" prefWidth="75.0" text="montant" />
+            <TableColumn fx:id="date_remise_s" prefWidth="75.0" text="date_remise" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

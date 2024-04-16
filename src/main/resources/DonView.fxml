@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="controller.DonViewController" prefHeight="600" prefWidth="800">
+    <children>
+        <!-- Ajout d'un titre -->
+        <Label text="Explorez les dons" style="-fx-font-size: 24px; -fx-padding: 10px;" />
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true">
+            <content>
+                <TilePane fx:id="cardsContainer" prefColumns="4" hgap="10" vgap="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <!-- Les cartes seront ajoutées ici dynamiquement -->
+                </TilePane>
+            </content>
+        </ScrollPane>
+    </children>
+</VBox>
