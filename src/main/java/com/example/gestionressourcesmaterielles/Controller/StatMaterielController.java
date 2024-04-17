@@ -16,8 +16,6 @@ import java.util.List;
 
 
 public class StatMaterielController {
-
-
     @FXML
     private Button displ;
 
@@ -62,7 +60,6 @@ public class StatMaterielController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 }

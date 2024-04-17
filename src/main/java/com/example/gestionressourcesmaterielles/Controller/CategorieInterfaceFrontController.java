@@ -13,7 +13,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import java.util.List;
 
-public class CategorieInterfaceFrontController {
+public class CategorieInterfaceFrontController{
     private final CategorieService categorieService = new CategorieService();
     private final MaterielService materielService = new MaterielService();
 
