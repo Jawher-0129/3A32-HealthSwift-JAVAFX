@@ -109,7 +109,8 @@ public class CategorieController {
     }
 
     @FXML
-    void handleUpdateCategorieButton(ActionEvent event) {
+    void handleUpdateCategorieButton(ActionEvent event)
+    {
         Categorie selectedCategorie = (Categorie)this.categorieTableView.getSelectionModel().getSelectedItem();
         String newLibelle = this.newCategorieLibelleField.getText().trim();
         if (selectedCategorie != null && !newLibelle.isEmpty()) {

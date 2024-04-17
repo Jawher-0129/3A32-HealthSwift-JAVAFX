@@ -68,7 +68,6 @@ public class CategorieService implements IService<Categorie> {
             while(rs.next()) {
                 list.add(new Categorie(rs.getInt("id_categorie"), rs.getString(2)));
             }
-
             return list;
         } catch (SQLException var4) {
             throw new RuntimeException(var4);

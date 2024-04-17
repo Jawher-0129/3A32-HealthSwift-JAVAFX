@@ -72,6 +72,10 @@ public class MaterielController {
     private TableColumn<Materiel,Integer> descriptionColumn;
 
     @FXML
+    private TableColumn<Materiel,Integer> prixColumn;
+
+
+    @FXML
     private Button qrcodeBtn;
 
     @FXML
@@ -82,6 +86,9 @@ public class MaterielController {
 
     @FXML
     private Button PDFMaterielBtn;
+
+
+
 
 
     private void populateFields(Materiel materiel) {
@@ -146,6 +153,8 @@ public class MaterielController {
         this.LibelleMaterielColumn.setCellValueFactory(new PropertyValueFactory("LibelleMateriel"));
         this.disponibiliteColumn.setCellValueFactory(new PropertyValueFactory("Disponibilite"));
         this.descriptionColumn.setCellValueFactory(new PropertyValueFactory("Description"));
+        this.prixColumn.setCellValueFactory(new PropertyValueFactory("Prix"));
+
 
     }
 
@@ -281,6 +290,12 @@ public class MaterielController {
             //System.out.println("Modification effectuée");
             this.refreshTableView();
             this.libelleMaterielTextField.clear();
+
+            this.descriptionTextArea.clear();
+            this.prixTextField.clear();
+            this.disponibleRadioButton.setSelected(true);
+            imageView.setImage(null);
+            categorieChoiceBox.getSelectionModel().clearSelection();
         } else {
             System.out.println("Veuillez sélectionner une catégorie et spécifier un nouveau libellé pour effectuer la modification.");
         }
