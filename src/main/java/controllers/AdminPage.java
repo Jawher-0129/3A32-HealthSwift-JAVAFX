@@ -72,10 +72,9 @@ public class AdminPage {
         User currentUser = SessionManager.getCurrentUser();
 
         // Display the name and role of the connected user
-        NameUser.setText("Welcome Back : " + currentUser.getNom());
+        NameUser.setText("Welcome : " + currentUser.getNom() + " " + currentUser.getPrenom());
 
         // Set up the TableView columns
-        id.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId()).asObject());
 
         Nom.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNom()));
         Prenom.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrenom()));
@@ -155,7 +154,11 @@ public class AdminPage {
         switchScene("/EditProfile.fxml", event);
 
     }
+    @FXML
+    void stat(ActionEvent event) {
+        switchScene("/StatController.fxml", event);
 
+    }
 
     @FXML
     void delete(ActionEvent event) {

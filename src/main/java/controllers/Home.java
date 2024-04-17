@@ -4,6 +4,9 @@ import Entity.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -19,7 +22,7 @@ public class Home {
         User currentUser = SessionManager.getCurrentUser();
 
         // Display the name and role of the connected user
-        NameUser.setText("Welcome  : " + currentUser.getNom());
+        NameUser.setText("Welcome : " + currentUser.getNom() + " " + currentUser.getPrenom());
 
 
     }
@@ -44,5 +47,23 @@ public class Home {
                 LoginController.showLoginWindow();
             }
         });
+    }
+    private void switchScene(String fxmlFile, ActionEvent event) {
+        try {
+            System.out.println("fxml:"+ fxmlFile);
+
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void EditProfile(ActionEvent event) {
+        switchScene("/EditProfile.fxml", event);
+
     }
 }

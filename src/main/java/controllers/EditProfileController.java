@@ -83,8 +83,12 @@ public class EditProfileController {
 
         // Show success message
         showAlert(Alert.AlertType.INFORMATION, "Profile Updated", "Your profile has been updated successfully.");
-        switchScene("/AdminPage.fxml", event);
-
+        String userRole = currentUser.getRoles();
+        if (userRole.equals("Admin")) {
+            switchScene("/AdminPage.fxml", event);
+        } else {
+            switchScene("/Home.fxml", event);
+        }
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
