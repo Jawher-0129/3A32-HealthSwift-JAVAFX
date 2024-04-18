@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.ListView?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionressourcesmaterielles.Controller.CategorieInterfaceFront">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.gestionressourcesmaterielles.Controller.CategorieInterfaceFrontController" prefHeight="600" prefWidth="800">
     <children>
-        <ListView fx:id="categorieListView" layoutX="50.0" layoutY="50.0" prefHeight="300.0" prefWidth="500.0" />
+        <Label text="Liste des Catégories" style="-fx-font-size: 24px; -fx-padding: 10px;" />
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true">
+            <content>
+                <TilePane fx:id="categoryContainer" prefColumns="4" hgap="10" vgap="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <!-- Bouton Voir Matériel -->
+
+
+                </TilePane>
+            </content>
+        </ScrollPane>
     </children>
-</AnchorPane>
+</VBox>

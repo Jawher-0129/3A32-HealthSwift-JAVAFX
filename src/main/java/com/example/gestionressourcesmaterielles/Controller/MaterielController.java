@@ -49,6 +49,10 @@ public class MaterielController {
     private TextField prixTextField;
 
     @FXML
+    private Button buttonMaterielAdmin;
+
+
+    @FXML
     private RadioButton disponibleRadioButton;
     @FXML
     private RadioButton nonDisponibleRadioButton;
@@ -70,6 +74,9 @@ public class MaterielController {
 
     @FXML
     private TableColumn<Materiel,Integer> descriptionColumn;
+
+    @FXML
+    private Button buttonCategorieAdmin;
 
     @FXML
     private TableColumn<Materiel,Integer> prixColumn;
@@ -346,6 +353,34 @@ public class MaterielController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    @FXML
+    void PageAdminMateriel(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/MaterielInterfaceAdmin.fxml"));
+            Parent root=loader.load();
+            buttonMaterielAdmin.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @FXML
+    void PageAdminCategorie(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/CategorieInterfaceAdmin.fxml"));
+            Parent root=loader.load();
+            buttonMaterielAdmin.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
 

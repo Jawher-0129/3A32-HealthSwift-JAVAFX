@@ -10,7 +10,6 @@ import com.example.gestionressourcesmaterielles.Model.Materiel;
 import com.example.gestionressourcesmaterielles.Service.MaterielService;
 import javafx.geometry.Insets;
 
-import java.net.MalformedURLException;
 import java.util.List;
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -23,6 +22,20 @@ public class MaterielInterfaceFrontController implements Initializable {
     private TilePane materialContainer;
 
     private MaterielService materielService;
+    private int categoryId;
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+        loadMaterialCards();
+    }
+
+    public MaterielInterfaceFrontController(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public MaterielInterfaceFrontController() {
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,8 +43,14 @@ public class MaterielInterfaceFrontController implements Initializable {
         loadMaterialCards();
     }
 
+    public void initializeWithCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     private void loadMaterialCards() {
-        List<Materiel> materials = materielService.getAll();
+        // Utiliser l'ID de la catégorie pour charger les matériaux associés à cette catégorie
+        System.out.println(categoryId);
+        List<Materiel> materials = materielService.getMaterielByCategorie(categoryId);
         for (Materiel material : materials) {
             VBox card = createMaterialCard(material);
             if (card != null) {
@@ -65,6 +84,4 @@ public class MaterielInterfaceFrontController implements Initializable {
         card.getChildren().addAll(imageView, nameLabel, descriptionLabel);
         return card;
     }
-
-
 }

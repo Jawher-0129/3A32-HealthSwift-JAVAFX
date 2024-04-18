@@ -6,16 +6,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class CategorieController {
     private final CategorieService categorieService = new CategorieService();
+
+    @FXML
+    private Button buttonMaterielAdminC;
+
     @FXML
     private TextField newCategorieCodeField;
     @FXML
@@ -123,4 +130,17 @@ public class CategorieController {
             System.out.println("Veuillez sélectionner une catégorie et spécifier un nouveau libellé pour effectuer la modification.");
         }
     }
+
+    @FXML
+    void PageMaterielAdminC(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/MaterielInterfaceAdmin.fxml"));
+            Parent root=loader.load();
+            buttonMaterielAdminC.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
