@@ -82,8 +82,8 @@
                   </font>
                </Label>
                <Button layoutX="14.0" layoutY="198.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="DASHBOARD" />
-               <Button layoutX="14.0" layoutY="256.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="MATERIELS" />
-               <Button layoutX="14.0" layoutY="314.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="CATEGORIES" />
+               <Button fx:id="buttonMaterielAdmin" layoutX="14.0" layoutY="256.0" mnemonicParsing="false" onAction="#PageAdminMateriel" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="MATERIELS" />
+               <Button fx:id="buttonCategorieAdmin" layoutX="14.0" layoutY="314.0" mnemonicParsing="false" onAction="#PageAdminCategorie" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="CATEGORIES" />
             </children>
          </AnchorPane>
       </children>
