@@ -3,33 +3,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.control.Button?>
-
-<?import javafx.geometry.Insets?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.gestionressourcesmaterielles.Controller.CategorieInterfaceFrontController"
-            prefHeight="400.0" prefWidth="600.0">
-
-    <left>
-        <VBox alignment="CENTER_LEFT" spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <children>
-                <VBox fx:id="categorieButtonsVBox" spacing="10"/>
-            </children>
-        </VBox>
-    </left>
-
-    <center>
-        <VBox alignment="CENTER_LEFT" spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <children>
-                <TilePane fx:id="categorieTilePane" prefColumns="3" prefTileWidth="100" prefTileHeight="100"/>
-            </children>
-        </VBox>
-    </center>
-
-</BorderPane>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ListView?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionressourcesmaterielles.Controller.CategorieInterfaceFront">
+    <children>
+        <ListView fx:id="categorieListView" layoutX="50.0" layoutY="50.0" prefHeight="300.0" prefWidth="500.0" />
+    </children>
+</AnchorPane>

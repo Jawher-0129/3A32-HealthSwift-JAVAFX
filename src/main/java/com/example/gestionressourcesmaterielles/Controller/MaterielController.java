@@ -82,6 +82,9 @@ public class MaterielController {
     private TextField rechercheTextField;
 
     @FXML
+    private TextField imagefield;
+
+    @FXML
     private Button rechercheButton;
 
     @FXML
@@ -136,6 +139,8 @@ public class MaterielController {
                 if (imageUrl != null && !imageUrl.isEmpty()) {
                     Image image = new Image(imageUrl);
                     imageView.setImage(image);
+                    imagefield.setText(imageUrl);
+
                 } else {
                     // If image URL is null or empty, clear the ImageView
                     imageView.setImage(null);
@@ -174,6 +179,7 @@ public class MaterielController {
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
             imageView.setImage(image);
+            imagefield.setText(selectedFile.toURI().toString());
         }
     }
 
@@ -215,9 +221,15 @@ public class MaterielController {
 
         int disponibilite = disponibleRadioButton.isSelected() ? 1 : 0;
 
-        String image = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+        String imageURL = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+        String imageName = imageURL != null ? new File(imageURL).getName() : null;
+        String image="C:\\Users\\jawhe\\OneDrive\\Bureau\\3A32HealthSwiftIntegration (2)\\3A32HealthSwiftIntegration\\3A32HealthSwift\\public\\uploads\\"+imageName;
 
-        if (image==null) {
+
+        System.out.println(imageName);
+
+
+        if (imageURL==null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
