@@ -2,7 +2,7 @@ package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import javafx.scene.paint.Color;
 import Entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +17,23 @@ import service.Usercrud;
 import service.SystemNotification;
 
 public class Registre {
+    @FXML
+    private Label nomErrorLabel;
 
+    @FXML
+    private Label prenomErrorLabel;
+
+    @FXML
+    private Label emailErrorLabel;
+
+    @FXML
+    private Label adresseErrorLabel;
+
+    @FXML
+    private Label telephoneErrorLabel;
+
+    @FXML
+    private Label passwordErrorLabel;
     @FXML
     private ResourceBundle resources;
 
@@ -63,6 +79,7 @@ public class Registre {
 
     @FXML
     void Registre(ActionEvent event) {
+
         String nom = this.nom.getText();
         String prenom = this.prenom.getText();
         String email = this.email.getText();
@@ -72,31 +89,24 @@ public class Registre {
 
         String password = this.password.getText();
 
-
-        // Check if any field is empty
-        if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || adresse.isEmpty() || telephone.isEmpty() || password.isEmpty()) {
-            // Display an alert if any of the fields are empty
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("All fields are required");
-            alert.show();
+        if (!checkFieldsNotEmpty()) {
+            // Si des champs sont vides, arrêter le processus d'inscription
             return;
         }
-
         // Check if the email is valid
-        if (!isValidEmail(email)) {
-            // Display an alert if the email is invalid
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Please enter a valid email address");
-            alert.show();
-            return;
-        }
-        if (new Usercrud().isEmailExistsInDatabase(email)) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Email already exists");
-            alert.show();
-            return;
-        }
-        // Check if a role is selected
+            // Check if the email is valid
+            if (!isValidEmail(email)) {
+                // Display an error message in red in the email error label
+                setErrorLabel(emailErrorLabel, " invalid email address");
+                return;
+            }
+            if (new Usercrud().isEmailExistsInDatabase(email)) {
+                // Display an error message in red in the email error label
+                setErrorLabel(emailErrorLabel, "Email already exists");
+                return;
+            }
+
+            // Check if a role is selected
         String selectedRole = roleComboBox.getValue();
         if (selectedRole == null || selectedRole.isEmpty()) {
             // Display an alert if no role is selected
@@ -106,20 +116,20 @@ public class Registre {
             return;
         }
 
-        // Hash the password
-        String hashedPassword = hashPassword(password);
-        User newUser = new User(nom,prenom,email,hashedPassword,adresse,telephone,selectedRole);
 
-        Usercrud add = new Usercrud();
-        add.addUser(newUser);
+    String hashedPassword = hashPassword(password);
+    User newUser = new User(nom, prenom, email, hashedPassword, adresse, telephone, selectedRole);
 
-        SystemNotification.showNotification("New User Registered", "A new user has been registered.");
+    Usercrud add = new Usercrud();
+    add.addUser(newUser);
 
-        switchScene("/Login.fxml", event);
+    SystemNotification.showNotification("New User Registered", "A new user has been registered.");
+
+    switchScene("/Login.fxml", event);
 
 
+}
 
-    }
     private void switchScene(String fxmlFile, ActionEvent event) {
         try {
             System.out.println("fxml:"+ fxmlFile);
@@ -145,6 +155,56 @@ public class Registre {
     @FXML
     void initialize() {
 
+    }
+    private void setErrorLabel(Label label, String message) {
+        label.setTextFill(Color.RED);
+        label.setText(message);
+    }
+
+    private void clearErrorLabels() {
+        nomErrorLabel.setText("");
+        nomErrorLabel.setTextFill(Color.BLACK);
+        prenomErrorLabel.setText("");
+        prenomErrorLabel.setTextFill(Color.BLACK);
+        emailErrorLabel.setText("");
+        emailErrorLabel.setTextFill(Color.BLACK);
+        adresseErrorLabel.setText("");
+        adresseErrorLabel.setTextFill(Color.BLACK);
+        telephoneErrorLabel.setText("");
+        telephoneErrorLabel.setTextFill(Color.BLACK);
+        passwordErrorLabel.setText("");
+        passwordErrorLabel.setTextFill(Color.BLACK);
+    }
+    private boolean checkFieldsNotEmpty() {
+        boolean allFieldsFilled = true;
+        if (nom.getText().isEmpty()) {
+            setErrorLabel(nomErrorLabel, "Nom is required");
+            allFieldsFilled = false;
+        }
+
+        if (prenom.getText().isEmpty()) {
+            setErrorLabel(prenomErrorLabel, "Prénom is required");
+            allFieldsFilled = false;
+        }
+        if (email.getText().isEmpty()) {
+            setErrorLabel(emailErrorLabel, "Email is required");
+            allFieldsFilled = false;
+        }
+        if (Adresse.getText().isEmpty()) {
+            setErrorLabel(adresseErrorLabel, "Adresse is required");
+            allFieldsFilled = false;
+        }
+        if (telephone.getText().isEmpty()) {
+            setErrorLabel(telephoneErrorLabel, "Téléphone is required");
+            allFieldsFilled = false;
+        }
+        if (password.getText().isEmpty()) {
+            setErrorLabel(passwordErrorLabel, "Password is required");
+            allFieldsFilled = false;
+        }
+
+
+        return allFieldsFilled;
     }
 
 }
