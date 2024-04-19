@@ -98,9 +98,6 @@ public class MaterielController {
     private Button PDFMaterielBtn;
 
 
-
-
-
     private void populateFields(Materiel materiel) {
         this.libelleMaterielTextField.setText(materiel.getLibelleMateriel());
         this.descriptionTextArea.setText(materiel.getDescription());
@@ -298,7 +295,45 @@ public class MaterielController {
         int idCategorie = categorieChoiceBox.getValue();
 
         String prixtext=prixTextField.getText().trim();
-        if (selectedMateriel != null && !libelleMaterielTextField.isEmpty() && !descriptionTextArea.isEmpty() && !prixtext.isEmpty()) {
+        if (selectedMateriel != null) {
+
+            if (libelleMaterielTextField.length() == 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Erreur : Veuillez entrer un libelle");
+                alert.show();
+                return;
+            }
+
+            if (descriptionTextArea.length() == 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Erreur : Veuillez entrer une description de materiel.");
+                alert.show();
+                return;
+            }
+
+            if (prix<0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Erreur : Veuillez entrer un prix positif");
+                alert.show();
+                return;
+            }
+
+
+            if (image==null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Erreur : Veuillez choisir une image");
+                alert.show();
+                return;
+            }
+
             selectedMateriel.setLibelleMateriel(libelleMaterielTextField);
             selectedMateriel.setDescription(descriptionTextArea);
             selectedMateriel.setPrix(prix);

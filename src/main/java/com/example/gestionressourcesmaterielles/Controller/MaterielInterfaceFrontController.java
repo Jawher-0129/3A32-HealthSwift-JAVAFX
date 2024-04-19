@@ -1,6 +1,10 @@
 package com.example.gestionressourcesmaterielles.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
@@ -10,6 +14,7 @@ import com.example.gestionressourcesmaterielles.Model.Materiel;
 import com.example.gestionressourcesmaterielles.Service.MaterielService;
 import javafx.geometry.Insets;
 
+import java.io.IOException;
 import java.util.List;
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -17,6 +22,10 @@ import java.util.ResourceBundle;
 import java.io.File;
 
 public class MaterielInterfaceFrontController implements Initializable {
+
+
+    @FXML
+    private Button retourPageCategorieFront;
 
     @FXML
     private TilePane materialContainer;
@@ -84,4 +93,17 @@ public class MaterielInterfaceFrontController implements Initializable {
         card.getChildren().addAll(imageView, nameLabel, descriptionLabel);
         return card;
     }
+
+    @FXML
+    void PageCategorieFront(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/CategorieInterfaceFront.fxml"));
+            Parent root=loader.load();
+            retourPageCategorieFront.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
