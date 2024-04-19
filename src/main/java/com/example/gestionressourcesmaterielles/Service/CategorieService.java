@@ -108,6 +108,72 @@ public class CategorieService implements IService<Categorie> {
     }
 
 
+    public List<String> afficherLibellesCategories() {
+        List<String> libellesCategories = new ArrayList<>();
+        String requete = "SELECT libelle_categorie FROM categorie";
+        try {
+            // Vérifier si la connexion est ouverte
+            if (cnx != null && !cnx.isClosed()) {
+                PreparedStatement pst = cnx.prepareStatement(requete);
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    libellesCategories.add(rs.getString("libelle_categorie"));
+                }
+            } else {
+                // Gestion de l'erreur de connexion
+                System.out.println("La connexion à la base de données n'est pas ouverte.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return libellesCategories;
+    }
+
+    public int getIdCategorieParLibelle(String libelleCategorie) {
+        int idCategorie = -1; // Initialiser à une valeur par défaut, par exemple -1 pour indiquer qu'aucune correspondance n'a été trouvée
+        String requete = "SELECT id_categorie FROM categorie WHERE libelle_categorie = ?";
+        try {
+            // Vérifier si la connexion est ouverte
+            if (cnx != null && !cnx.isClosed()) {
+                PreparedStatement pst = cnx.prepareStatement(requete);
+                pst.setString(1, libelleCategorie); // Remplacer le premier paramètre de la requête préparée par le libellé de catégorie
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    idCategorie = rs.getInt("id_categorie");
+                }
+            } else {
+                // Gestion de l'erreur de connexion
+                System.out.println("La connexion à la base de données n'est pas ouverte.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return idCategorie;
+    }
+
+    public String getLibelleCategorieParId(int idCategorie) {
+        String libelleCategorie = null; // Initialiser à null pour indiquer qu'aucune correspondance n'a été trouvée
+        String requete = "SELECT libelle_categorie FROM categorie WHERE id_categorie = ?";
+        try {
+            // Vérifier si la connexion est ouverte
+            if (cnx != null && !cnx.isClosed()) {
+                PreparedStatement pst = cnx.prepareStatement(requete);
+                pst.setInt(1, idCategorie); // Remplacer le premier paramètre de la requête préparée par l'ID de catégorie
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    libelleCategorie = rs.getString("libelle_categorie");
+                }
+            } else {
+                // Gestion de l'erreur de connexion
+                System.out.println("La connexion à la base de données n'est pas ouverte.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return libelleCategorie;
+    }
+
+
 
 
 

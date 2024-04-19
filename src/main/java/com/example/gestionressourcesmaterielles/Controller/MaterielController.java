@@ -21,7 +21,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MaterielController {
-
     private final CategorieService categorieService = new CategorieService();
     private final MaterielService materielService=new MaterielService();
 
@@ -31,7 +30,7 @@ public class MaterielController {
     private Button choisirImageButton;
 
     @FXML
-    private ChoiceBox<Integer> categorieChoiceBox;
+    private ChoiceBox<String> categorieChoiceBox;
 
     @FXML
     private ImageView imageView;
@@ -118,17 +117,21 @@ public class MaterielController {
             this.imageView.setImage(image);
         }
         int idCategorie = materiel.getId_categorie();
-        ObservableList<Integer> categories = categorieChoiceBox.getItems();
-        if (categories.contains(idCategorie)) {
-            categorieChoiceBox.setValue(idCategorie);
+
+        String libelleCategorie=categorieService.getLibelleCategorieParId(idCategorie);
+
+        ObservableList<String> categories = categorieChoiceBox.getItems();
+        if (libelleCategorie != null) {
+            // Définir le libellé de la catégorie comme valeur sélectionnée dans la ChoiceBox
+            categorieChoiceBox.setValue(libelleCategorie);
         }
     }
 
 
     @FXML
     void initialize() {
-        List<Integer> idCategories = categorieService.afficherIdCategories();
-        ObservableList<Integer> idCategoriesList = FXCollections.observableArrayList(idCategories);
+        List<String> CategoriesLibelle = categorieService.afficherLibellesCategories();
+        ObservableList<String> idCategoriesList = FXCollections.observableArrayList(CategoriesLibelle);
         categorieChoiceBox.setItems(idCategoriesList);
 
         materielTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -242,9 +245,13 @@ public class MaterielController {
             return;
         }
 
-        Integer idCategorie = categorieChoiceBox.getValue();
 
-        if (idCategorie == null) {
+
+
+        String categorieLibelle=categorieChoiceBox.getValue();
+
+        if(categorieLibelle==null)
+        {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -252,6 +259,9 @@ public class MaterielController {
             alert.show();
             return;
         }
+
+
+       Integer idCategorie=categorieService.getIdCategorieParLibelle(categorieLibelle);
 
         Materiel nouveauMateriel = new Materiel(libelle, description, disponibilite, image, prix, idCategorie);
 
@@ -263,7 +273,7 @@ public class MaterielController {
         prixTextField.setText("");
         disponibleRadioButton.setSelected(true); // Réinitialiser à Disponible
         imageView.setImage(null);
-        categorieChoiceBox.getSelectionModel().clearSelection();
+       // categorieChoiceBox.getSelectionModel().clearSelection();
         refreshTableView();
     }
 
@@ -292,7 +302,9 @@ public class MaterielController {
         int disponibilite = disponibleRadioButton.isSelected() ? 1 : 0;
         String image = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
 
-        int idCategorie = categorieChoiceBox.getValue();
+        //int idCategorie = categorieChoiceBox.getValue();
+        String libelleCategorie=categorieChoiceBox.getValue();
+        int idCategorie=categorieService.getIdCategorieParLibelle(libelleCategorie);
 
         String prixtext=prixTextField.getText().trim();
         if (selectedMateriel != null) {
@@ -341,7 +353,7 @@ public class MaterielController {
             selectedMateriel.setImageMateriel(image);
             selectedMateriel.setId_categorie(idCategorie);
             this.materielService.update(selectedMateriel, selectedMateriel.getId());
-            //System.out.println("Modification effectuée");
+            System.out.println("Modification effectuée");
             this.refreshTableView();
             this.libelleMaterielTextField.clear();
 
