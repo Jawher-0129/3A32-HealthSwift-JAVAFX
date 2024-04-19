@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.gestionressourcesmaterielles.Controller.MaterielInterfaceFrontController" prefHeight="600" prefWidth="800">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="655.0" prefWidth="875.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.gestionressourcesmaterielles.Controller.MaterielInterfaceFrontController">
     <children>
         <!-- Header label for the material view -->
-        <Label text="Liste des Matériaux" style="-fx-font-size: 24px; -fx-padding: 10px;" />
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true">
+        <Label prefHeight="56.0" prefWidth="226.0" style="-fx-font-size: 24px; -fx-padding: 10px;" text="Liste des Matériaux" />
+      <Button fx:id="retourPageCategorieFront" mnemonicParsing="false" onAction="#PageCategorieFront" prefHeight="26.0" prefWidth="87.0" text="Retour" />
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true">
             <content>
-                <TilePane fx:id="materialContainer" prefColumns="4" hgap="10" vgap="10">
+                <TilePane fx:id="materialContainer" hgap="10" prefColumns="4" prefHeight="774.0" prefWidth="798.0" vgap="10">
                     <padding>
-                        <Insets top="10" right="10" bottom="10" left="10"/>
+                        <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
                     <!-- Material cards will be dynamically added here -->
                 </TilePane>
@@ -23,4 +24,3 @@
         </ScrollPane>
     </children>
 </VBox>
-

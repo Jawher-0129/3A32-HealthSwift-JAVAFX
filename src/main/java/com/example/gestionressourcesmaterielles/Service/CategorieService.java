@@ -107,6 +107,11 @@ public class CategorieService implements IService<Categorie> {
         return idCategories;
     }
 
+
+
+
+
+
     public Categorie getById(int id) {
         return null;
     }

@@ -73,7 +73,7 @@ public class CategorieController {
                 this.populateFields(newSelection);
             }
         });
-        this.configureTableView();
+        //this.configureTableView();
         this.refreshTableView();
     }
 
@@ -89,13 +89,31 @@ public class CategorieController {
     }
 
     @FXML
-    void handleNewCategorieButton() {
+    void handleNewCategorieButton(ActionEvent event) {
         String libelle = this.newCategorieLibelleField.getText().trim();
-        if (!libelle.isEmpty() && !this.categorieService.rechercherCategorie(libelle)) {
+        if(libelle.isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Erreur : Veuillez entrer un libelle");
+            alert.show();
+            return;
+        }
+        if (!this.categorieService.rechercherCategorie(libelle)) {
             Categorie newCategorie = new Categorie(libelle);
             this.categorieService.add(newCategorie);
             this.refreshTableView();
             this.newCategorieLibelleField.clear();
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("La categorie existe deja");
+            alert.show();
+            return;
         }
     }
 
@@ -120,7 +138,18 @@ public class CategorieController {
     {
         Categorie selectedCategorie = (Categorie)this.categorieTableView.getSelectionModel().getSelectedItem();
         String newLibelle = this.newCategorieLibelleField.getText().trim();
-        if (selectedCategorie != null && !newLibelle.isEmpty()) {
+
+        if(newLibelle.isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Libelle est vide !!");
+            alert.show();
+            return;
+        }
+
+        if (selectedCategorie != null) {
             selectedCategorie.setLibelle(newLibelle);
             this.categorieService.update(selectedCategorie, selectedCategorie.getId());
             System.out.println("Modification effectuée");
@@ -140,7 +169,6 @@ public class CategorieController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 }

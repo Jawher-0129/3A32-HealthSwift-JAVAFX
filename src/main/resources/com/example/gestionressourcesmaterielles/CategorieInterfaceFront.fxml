@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.gestionressourcesmaterielles.Controller.CategorieInterfaceFrontController" prefHeight="600" prefWidth="800">
+
+<VBox prefHeight="600" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.gestionressourcesmaterielles.Controller.CategorieInterfaceFrontController">
     <children>
-        <Label text="Liste des Catégories" style="-fx-font-size: 24px; -fx-padding: 10px;" />
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true">
+        <Label style="-fx-font-size: 24px; -fx-padding: 10px;" text="Liste des Catégories" />
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true">
             <content>
-                <TilePane fx:id="categoryContainer" prefColumns="4" hgap="10" vgap="10">
+                <TilePane fx:id="categoryContainer" hgap="10" prefColumns="4" prefHeight="580.0" prefWidth="798.0" vgap="10">
                     <padding>
-                        <Insets top="10" right="10" bottom="10" left="10"/>
+                        <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
-                    <!-- Bouton Voir Matériel -->
-
-
                 </TilePane>
             </content>
         </ScrollPane>
