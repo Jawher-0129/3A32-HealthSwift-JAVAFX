@@ -11,7 +11,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import java.io.IOException;
 import Entity.User;
 
 import javafx.scene.control.*;
@@ -116,11 +121,8 @@ public class AdminPage {
                     return true; // Correspondance trouvée dans l'adresse
                 } else if (user.getTelephone().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Correspondance trouvée dans le téléphone
-                } else if (user.getRoles().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Correspondance trouvée dans les rôles
-                }
-
-                return false; // Aucune correspondance trouvée
+                } else return user.getRoles().toLowerCase().contains(lowerCaseFilter); // Correspondance trouvée dans les rôles
+// Aucune correspondance trouvée
             });
         });
 
@@ -239,6 +241,85 @@ public class AdminPage {
 
     }
     // Method to calculate role count
+    @FXML
+    void generatePDF(ActionEvent event) {
+        try {
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 700);
+// Specify a font that supports the characters you need
+            PDType1Font font = PDType1Font.HELVETICA;
+            String text = "This is a multi-line message.";
+            String[] lines = text.split("\n");
+
+            for (String line : lines) {
+                contentStream.newLineAtOffset(0, -15);
+                // Use the specified font for displaying text
+                contentStream.setFont(font, 12);
+                contentStream.showText(line);
+                contentStream.newLine();
+            }
+
+            ObservableList<User> userList = UserTable.getItems();
+            float currentY = 700; // Starting vertical position
+            for (User user : userList) {
+                contentStream.newLineAtOffset(50, currentY); // Move to the current vertical position
+                contentStream.showText("Nom: " + user.getNom());
+                contentStream.newLine();
+
+                contentStream.newLine(); // Add spacing between each attribute
+                contentStream.showText("Prénom: " + user.getPrenom());
+                contentStream.newLine();
+
+                contentStream.newLine(); // Add spacing between each attribute
+                contentStream.showText("Email: " + user.getEmail());
+                contentStream.newLine();
+
+                contentStream.newLine(); // Add spacing between each attribute
+                contentStream.showText("Adresse: " + user.getAdresse());
+                contentStream.newLine();
+
+                contentStream.newLine(); // Add spacing between each attribute
+                contentStream.showText("Téléphone: " + user.getTelephone());
+                contentStream.newLine();
+
+                contentStream.newLine(); // Add spacing between each attribute
+                contentStream.showText("Rôles: " + user.getRoles());
+                contentStream.newLine();
+
+                currentY -= 100; // Move the vertical position for the next user
+            }
+
+
+
+            contentStream.endText();
+            contentStream.close();
+
+            // Save the PDF document
+            document.save("user_list.pdf");
+            document.close();
+
+            // Show a dialog box to inform the user that the PDF has been generated
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("PDF Généré");
+            alert.setHeaderText(null);
+            alert.setContentText("Le document PDF contenant la liste des utilisateurs a été généré avec succès !");
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Show an error dialog box if an error occurs
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Erreur lors de la génération du PDF");
+            alert.setContentText("Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.");
+            alert.showAndWait();
+        }
+    }
 
 }
 

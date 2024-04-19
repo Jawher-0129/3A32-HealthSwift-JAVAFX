@@ -65,6 +65,12 @@
             <artifactId>controlsfx</artifactId>
             <version>11.1.0</version> <!-- La version peut varier, assurez-vous de vérifier la dernière version disponible -->
         </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <version>1.39.0</version> <!-- ou une version plus récente -->
+        </dependency>
+
 
         <!-- New dependencies -->
         <dependency>
@@ -89,6 +95,11 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.24</version>
+        </dependency>
 
 
 

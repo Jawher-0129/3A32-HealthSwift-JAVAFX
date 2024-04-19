@@ -34,21 +34,29 @@ public class StatController {
             String role = user.getRoles();
             if ("Donateur".equals(role)) {
                 donateurCount++;
-            } else if ("Directeur de campagne".equals(role)) {
+            } else if ("Directeur De Campagne".equals(role)) {
                 directeurCount++;
             }
-            // Vous pouvez ajouter d'autres conditions pour d'autres rôles si nécessaire
         }
 
-        // Créer les données pour le PieChart
+        // Calculer les pourcentages pour chaque rôle
+        double totalUsers = donateurCount + directeurCount;
+        double donateurPercentage = (donateurCount / totalUsers) * 100;
+        double directeurPercentage = (directeurCount / totalUsers) * 100;
+
+// Créer des libellés personnalisés avec les pourcentages
+        String donateurLabel = String.format("Donateur (%.2f%%)", donateurPercentage);
+        String directeurLabel = String.format("Directeur de campagne (%.2f%%)", directeurPercentage);
+
+// Créer les données pour le PieChart avec les libellés personnalisés
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("Donateur", donateurCount),
-                        new PieChart.Data("Directeur de campagne", directeurCount));
-        // Vous pouvez ajouter d'autres données ici pour d'autres rôles
+                        new PieChart.Data(donateurLabel, donateurCount),
+                        new PieChart.Data(directeurLabel, directeurCount));
 
-        // Définir les données sur le PieChart
+// Définir les données sur le PieChart
         pieChart.setData(pieChartData);
+
     }
     private void switchScene(String fxmlFile, ActionEvent event) {
         try {

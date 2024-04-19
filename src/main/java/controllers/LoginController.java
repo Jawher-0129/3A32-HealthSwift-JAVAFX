@@ -1,4 +1,5 @@
 package controllers;
+import javafx.scene.control.CheckBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,14 +12,23 @@ import java.io.IOException;
 import Entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import java.util.prefs.Preferences;
 
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import org.mindrot.jbcrypt.BCrypt;
 import service.Usercrud;
 
+import javafx.scene.control.Alert;
+
+
 public class LoginController {
 
+
+
+
+    @FXML
+    private CheckBox rememberMeCheckbox;
     @FXML
     private WebView recaptchaWebView;
 
@@ -47,7 +57,13 @@ public class LoginController {
     void handleButtonAction(MouseEvent event) {
 
     }
-
+    private void rememberCredentials(String email, String password) {
+        // Store the email and password securely (e.g., using encryption)
+        // For simplicity, let's just use Preferences API
+        Preferences prefs = Preferences.userNodeForPackage(LoginController.class);
+        prefs.put("rememberedEmail", email);
+        prefs.put("rememberedPassword", password);
+    }
     @FXML
     void login(ActionEvent event) {
 
@@ -75,7 +91,9 @@ public class LoginController {
             } else {
                 switchScene("/Home.fxml", event);
             }
-
+            if (rememberMeCheckbox.isSelected() && user != null) {
+                rememberCredentials(user.getEmail(), pass);
+            }
 
                 switchScene("/AdminPage.fxml", event);
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome!");
@@ -99,30 +117,48 @@ public class LoginController {
     }
     private void switchScene(String fxmlFile, ActionEvent event) {
         try {
-            System.out.println("fxml:"+ fxmlFile);
+            if (event == null || event.getSource() == null) {
+                System.out.println("Event or event source is null.");
+                return;
+            }
 
             Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            if (stage != null) {
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                System.out.println("Stage is null.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void Registre(ActionEvent event) {
         switchScene("/Registre.fxml", event);
 
     }
-
     @FXML
     void initialize() {
+        loadRememberedCredentials();
 
     }
 
+    private void loadRememberedCredentials() {
+        Preferences prefs = Preferences.userNodeForPackage(LoginController.class);
+        String rememberedEmail = prefs.get("rememberedEmail", null);
+        String rememberedPassword = prefs.get("rememberedPassword", null);
 
+        if (rememberedEmail != null && rememberedPassword != null) {
+            email.setText(rememberedEmail);
+            password.setText(rememberedPassword);
+            rememberMeCheckbox.setSelected(true);
+        }
+    }
 
     @FXML
     void forgotPassword(ActionEvent event) {

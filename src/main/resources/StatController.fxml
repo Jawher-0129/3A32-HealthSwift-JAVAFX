@@ -2,14 +2,22 @@
 
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="550.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StatController">
+<AnchorPane prefHeight="547.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StatController">
 
     <children>
-        <Button fx:id="displ" layoutX="377.0" layoutY="446.0" mnemonicParsing="false" onAction="#displaystats" prefHeight="75.0" prefWidth="188.0" text="Afficher Statistique" />
-        <PieChart fx:id="pieChart" layoutX="50.0" layoutY="25.0" />
-        <Button fx:id="bouttonRetour" layoutX="121.0" layoutY="453.0" mnemonicParsing="false" onAction="#back" prefHeight="61.0" prefWidth="129.0" text="Retour" />
+        <Button fx:id="displ" layoutX="662.0" layoutY="479.0" mnemonicParsing="false" onAction="#displaystats" prefHeight="35.0" prefWidth="143.0" text="Afficher Statistique" />
+        <PieChart fx:id="pieChart" layoutX="449.0" layoutY="111.0" prefHeight="369.0" prefWidth="381.0" />
+        <Button fx:id="bouttonRetour" layoutX="449.0" layoutY="479.0" mnemonicParsing="false" onAction="#back" prefHeight="35.0" prefWidth="143.0" text="Retour" />
+      <AnchorPane layoutX="-3.0" prefHeight="558.0" prefWidth="408.0" style="-fx-background-color: #42A9E6;" />
+      <ImageView fitHeight="90.0" fitWidth="96.0" layoutX="580.0" layoutY="21.0">
+         <image>
+            <Image url="file:\C:/Users/admin/Desktop/PIDEVJAVAFIRAS/PidevUserJava/src/main/images/Capture%20d'écran%202024-02-18%20152610.png" />
+         </image>
+      </ImageView>
     </children>
 
 </AnchorPane>
