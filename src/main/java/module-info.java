@@ -4,6 +4,9 @@ module com.example.gestionressourcesmaterielles {
     requires java.sql;
     requires com.google.zxing;
     requires java.desktop;
+    requires kernel;
+    requires layout;
+    requires io;
     opens com.example.gestionressourcesmaterielles.Model;
     opens com.example.gestionressourcesmaterielles.Controller to javafx.fxml;
 
