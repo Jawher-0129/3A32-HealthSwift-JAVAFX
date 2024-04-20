@@ -3,9 +3,13 @@ package com.example.gestionressourcesmaterielles.Service;
 import com.example.gestionressourcesmaterielles.Model.IService;
 import com.example.gestionressourcesmaterielles.Model.Materiel;
 import com.example.gestionressourcesmaterielles.util.DataSource;
+import com.itextpdf.kernel.pdf.PdfDocument;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import com.itextpdf.kernel.pdf.PdfWriter;
 
+
+import javax.swing.text.Document;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -161,6 +165,8 @@ public class MaterielService implements IService<Materiel> {
         }
         return list;
     }
+
+
 
 
 

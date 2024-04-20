@@ -19,6 +19,15 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import com.itextpdf.layout.element.Cell;
+
+import com.itextpdf.io.image.ImageDataFactory;
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 
 public class MaterielController {
     private final CategorieService categorieService = new CategorieService();
@@ -49,7 +58,6 @@ public class MaterielController {
 
     @FXML
     private Button buttonMaterielAdmin;
-
 
     @FXML
     private RadioButton disponibleRadioButton;
@@ -94,7 +102,7 @@ public class MaterielController {
     private Button rechercheButton;
 
     @FXML
-    private Button PDFMaterielBtn;
+    private Button buttonPDFMateriel;
 
 
     private void populateFields(Materiel materiel) {
@@ -426,21 +434,40 @@ public class MaterielController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
+    @FXML
+    void GenererPdfMateriel(ActionEvent event) {
+        try (PdfWriter writer = new PdfWriter("materiels.pdf");
+             PdfDocument pdf = new PdfDocument(writer);
+             Document document = new Document(pdf)) {
 
+            document.add(new Paragraph("Liste des Matériels"));
 
+            Table table = new Table(6);
+            table.addCell("ID");
+            table.addCell("Libellé");
+            table.addCell("Description");
+            table.addCell("Disponibilité");
+            table.addCell("Prix");
 
+            // Récupération des données des matériels depuis la TableView
+            ObservableList<Materiel> materiels = materielTableView.getItems();
+            for (Materiel materiel : materiels) {
+                table.addCell(String.valueOf(materiel.getId()));
+                table.addCell(materiel.getLibelleMateriel());
+                table.addCell(materiel.getDescription());
+                table.addCell(materiel.getDisponibilite() == 1 ? "Disponible" : "Non disponible");
+                table.addCell(String.valueOf(materiel.getPrix()));
+            }
 
+            document.add(table);
 
-
-
-
-
-
-
+            System.out.println("PDF généré avec succès !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
