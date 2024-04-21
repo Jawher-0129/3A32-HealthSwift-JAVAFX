@@ -79,7 +79,7 @@ public class CampagneViewController {
         }
         imageView.getStyleClass().add("campaign-image");
 
-        // Title with gradient background
+        // Title with updated styling
         Label titleLabel = new Label(campagne.getTitre());
         titleLabel.getStyleClass().add("campaign-title");
 
@@ -97,12 +97,13 @@ public class CampagneViewController {
         detailsButton.getStyleClass().add("campaign-details-button");
         detailsButton.setOnAction(e -> showCampagneDetails(campagne));
 
-        // Add all elements to card
-        card.getChildren().addAll(titleLabel, imageView, subtitleLabel, dateLabel, detailsButton);
+        // Reordering: First add the image, then the title
+        card.getChildren().addAll(imageView, titleLabel, subtitleLabel, dateLabel, detailsButton);
         card.setAlignment(Pos.CENTER); // Center content
 
         return card;
     }
+
 
 
 
