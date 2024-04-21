@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-padding: 30;" stylesheets="@StyleSheets/form.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="controller.DonFormController">
+   <children>
+      <Label fx:id="labelTitre" style="-fx-font-size: 24px; -fx-font-weight: bold;" styleClass="form-label" text="Initialisation..." />
+
+      <Label style="-fx-font-size: 18px;" styleClass="form-label" text="Type de Don:" />
+      <TextField fx:id="champType" promptText="Entrez le type de don" style="-fx-font-size: 18px;" styleClass="form-textfield" />
+      <Label style="-fx-font-size: 18px;" styleClass="form-label" text="Montant du Don:" />
+      <TextField fx:id="champMontant" promptText="Entrez le montant" style="-fx-font-size: 18px;" styleClass="form-textfield" />
+      <Label style="-fx-font-size: 18px;" styleClass="form-label" text="Date de Remise:" />
+      <DatePicker fx:id="selecteurDateRemise" promptText="Sélectionnez la date de remise" style="-fx-font-size: 18px;" styleClass="form-datepicker" />
+      <Label style="-fx-font-size: 18px;" styleClass="form-label" text="Campagne:" />
+      <ComboBox fx:id="comboCampagne" promptText="Sélectionnez la campagne" style="-fx-font-size: 18px;" styleClass="form-textarea" />
+      <Button fx:id="boutonEnregistrer" style="-fx-font-size: 18px; -fx-padding: 5 20;" styleClass="form-button" text="Enregistrer le Don" />
+   </children>
+</VBox>

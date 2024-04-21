@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,6 +33,8 @@ public class CampagneController {
 
     private CampagneService campagneService = new CampagneService();
 
+    private PseudoClass firstRowPseudoClass = PseudoClass.getPseudoClass("first-row");
+
     @FXML
     public void initialize() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -43,12 +46,23 @@ public class CampagneController {
 
         loadTableData();
 
+        tableView.setRowFactory(tv -> {
+            TableRow<Campagne> row = new TableRow<>();
+            row.itemProperty().addListener((obs, previousItem, currentItem) -> {
+                if (currentItem != null) {
+                    row.pseudoClassStateChanged(firstRowPseudoClass, tableView.getItems().indexOf(currentItem) == 0);
+                }
+            });
+            return row;
+        });
+
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 fillInputFieldsWithSelectedCampaign(newSelection);
             }
         });
     }
+
     private boolean validateInput() {
         String errorMessage = "";
 
@@ -106,8 +120,6 @@ public class CampagneController {
         }
     }
 
-
-
     @FXML
     private void insert() {
         if (validateInput()) {
@@ -151,6 +163,7 @@ public class CampagneController {
             }
         }
     }
+
     @FXML
     private void delete() {
         int selectedIndex = tableView.getSelectionModel().getSelectedIndex();

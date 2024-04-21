@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fitToWidth="true" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShowCampagneController">
+    <content>
+        <VBox fx:id="detailsBox" spacing="10">
+            <children>
+                <!-- Back button with arrow graphic -->
+                <Button fx:id="backButton" onAction="#handleBack" text="&lt;&lt;" style="-fx-background-color: transparent; -fx-font-size: 16px;"/>
+
+
+                <Label fx:id="titleLabel" text="Titre de la Campagne:" style="-fx-font-size: 18px;"/>
+                <Label fx:id="titleValue" style="-fx-font-size: 16px;"/>
+                <Label fx:id="descriptionLabel" text="Description:" style="-fx-font-size: 18px;"/>
+                <Label fx:id="descriptionValue" wrapText="true" style="-fx-font-size: 16px;"/>
+                <Label fx:id="startDateLabel" text="Date de Début:" style="-fx-font-size: 18px;"/>
+                <Label fx:id="startDateValue" style="-fx-font-size: 16px;"/>
+                <Label fx:id="endDateLabel" text="Date de Fin:" style="-fx-font-size: 18px;"/>
+                <Label fx:id="endDateValue" style="-fx-font-size: 16px;"/>
+                <ImageView fx:id="imageView" fitWidth="200" fitHeight="200" preserveRatio="true"/>
+                <Button fx:id="updateButton" text="Modifier" style="-fx-font-size: 16px;" onAction="#handleModify"/>
+
+                <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDelete" style="-fx-font-size: 16px;"/>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
