@@ -14,12 +14,12 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Actualites.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ActualiteFront.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setTitle("Health Swift");
         stage.setScene(scene);
         stage.show();
-
     }
+
 }

@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="" />
+    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteFront.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteBack.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteFront.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementBack.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementCard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/Styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/actualite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/download.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/eventImage.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/testcard.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/ActualiteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/ActualiteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/IService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/IService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gestionevenement/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gestionevenement/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entite/Evenement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entite/Evenement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Style.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,10 +40,16 @@
       <list>
         <option value="Interface" />
         <option value="CSS File" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -37,6 +68,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;malika&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/IdeaProjects/GestionEvenement/src/main/resources/image&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -48,6 +81,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\IdeaProjects\GestionEvenement\src\main\resources\image" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.MainFx">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.gestionevenement.HelloApplication" />
@@ -166,7 +204,18 @@
       <workItem from="1713171857079" duration="959000" />
       <workItem from="1713179459204" duration="234000" />
       <workItem from="1713185051109" duration="201000" />
-      <workItem from="1713271659862" duration="1087000" />
+      <workItem from="1713271659862" duration="4640000" />
+      <workItem from="1713278663985" duration="8995000" />
+      <workItem from="1713304552879" duration="7551000" />
+      <workItem from="1713388360636" duration="4574000" />
+      <workItem from="1713441640395" duration="20589000" />
+      <workItem from="1713474913828" duration="489000" />
+      <workItem from="1713525298533" duration="302000" />
+      <workItem from="1713626883811" duration="11242000" />
+      <workItem from="1713648960565" duration="2457000" />
+      <workItem from="1713653698109" duration="190000" />
+      <workItem from="1713656427924" duration="297000" />
+      <workItem from="1713657510199" duration="864000" />
     </task>
     <servers />
   </component>

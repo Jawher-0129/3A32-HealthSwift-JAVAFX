@@ -36,7 +36,11 @@
     -fx-text-fill:#fff;
     -fx-font-size:15px;
     -fx-font-family:"Arial";
-    -fx-alignment:CENTER-LEFT;
+    -fx-alignment:CENTER;
+}
+.nav-btn:hover{
+    -fx-background-color:#fff;
+    -fx-text-fill:#000;
 }
 
 .logout{
@@ -177,4 +181,20 @@
     -fx-font-family:"Tahoma";
     -fx-border-radius:4px;
     -fx-padding:0px 0px 0px 5px;
-}v
+}
+.round-layout{
+    -fx-border-radius: 50;
+    -fx-border-color: #D7D7D7;
+ }
+.white-border-text-field {
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+}
+.selected{
+    -fx-background-color: #F3F3F3;
+}
+.mouse-moved:hover{
+    -fx-background-color: E4E4E4;
+}
+
+

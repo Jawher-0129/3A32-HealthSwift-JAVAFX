@@ -1,40 +1,29 @@
 package Controller;
 
+import Service.ActualiteService;
 import entite.Actualite;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import util.DataSource;
-
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
 import javafx.scene.control.Alert.AlertType;
 
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
 public class ActualiteController implements Initializable {
-    Connection con = null;
-    PreparedStatement st = null;
-    ResultSet rs = null;
-
+    private ActualiteService actualiteService = new ActualiteService();
     @FXML
-    private Button btnClear;
-
-    @FXML
-    private Button btnDelete;
-
-    @FXML
-    private Button btnSave;
-
-    @FXML
-    private Button btnUpdate;
+    private Button GotoEvent_Btn;
 
     @FXML
     private TextField iddescr;
@@ -73,7 +62,6 @@ public class ActualiteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        con = DataSource.getInstance().getConnection();
         configureTableView();
         loadData();
     }
@@ -88,33 +76,15 @@ public class ActualiteController implements Initializable {
 
     private void loadData() {
         actualiteList.clear();
-        try {
-            String query = "SELECT * FROM actualite";
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-
-            while (rs.next()) {
-                int id_actualite = rs.getInt("id_actualite");
-                String titre = rs.getString("titre");
-                String description = rs.getString("description");
-                String type_pub_cible = rs.getString("type_pub_cible");
-                String theme = rs.getString("theme");
-
-                Actualite actualite = new Actualite(id_actualite, titre, description, type_pub_cible, theme);
-                actualiteList.add(actualite);
-            }
-
-            table.setItems(actualiteList);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        actualiteList.addAll(actualiteService.getAll());
+        table.setItems(actualiteList);
     }
 
     @FXML
     void AddActualite(ActionEvent event) {
         String titre = idtitre.getText();
         String description = iddescr.getText();
-        String type_pub_cible = idtype.getValue(); // Ensure the ComboBox has a selected value
+        String type_pub_cible = idtype.getValue();
         String theme = idtheme.getValue();
 
         if (titre != null && !titre.isEmpty() &&
@@ -122,18 +92,11 @@ public class ActualiteController implements Initializable {
                 type_pub_cible != null && !type_pub_cible.isEmpty() &&
                 theme != null && !theme.isEmpty()) {
             try {
-                String query = "INSERT INTO actualite (titre, description, type_pub_cible, theme) VALUES (?, ?, ?, ?)";
-                st = con.prepareStatement(query);
-                st.setString(1, titre);
-                st.setString(2, description);
-                st.setString(3, type_pub_cible);
-                st.setString(4, theme);
-
-                st.executeUpdate();
-
-                loadData(); // Refresh table data after insertion
+                Actualite newActualite = new Actualite(0, titre, description, type_pub_cible, theme);
+                actualiteService.add(newActualite);
+                loadData();
                 showAlert(AlertType.INFORMATION, "Success", "Success", "Successfully added the data!");
-            } catch (SQLException e) {
+            } catch (RuntimeException e) {
                 e.printStackTrace();
             }
         } else {
@@ -145,7 +108,7 @@ public class ActualiteController implements Initializable {
     void ClearActualite(ActionEvent event) {
         idtitre.clear();
         iddescr.clear();
-        idtype.getSelectionModel().clearSelection(); // Clear the selection
+        idtype.getSelectionModel().clearSelection();
         idtheme.getSelectionModel().clearSelection();
         showAlert(AlertType.INFORMATION, "Success", "Success", "Cleared all fields.");
     }
@@ -156,14 +119,10 @@ public class ActualiteController implements Initializable {
         if (selectedActualite != null) {
             int id_actualite = selectedActualite.getId_actualite();
             try {
-                String query = "DELETE FROM actualite WHERE id_actualite=?";
-                st = con.prepareStatement(query);
-                st.setInt(1, id_actualite);
-                st.executeUpdate();
-
-                loadData(); // Refresh table data after deletion
+                actualiteService.delete(id_actualite);
+                loadData();
                 showAlert(AlertType.INFORMATION, "Success", "Success", "Successfully deleted the data!");
-            } catch (SQLException e) {
+            } catch (RuntimeException e) {
                 e.printStackTrace();
             }
         } else {
@@ -178,60 +137,66 @@ public class ActualiteController implements Initializable {
             int id_actualite = selectedActualite.getId_actualite();
             String titre = idtitre.getText();
             String description = iddescr.getText();
-            String type_pub_cible = idtype.getValue(); // Ensure the ComboBox has a selected value
+            String type_pub_cible = idtype.getValue();
             String theme = idtheme.getValue();
 
-            if (idtitre.getText().isEmpty() || iddescr.getText().isEmpty()
-                    || type_pub_cible == null || theme == null) {
-
-                showAlert(AlertType.ERROR, "Error Message", "Error", "Please enter all required fields .");
+            if (titre.isEmpty() || description.isEmpty() ||
+                    type_pub_cible == null || theme == null) {
+                showAlert(AlertType.ERROR, "Error Message", "Error", "Please enter all required fields.");
                 return;
             }
 
             try {
-                String query = "UPDATE actualite SET titre=?, description=?, type_pub_cible=?, theme=? WHERE id_actualite=?";
-                st = con.prepareStatement(query);
-                st.setString(1, titre);
-                st.setString(2, description);
-                st.setString(3, type_pub_cible);
-                st.setString(4, theme);
-                st.setInt(5, id_actualite);
-
-                st.executeUpdate();
-
-                loadData(); // Refresh table data after update
-
+                Actualite updatedActualite = new Actualite(id_actualite, titre, description, type_pub_cible, theme);
+                actualiteService.update(updatedActualite, id_actualite);
+                loadData();
                 idtitre.clear();
                 iddescr.clear();
                 idtype.getSelectionModel().clearSelection();
                 idtheme.getSelectionModel().clearSelection();
                 showAlert(AlertType.INFORMATION, "Success", "Success", "Successfully updated the data!");
-            } catch (SQLException e) {
+            } catch (RuntimeException e) {
                 e.printStackTrace();
-
             }
         } else {
-
             showAlert(AlertType.ERROR, "Error Message", "Error", "Please select an item to update.");
         }
     }
+
     @FXML
     public void selectData() {
         Actualite actualite = table.getSelectionModel().getSelectedItem();
 
-        int selectedIndex = table.getSelectionModel().getSelectedIndex();
-
-        if (selectedIndex < 0)
-            return;
-
-        idtitre.setText(actualite.getTitre());
-        iddescr.setText(actualite.getDescription());
-        idtype.getSelectionModel().clearSelection();
-        idtype.getSelectionModel().select(actualite.getType_pub_cible());
-        idtheme.getSelectionModel().clearSelection();
-        idtheme.getSelectionModel().select(actualite.getTheme());
+        if (actualite != null) {
+            idtitre.setText(actualite.getTitre());
+            iddescr.setText(actualite.getDescription());
+            idtype.getSelectionModel().select(actualite.getType_pub_cible());
+            idtheme.getSelectionModel().select(actualite.getTheme());
+        }
     }
 
+    @FXML
+    void SearchActualite(KeyEvent event) {
+        String keyword = idSearchActualite.getText().toLowerCase().trim();
+
+        if (keyword.isEmpty()) {
+            table.setItems(actualiteList);
+            return;
+        }
+
+        ObservableList<Actualite> filteredList = FXCollections.observableArrayList();
+
+        for (Actualite actualite : actualiteList) {
+            if (actualite.getTitre().toLowerCase().contains(keyword) ||
+                    actualite.getDescription().toLowerCase().contains(keyword) ||
+                    actualite.getType_pub_cible().toLowerCase().contains(keyword) ||
+                    actualite.getTheme().toLowerCase().contains(keyword)) {
+                filteredList.add(actualite);
+            }
+        }
+
+        table.setItems(filteredList);
+    }
 
     private void showAlert(AlertType alertType, String title, String headerText, String contentText) {
         Alert alert = new Alert(alertType);
@@ -242,27 +207,17 @@ public class ActualiteController implements Initializable {
     }
 
     @FXML
-    void SearchActualite(KeyEvent event) {
-        String keyword = idSearchActualite.getText().toLowerCase().trim();
-
-        if (keyword.isEmpty()) {
-            table.setItems(actualiteList); //all items kn mzelt mabditch
-            return;
+    void PageEventBack(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/EvenementBack.fxml"));
+            Parent root = loader.load();
+            // Get the scene from any node in the current scene
+            Scene scene = GotoEvent_Btn.getScene();
+            // Set the loaded FXML file as the root of the scene
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        ObservableList<Actualite> filteredList = FXCollections.observableArrayList();
-
-        for (Actualite actualite : actualiteList) {
-
-            if (actualite.getTitre().toLowerCase().contains(keyword) ||
-                    actualite.getDescription().toLowerCase().contains(keyword) ||
-                    actualite.getType_pub_cible().toLowerCase().contains(keyword) ||
-                    actualite.getTheme().toLowerCase().contains(keyword)) {
-                filteredList.add(actualite);
-            }
-        }
-
-        table.setItems(filteredList); //bch yjini kn l result
-
     }
+
 }

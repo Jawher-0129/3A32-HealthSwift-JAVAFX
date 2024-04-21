@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.EvenementFront" prefHeight="600" prefWidth="800">
+   <children>
+      <!-- Ajout d'un titre -->
+      <Label text="Explorez les événements" style="-fx-font-size: 24px; -fx-padding: 10px;" />
+      <ScrollPane fitToWidth="true" fitToHeight="true">
+         <content>
+            <FlowPane fx:id="cardsContainer" prefWidth="800" alignment="CENTER" hgap="10" vgap="10">
+               <padding>
+                  <Insets top="10" right="10" bottom="10" left="10"/>
+               </padding>
+               <!-- Les cartes d'événement seront ajoutées ici dynamiquement -->
+            </FlowPane>
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

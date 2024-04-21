@@ -1,5 +1,10 @@
 package entite;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
 import java.util.Date;
 
 public class Evenement {
@@ -34,6 +39,9 @@ public class Evenement {
         this.objectif = objectif;
         this.image = image;
         this.id_actualite = id_actualite;
+    }
+    public Evenement(String titre) {
+        this.titre = titre;
     }
 
     public int getId_evenement() {
@@ -113,4 +121,5 @@ public class Evenement {
                 ", id_actualite=" + id_actualite +
                 '}';
     }
+
 }

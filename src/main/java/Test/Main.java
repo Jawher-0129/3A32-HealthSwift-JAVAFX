@@ -1,13 +1,18 @@
 package Test;
 
 import Service.ActualiteService;
+import Service.EvenementService;
 import entite.Actualite;
+import entite.Evenement;
 import util.DataSource;
+
+import java.util.Date;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Actualite a1=new Actualite("testttt","descr","type","theme");
-        ActualiteService as= new ActualiteService();
+        //Actualite a1=new Actualite("testttt","descr","type","theme");
+        //ActualiteService as= new ActualiteService();
         //as.add(a1);
         //as.getAll().forEach(System.out::println);
         //as.delete(37);
@@ -26,5 +31,7 @@ public class Main {
         } else {
             System.out.println("Aucune actualité trouvée avec l'identifiant " + idToUpdate);
         }*/
+
+
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ActualiteService implements IService<Actualite> {
     private Connection cnx;
-    private Statement ste; //envoyer des requete au bd
+    private Statement ste;
     private PreparedStatement pst;
     public ActualiteService(){
         cnx= DataSource.getInstance().getConnection();

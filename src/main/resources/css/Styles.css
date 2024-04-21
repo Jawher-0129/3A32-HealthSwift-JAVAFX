@@ -1,0 +1,27 @@
+.card {
+    -fx-background-color: #ffffff; /* White */
+    -fx-border-color: #ced4da; /* Light gray */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+
+.card-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+
+.card-date {
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+}
+
+
+.card-image {
+    -fx-fit-width: 200px;
+    -fx-fit-height: 150px;
+    -fx-padding: 10px 0;
+}

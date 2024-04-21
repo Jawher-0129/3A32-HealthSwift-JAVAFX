@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox fx:id="card" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="Controller.EvenementCard"
+      prefWidth="250" prefHeight="200">
+    <ImageView fx:id="imageView"/>
+    <Label fx:id="titleLabel" text=""/>
+    <Label fx:id="dateLabel" text=""/>
+</VBox>
