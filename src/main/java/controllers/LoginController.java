@@ -1,5 +1,6 @@
 package controllers;
 import javafx.scene.control.CheckBox;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +14,8 @@ import Entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import java.util.prefs.Preferences;
-
+import java.util.List; // Add this import for List interface
+import java.util.Arrays; // Add this import for Arrays class
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import org.mindrot.jbcrypt.BCrypt;
@@ -34,7 +36,11 @@ public class LoginController {
 
     @FXML
     private ResourceBundle resources;
+    @FXML
+    private Label lblEmailError;
 
+    @FXML
+    private Label lblPasswordError;
     @FXML
     private URL location;
 
@@ -64,14 +70,20 @@ public class LoginController {
         prefs.put("rememberedEmail", email);
         prefs.put("rememberedPassword", password);
     }
+
+    private void showErrorMessage(Label label, String message) {
+        label.setTextFill(Color.RED);
+        label.setText(message);
+    }
     @FXML
     void login(ActionEvent event) {
-
+        lblEmailError.setText(""); // Efface les messages d'erreur précédents
+        lblPasswordError.setText("");
 
         String userEmail = email.getText();
         String pass = password.getText();
         if (!isValidEmail(userEmail)) {
-            showAlert(Alert.AlertType.ERROR, "Invalid Email", "Please enter a valid email address.");
+            showErrorMessage(lblEmailError, "Please enter a valid email address.");
             return;
         }
         Usercrud x = new Usercrud();
@@ -79,9 +91,8 @@ public class LoginController {
         // Fetch user data from the database
         User user = x.getUserByEmail(userEmail);
 
-
         // Check if the user exists and the password matches
-        if (user != null && BCrypt.checkpw(pass, user.getPassword()) ) {
+        if (user != null && BCrypt.checkpw(pass, user.getPassword())) {
             SessionManager.setCurrentUser(user);
 
             // Check the user's role
@@ -94,15 +105,11 @@ public class LoginController {
             if (rememberMeCheckbox.isSelected() && user != null) {
                 rememberCredentials(user.getEmail(), pass);
             }
-
-                switchScene("/AdminPage.fxml", event);
-                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome!");
-            }
-         else {
+        } else {
             // Show error message for invalid email or password
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password!");
-        }}
-
+            showErrorMessage(lblPasswordError, "Incorrect password !");
+        }
+    }
 
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";

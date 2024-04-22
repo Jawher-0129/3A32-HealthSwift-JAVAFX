@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +12,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.CheckBox?>
 
 <AnchorPane id="AnchorPane" prefHeight="547.0" prefWidth="854.0" style="-fx-background-color: #fff; " xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
     <children>
@@ -19,31 +20,34 @@
         <Pane layoutX="451.0" layoutY="38.0" prefHeight="439.0" prefWidth="419.0" AnchorPane.bottomAnchor="69.99999999999994" AnchorPane.topAnchor="38.0">
 
             <children>
-                <TextField fx:id="email" layoutX="46.0" layoutY="196.0" prefHeight="34.0" prefWidth="275.0" promptText="Email" />
-                <PasswordField fx:id="password" layoutX="46.0" layoutY="257.0" prefHeight="34.0" prefWidth="275.0" promptText="password" stylesheets="@../styling/fullpackstyling.css" />
-                <CheckBox fx:id="rememberMeCheckbox" layoutX="46.0" layoutY="300.0" text="Remember Me" />
+                <TextField fx:id="email" layoutX="46.0" layoutY="196.0" onKeyReleased="#handleEmailFieldTextChanged" prefHeight="34.0" prefWidth="275.0" promptText="Email" />
+                <Label fx:id="lblEmailError" layoutX="46.0" layoutY="234.0" prefWidth="275.0" textFill="#ff0000" />
 
-                <Button fx:id="loginButton" layoutX="46.0" layoutY="340.0" mnemonicParsing="false" onAction="#login" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="275.0" stylesheets="@../styling/fullpackstyling.css" text="Sign In" />
-                <Label fx:id="lblErrors" alignment="CENTER" layoutX="20.0" layoutY="159.0" prefHeight="23.0" prefWidth="275.0" textFill="#ff6354">
+                <PasswordField fx:id="password" layoutX="46.0" layoutY="257.0" prefHeight="34.0" prefWidth="275.0" promptText="password" stylesheets="@../styling/fullpackstyling.css" />
+                <Label fx:id="lblPasswordError" layoutX="46.0" layoutY="295.0" prefWidth="275.0" textFill="#ff0000" />
+
+                <CheckBox fx:id="rememberMeCheckbox" layoutX="46.0" layoutY="340.0" text="Remember Me" />
+
+                <Button fx:id="loginButton" layoutX="46.0" layoutY="380.0" mnemonicParsing="false" onAction="#login" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="275.0" stylesheets="@../styling/fullpackstyling.css" text="Sign In" />
+
+                <Hyperlink layoutX="210.0" layoutY="343.0" onAction="#forgotPassword" text="Forgot Password ?" />
+
+                <Button layoutX="227.0" layoutY="429.0" mnemonicParsing="false" onAction="#Registre" prefHeight="23.0" prefWidth="96.0" text="Sign Up" />
+
+                <ImageView fitHeight="90.0" fitWidth="96.0" layoutX="131.0" layoutY="92.0">
+                    <image>
+                        <Image url="file:\C:/Users/admin/Desktop/PIDEVJAVAFIRAS/PidevUserJava/src/main/images/Capture%20d'écran%202024-02-18%20152610.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="130.0" layoutY="33.0" text="Sign In">
                     <font>
-                        <Font name="Segoe UI" size="10.0" />
+                        <Font size="32.0" />
                     </font>
                 </Label>
-            <Hyperlink layoutX="210.0" layoutY="303.0" onAction="#forgotPassword" text="Forgot Password ?" />
+                <Hyperlink layoutX="47.0" layoutY="429.0" text="Don't have An Account Yet  ?" />
 
-                <Button layoutX="227.0" layoutY="391.0" mnemonicParsing="false" onAction="#Registre" prefHeight="23.0" prefWidth="96.0" text="Sign Up" />
-            <ImageView fitHeight="90.0" fitWidth="96.0" layoutX="131.0" layoutY="92.0">
-               <image>
-                   <Image url="file:\C:/Users/admin/Desktop/PIDEVJAVAFIRAS/PidevUserJava/src/main/images/Capture%20d'écran%202024-02-18%20152610.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="130.0" layoutY="33.0" text="Sign In">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
-            <Hyperlink layoutX="47.0" layoutY="391.0" text="Dont't have An Account Yet  ?" />
-
+                <!-- Add ListView to display suggested emails -->
+                <ListView fx:id="suggestedEmailsListView" layoutX="46.0" layoutY="230.0" onMouseClicked="#handleSuggestedEmailSelected" prefHeight="100.0" prefWidth="247.0" visible="false" />
             </children>
 
         </Pane>

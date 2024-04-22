@@ -44,20 +44,23 @@ public class StatController {
         double donateurPercentage = (donateurCount / totalUsers) * 100;
         double directeurPercentage = (directeurCount / totalUsers) * 100;
 
-// Créer des libellés personnalisés avec les pourcentages
+        // Créer des libellés personnalisés avec les pourcentages
         String donateurLabel = String.format("Donateur (%.2f%%)", donateurPercentage);
         String directeurLabel = String.format("Directeur de campagne (%.2f%%)", directeurPercentage);
 
-// Créer les données pour le PieChart avec les libellés personnalisés
+        // Créer les données pour le PieChart avec les libellés personnalisés
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data(donateurLabel, donateurCount),
                         new PieChart.Data(directeurLabel, directeurCount));
 
-// Définir les données sur le PieChart
+        // Définir les données sur le PieChart
         pieChart.setData(pieChartData);
 
+        // Définir la taille du PieChart
+        pieChart.setPrefSize(450, 400); // Ajustez la taille selon vos besoins
     }
+
     private void switchScene(String fxmlFile, ActionEvent event) {
         try {
             System.out.println("fxml:"+ fxmlFile);

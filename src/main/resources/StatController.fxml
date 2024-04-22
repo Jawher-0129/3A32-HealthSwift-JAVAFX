@@ -9,9 +9,9 @@
 <AnchorPane prefHeight="547.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StatController">
 
     <children>
-        <Button fx:id="displ" layoutX="662.0" layoutY="479.0" mnemonicParsing="false" onAction="#displaystats" prefHeight="35.0" prefWidth="143.0" text="Afficher Statistique" />
-        <PieChart fx:id="pieChart" layoutX="449.0" layoutY="111.0" prefHeight="369.0" prefWidth="381.0" />
-        <Button fx:id="bouttonRetour" layoutX="449.0" layoutY="479.0" mnemonicParsing="false" onAction="#back" prefHeight="35.0" prefWidth="143.0" text="Retour" />
+        <Button fx:id="displ" layoutX="676.0" layoutY="505.0" mnemonicParsing="false" onAction="#displaystats" prefHeight="26.0" prefWidth="143.0" text="Afficher Statistique" />
+        <PieChart fx:id="pieChart" layoutX="411.0" layoutY="109.0" prefHeight="297.0" prefWidth="350.0" />
+        <Button fx:id="bouttonRetour" layoutX="444.0" layoutY="505.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="143.0" text="Retour" />
       <AnchorPane layoutX="-3.0" prefHeight="558.0" prefWidth="408.0" style="-fx-background-color: #42A9E6;" />
       <ImageView fitHeight="90.0" fitWidth="96.0" layoutX="580.0" layoutY="21.0">
          <image>

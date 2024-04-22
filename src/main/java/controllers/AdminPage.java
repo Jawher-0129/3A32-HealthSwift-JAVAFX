@@ -249,16 +249,16 @@ public class AdminPage {
             document.addPage(page);
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
-            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, 700);
+            contentStream.newLineAtOffset(50, 700); // Starting position
 // Specify a font that supports the characters you need
             PDType1Font font = PDType1Font.HELVETICA;
             String text = "This is a multi-line message.";
             String[] lines = text.split("\n");
 
             for (String line : lines) {
-                contentStream.newLineAtOffset(0, -15);
+                contentStream.newLineAtOffset(15, -15);
                 // Use the specified font for displaying text
                 contentStream.setFont(font, 12);
                 contentStream.showText(line);
@@ -266,41 +266,43 @@ public class AdminPage {
             }
 
             ObservableList<User> userList = UserTable.getItems();
-            float currentY = 700; // Starting vertical position
+            // Initialize vertical position
+            float currentY = 1000;
+
+// Loop through each user
+            // Loop through each user
+            // Loop through each user
+            // Loop through each user
             for (User user : userList) {
-                contentStream.newLineAtOffset(50, currentY); // Move to the current vertical position
+                // Display user information
                 contentStream.showText("Nom: " + user.getNom());
                 contentStream.newLine();
-
-                contentStream.newLine(); // Add spacing between each attribute
                 contentStream.showText("Prénom: " + user.getPrenom());
                 contentStream.newLine();
-
-                contentStream.newLine(); // Add spacing between each attribute
                 contentStream.showText("Email: " + user.getEmail());
                 contentStream.newLine();
-
-                contentStream.newLine(); // Add spacing between each attribute
+                contentStream.newLine(); // Add an extra line for spacing
                 contentStream.showText("Adresse: " + user.getAdresse());
                 contentStream.newLine();
-
-                contentStream.newLine(); // Add spacing between each attribute
+                contentStream.newLine(); // Add an extra line for spacing
                 contentStream.showText("Téléphone: " + user.getTelephone());
                 contentStream.newLine();
-
-                contentStream.newLine(); // Add spacing between each attribute
+                contentStream.newLine(); // Add an extra line for spacing
                 contentStream.showText("Rôles: " + user.getRoles());
                 contentStream.newLine();
+                contentStream.newLine(); // Add an extra line for spacing
 
-                currentY -= 100; // Move the vertical position for the next user
+                // Move to the next position
+                contentStream.newLineAtOffset(0, -200); // Move down 200 units
             }
 
 
 
+// End text and close content stream
             contentStream.endText();
             contentStream.close();
 
-            // Save the PDF document
+// Save the PDF document
             document.save("user_list.pdf");
             document.close();
 
