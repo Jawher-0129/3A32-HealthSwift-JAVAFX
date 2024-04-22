@@ -62,13 +62,32 @@ public class PersonnelController{
     private TableView<Personnel> tablePersonnel;
     @FXML
     private TableColumn<Personnel,String> prenompersonnel;
-
+    @FXML
+    private TableColumn<Personnel, Integer> disponibilite;
 
     @FXML
+    private TableColumn<Personnel, String> image;
+    @FXML
+    private TableColumn<Personnel, Integer> rating;
+    @FXML
+    private TableColumn<Personnel, String> role;
+
+    @FXML
+    private TableColumn<Personnel,Integer> userid;
+
     private Button SupprimerPersonnelBtn;
 
     @FXML
     private Button AjouterPersonnelBtn;
+
+    @FXML
+    private void initializeDemandeChoiceBox() {
+        roleChoiceBox.setItems(FXCollections.observableArrayList(
+                "Chirurgie", "Neurologie", "Infirmier", "Cardiologie"
+        ));
+        roleChoiceBox.setValue("Chirurgie"); // Définir la valeur initiale
+
+    }
 
     private void populateFields(Personnel personnel) {
 
@@ -112,7 +131,29 @@ public class PersonnelController{
 @FXML
 void initialize(){
     configureTableView();
-    loadPersonnels();
+    initializeDemandeChoiceBox();
+    // Ajouter un écouteur de sélection à la TableView
+    tablePersonnel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Déplacer les données de la demande sélectionnée vers les champs de texte
+            Nom.setText(newSelection.getNom());
+            Prenom_personnel.setText(newSelection.getPrenom_personnel());
+            roleChoiceBox.setValue(newSelection.getRole());
+            experiencePersonnel.setText(String.valueOf(newSelection.getExperience()));
+            RatingPersonnel.setText(String.valueOf(newSelection.getRating()));
+
+            // don.setValue(newSelection.getDon_id());
+        } else {
+            // Effacer les champs de texte si aucune demande n'est sélectionnée
+            Nom.clear();
+            Prenom_personnel.clear();
+            experiencePersonnel.clear();
+            roleChoiceBox.getSelectionModel().clearSelection();
+        }
+    });
+
+
+
 }
     private void configureTableView() {
         System.out.println("Configuration de la TableView...");
@@ -120,6 +161,11 @@ void initialize(){
         nompersonnel.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenompersonnel.setCellValueFactory(new PropertyValueFactory<>("prenom_personnel"));
         experience.setCellValueFactory(new PropertyValueFactory<>("experience"));
+        role.setCellValueFactory(new PropertyValueFactory<>("role"));
+        rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        userid.setCellValueFactory(new PropertyValueFactory<>("user_id_id"));
+        disponibilite.setCellValueFactory(new PropertyValueFactory<>("disponibilite"));
+        image.setCellValueFactory(new PropertyValueFactory<>("image"));
        loadPersonnels();
     }
     private void loadPersonnels() {
@@ -138,15 +184,39 @@ void initialize(){
 
         String Nom = this.Nom.getText();
         String prenom = this.Prenom_personnel.getText();
+        String role = this.roleChoiceBox.getValue();
+        String experiencetext = experiencePersonnel.getText();
+        String ratingtext = RatingPersonnel.getText();
 
-        if (Nom.length() == 0) {
+        int experience = Integer.parseInt(experiencetext);
+        int rating = Integer.parseInt(ratingtext);
+        int disponibilite;
+
+        if (nonDisponibleRadioButton.isSelected()) {
+            disponibilite = 0;
+        } else {
+            disponibilite = 1;
+        }
+        String image = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+
+        if (image==null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Erreur : Veuillez choisir une image");
+            alert.show();
+            return;}
+
+
+
+      /*  if (Nom.length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("Erreur : Veuillez entrer un Nom");
             alert.show();
             return;
-        }
+        }*/
 
 
        /* String Role = roleChoiceBox.getText();
@@ -160,7 +230,7 @@ void initialize(){
             return;
         }*/
 
-        Integer experience = Integer.parseInt(experiencePersonnel.getText());
+       /* Integer experience = Integer.parseInt(experiencePersonnel.getText());
         Integer rating = Integer.parseInt(RatingPersonnel.getText());
         if (experience<0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -183,11 +253,11 @@ void initialize(){
             alert.setContentText("Erreur : Veuillez choisir une image");
             alert.show();
             return;
-        }
+        }*/
 
-       /* Personnel newPer = new Personnel(Nom,prenom,disponibilite,Role,experience,image, rating, 8);
+        Personnel newPer = new Personnel(Nom,prenom,disponibilite,role,experience,image, rating, 8);
         this.personnelService.add(newPer);
-        this.refreshTableView();*/
+        loadPersonnels();
 
     }
 
@@ -206,7 +276,48 @@ void initialize(){
 
     @FXML
     void handleModifierPersonnel(ActionEvent event) {
+            Personnel demandeSelectionnee = tablePersonnel.getSelectionModel().getSelectedItem();
+            if (demandeSelectionnee != null) {
+                String Nom = this.Nom.getText();
+                String prenom = this.Prenom_personnel.getText();
+                String role = this.roleChoiceBox.getValue();
+                String experiencetext = experiencePersonnel.getText();
+                String ratingtext = RatingPersonnel.getText();
 
+                int experience = Integer.parseInt(experiencetext);
+                int rating = Integer.parseInt(ratingtext);
+                int disponibilite;
+
+                if (nonDisponibleRadioButton.isSelected()) {
+                    disponibilite = 0;
+                } else {
+                    disponibilite = 1;
+                }
+                String image = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+
+                if (image==null) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Erreur : Veuillez choisir une image");
+                    alert.show();
+                    return;}
+                Personnel newPer = new Personnel(Nom,prenom,disponibilite,role,experience,image, rating, 8);
+                this.personnelService.update(newPer,demandeSelectionnee.getId_personnel());
+                loadPersonnels();
+
+                showAlert(Alert.AlertType.INFORMATION, "Succès", "Demande mise à jour", "La demande a été mise à jour avec succès.");
+
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Erreur", "Aucune demande sélectionnée", "Veuillez sélectionner une demande à mettre à jour.");
+            }
+        }
+    private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 
     @FXML

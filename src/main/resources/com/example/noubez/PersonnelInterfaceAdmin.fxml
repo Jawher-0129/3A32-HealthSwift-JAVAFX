@@ -31,12 +31,17 @@
       <Button fx:id="ModifierPersonnelBtn" layoutX="107.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleModifierPersonnel" text="Modifier" />
       <Button fx:id="SupprimerPersonnelBtn" layoutX="614.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleSupprimerPersonnel" text="Supprimer" />
       <ImageView fx:id="imageView" fitHeight="121.0" fitWidth="198.0" layoutX="370.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" />
-      <TableView fx:id="tablePersonnel" layoutX="260.0" layoutY="85.0" prefHeight="200.0" prefWidth="436.0">
+      <TableView fx:id="tablePersonnel" layoutX="338.0" layoutY="14.0" prefHeight="346.0" prefWidth="520.0">
         <columns>
           <TableColumn fx:id="idpersonnel" prefWidth="75.0" text="C1" />
           <TableColumn fx:id="nompersonnel" prefWidth="75.0" text="C2" />
-            <TableColumn fx:id="prenompersonnel" prefWidth="75.0" text="Column X" />
-            <TableColumn fx:id="experience" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="prenompersonnel" prefWidth="37.3333740234375" text="Column X" />
+            <TableColumn fx:id="experience" prefWidth="60.0" text="experence" />
+            <TableColumn fx:id="disponibilite" prefWidth="76.66671752929688" text="disponibilite" />
+            <TableColumn fx:id="role" prefWidth="48.00006103515625" text="role" />
+            <TableColumn fx:id="image" prefWidth="51.33331298828125" text="image" />
+            <TableColumn fx:id="rating" prefWidth="48.666748046875" text="raiting" />
+            <TableColumn fx:id="userid" prefWidth="75.0" text="userid" />
         </columns>
       </TableView>
    </children>

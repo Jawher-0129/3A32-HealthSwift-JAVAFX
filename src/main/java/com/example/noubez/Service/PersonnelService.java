@@ -63,6 +63,7 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
             pst.setInt(5, p.getExperience());
             pst.setString(6, p.getImage());
             pst.setInt(7, p.getRating());
+            pst.setInt(8, id_personnel);
             this.pst.executeUpdate();
 
 
@@ -71,33 +72,6 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
         }
     }
 
-
-
-   /* @Override
-    public List<Personnel> getAll() {
-        String requete="Select * from personnel";
-        List<Personnel> list=new ArrayList<>();
-        try {
-            ste= cnx.createStatement();
-            ResultSet rs=ste.executeQuery(requete);
-            while (rs.next()) {
-                list.add(new Personnel(
-                        rs.getInt("id_personnel"),
-                        rs.getString("nom"),
-                        rs.getString("prenom_personnel"),
-                        rs.getInt("disponibilite"),
-                        rs.getString("role"),
-                        rs.getInt("experience"),
-                        rs.getString("image"),
-                        rs.getInt("rating"),
-                        rs.getInt("user_id_id")));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
-
-    }*/
     @Override
     public List<Personnel> getAll(){
         String requete = "SELECT * FROM personnel";
