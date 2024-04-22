@@ -59,3 +59,17 @@
 .form-datepicker .arrow-button:hover {
     -fx-background-color: #bbbbbb;
 }
+
+.error-message {
+    -fx-font-size: 12px;
+    -fx-text-fill: #d9534f; /* Red color for errors */
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-padding: 5px;
+}
+
+/* Enhanced visibility when an error is displayed */
+.form-textfield.error, .form-textarea.error, .form-datepicker.error {
+    -fx-border-color: #d9534f; /* Red border on error */
+    -fx-effect: dropshadow(one-pass-box, rgba(217, 83, 79, 0.5), 5, 0, 0, 0); /* Subtle red shadow */
+}
+

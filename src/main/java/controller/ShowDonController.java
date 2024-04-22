@@ -13,6 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
 import javafx.scene.control.ButtonType;
 import javafx.geometry.Insets;
+import java.util.Optional;
 
 import entite.Don;
 import service.DonService;
@@ -56,10 +57,26 @@ public class ShowDonController {
             stage.setScene(new Scene(form));
             stage.setTitle("Modifier le Don");
             stage.showAndWait();
+
+            // Refresh data display after the form is closed
+            refreshDonDisplay();
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
+    private void refreshDonDisplay() {
+        if (currentDon != null) {
+            // Assuming DonService or similar method to fetch the latest data
+            Optional<Don> optionalDon = donService.findById(currentDon.getId());
+            if (optionalDon.isPresent()) {
+                Don updatedDon = optionalDon.get();
+                setDon(updatedDon); // Reuse the setDon method to update the UI
+            }
+        }
+    }
+
 
     @FXML
     private void handleBack() {
@@ -86,9 +103,8 @@ public class ShowDonController {
             if (response == ButtonType.OK) {
                 try {
                     donService.deleteById(id);
-                    // Close the details view
-                    Stage stage = (Stage) deleteButton.getScene().getWindow();
-                    stage.close();
+                    // Navigate back to DonView after successful deletion
+                    handleBack();
                 } catch (Exception ex) {
                     Alert errorAlert = new Alert(AlertType.ERROR, "Error deleting donation: " + ex.getMessage());
                     errorAlert.show();

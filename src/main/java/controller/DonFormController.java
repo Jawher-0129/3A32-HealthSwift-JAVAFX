@@ -20,12 +20,14 @@ public class DonFormController {
     @FXML private ComboBox<Campagne> comboCampagne;
     @FXML private Button boutonEnregistrer;
 
+    @FXML private Label typeError, montantError, dateRemiseError, campagneError;  // Labels for displaying validation errors
+
     private DonService serviceDon = new DonService();
     private CampagneService serviceCampagne = new CampagneService();
     private Don donActuel;
 
     public void initialize() {
-        updateFormTitle(); // Ensure title is updated based on initial state
+        updateFormTitle();
         chargerCampagnes();
         boutonEnregistrer.setOnAction(event -> gererEnregistrementDon());
     }
@@ -71,52 +73,86 @@ public class DonFormController {
     }
 
     private void gererEnregistrementDon() {
-        if (!validerSaisie()) {
-            afficherAlerte(Alert.AlertType.WARNING, "Validation échouée", "Veuillez corriger les champs invalides.");
-            return;
-        }
+        if (validerSaisie()) {
+            String type = champType.getText();
+            Integer montant = essayerParserInt(champMontant.getText());
+            LocalDate dateRemise = selecteurDateRemise.getValue();
+            Campagne selectedCampagne = comboCampagne.getSelectionModel().getSelectedItem();
 
-        String type = champType.getText();
-        Integer montant = essayerParserInt(champMontant.getText());
-        LocalDate dateRemise = selecteurDateRemise.getValue();
-        Campagne selectedCampagne = comboCampagne.getSelectionModel().getSelectedItem();
-
-        if (donActuel == null) {
-            donActuel = new Don(type, montant, dateRemise.toString(), selectedCampagne != null ? selectedCampagne.getId() : null);
-            Don donEnregistre = serviceDon.save(donActuel);
-            if (donEnregistre != null) {
-                afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Don ajouté avec succès.");
+            if (donActuel == null) {
+                donActuel = new Don(type, montant, dateRemise.toString(), selectedCampagne != null ? selectedCampagne.getId() : null);
+                Don donEnregistre = serviceDon.save(donActuel);
+                if (donEnregistre != null) {
+                    afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Don ajouté avec succès.");
+                } else {
+                    afficherAlerte(Alert.AlertType.ERROR, "Erreur", "L'ajout du don a échoué.");
+                }
             } else {
-                afficherAlerte(Alert.AlertType.ERROR, "Erreur", "L'ajout du don a échoué.");
-            }
-        } else {
-            donActuel.setType(type);
-            donActuel.setMontant(montant);
-            donActuel.setDate_remise(dateRemise.toString());
-            donActuel.setCampagne_id(selectedCampagne != null ? selectedCampagne.getId() : null);
+                donActuel.setType(type);
+                donActuel.setMontant(montant);
+                donActuel.setDate_remise(dateRemise.toString());
+                donActuel.setCampagne_id(selectedCampagne != null ? selectedCampagne.getId() : null);
 
-            Don donMisAJour = serviceDon.update(donActuel);
-            if (donMisAJour != null) {
-                afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Don mis à jour avec succès.");
-            } else {
-                afficherAlerte(Alert.AlertType.ERROR, "Erreur", "La mise à jour du don a échoué.");
+                Don donMisAJour = serviceDon.update(donActuel);
+                if (donMisAJour != null) {
+                    afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Don mis à jour avec succès.");
+                } else {
+                    afficherAlerte(Alert.AlertType.ERROR, "Erreur", "La mise à jour du don a échoué.");
+                }
             }
         }
     }
 
     private boolean validerSaisie() {
-        String errorMessage = "";
+        boolean isValid = true;
+        clearErrors();
+
         if (champType.getText().isEmpty()) {
-            errorMessage += "Le type ne peut pas être vide.\n";
+            typeError.setText("Le type ne peut pas être vide.");
+            champType.getStyleClass().add("error");
+            isValid = false;
+        } else {
+            champType.getStyleClass().remove("error");
+            typeError.setText("");
         }
+
         if (selecteurDateRemise.getValue() == null) {
-            errorMessage += "La date de remise est requise.\n";
+            dateRemiseError.setText("La date de remise est requise.");
+            selecteurDateRemise.getStyleClass().add("error");
+            isValid = false;
+        } else if (selecteurDateRemise.getValue().isBefore(LocalDate.now())) {
+            dateRemiseError.setText("La date de remise doit être dans le futur.");
+            selecteurDateRemise.getStyleClass().add("error");
+            isValid = false;
+        } else {
+            dateRemiseError.setText("");
         }
-        if (!errorMessage.isEmpty()) {
-            afficherAlerte(Alert.AlertType.WARNING, "Saisie invalide", errorMessage);
-            return false;
+
+        if (!champMontant.getText().isEmpty()) {
+            Integer montant = essayerParserInt(champMontant.getText());
+            if (montant == null || montant <= 0) {
+                montantError.setText("Le montant doit être positif si fourni.");
+                champMontant.getStyleClass().add("error");
+                isValid = false;
+            } else {
+                champMontant.getStyleClass().remove("error");
+                montantError.setText("");
+            }
         }
-        return true;
+
+        return isValid;
+    }
+
+    private void clearErrors() {
+        typeError.setText("");
+        montantError.setText("");
+        dateRemiseError.setText("");
+        campagneError.setText("");
+
+        champType.getStyleClass().remove("error");
+        champMontant.getStyleClass().remove("error");
+        selecteurDateRemise.getStyleClass().remove("error");
+        comboCampagne.getStyleClass().remove("error");
     }
 
     private Integer essayerParserInt(String texte) {

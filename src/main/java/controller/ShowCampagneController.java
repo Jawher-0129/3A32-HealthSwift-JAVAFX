@@ -14,6 +14,7 @@ import service.CampagneService;
 import javafx.geometry.Insets;
 import java.util.Optional;
 import javafx.scene.Parent;
+import javafx.stage.Modality;
 
 public class ShowCampagneController {
 
@@ -53,6 +54,29 @@ public class ShowCampagneController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void openDonationForm() {
+        try {
+            // Charger le FXML du formulaire de don
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/DonForm.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Créer une nouvelle fenêtre de popup
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setScene(scene);
+            popupStage.setTitle("Formulaire de Don");
+
+            // Afficher la fenêtre de popup
+            popupStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void handleModify() {
         if (currentCampagne != null) {
@@ -83,13 +107,14 @@ public class ShowCampagneController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.YES) {
                 service.deleteById(currentCampagne.getId());
-                closeStage(); // Close the stage after deletion
+                handleBack(); // Call handleBack after deletion
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "No valid campaign is loaded for deletion.");
             alert.showAndWait();
         }
     }
+
 
     private void closeStage() {
         Stage stage = (Stage) detailsBox.getScene().getWindow();

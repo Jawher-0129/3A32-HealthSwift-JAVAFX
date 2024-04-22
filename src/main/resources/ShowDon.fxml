@@ -4,16 +4,23 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.geometry.Insets?>
 
-<ScrollPane fitToWidth="true" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShowDonController">
+<ScrollPane fitToWidth="true" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShowDonController"
+            stylesheets="@StyleSheets/Details.css">
     <content>
-        <VBox fx:id="vbox" spacing="10">
+        <VBox fx:id="vbox" spacing="10" minHeight="200" alignment="CENTER">
             <children>
-                <Button fx:id="backButton" onAction="#handleBack" text="&lt;&lt;" style="-fx-background-color: transparent; -fx-font-size: 16px;"/>
-                <Label fx:id="typeLabel" text="Type:" style="-fx-font-size: 18px;"/>
-                <Label fx:id="amountLabel" text="Montant:" style="-fx-font-size: 18px;"/>
-                <Label fx:id="dateLabel" text="Date de remise:" style="-fx-font-size: 18px;"/>
-                <Button fx:id="updateButton" text="Modifier" style="-fx-font-size: 16px;"/>
-                <Button fx:id="deleteButton" text="Supprimer" style="-fx-font-size: 16px;"/>
+                <HBox alignment="TOP_LEFT"> <!-- Panneau pour le bouton de retour -->
+                    <Button fx:id="backButton" onAction="#handleBack" text="&lt;&lt;" />
+                </HBox>
+                <Label text=" Détails du don" styleClass="title"/> <!-- Titre centré -->
+                <Label fx:id="typeLabel" text="Type:" styleClass="label"/>
+                <Label fx:id="amountLabel" text="Montant:" styleClass="label"/>
+                <Label fx:id="dateLabel" text="Date de remise:" styleClass="label"/>
+
+                <HBox spacing="10" alignment="CENTER"> <!-- Panneau pour les boutons Modifier et Supprimer -->
+                    <Button fx:id="updateButton" text="Modifier" styleClass="button"/>
+                    <Button fx:id="deleteButton" text="Supprimer" styleClass="button"/>
+                </HBox>
             </children>
         </VBox>
     </content>

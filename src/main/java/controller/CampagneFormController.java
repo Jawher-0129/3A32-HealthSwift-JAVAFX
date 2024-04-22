@@ -22,6 +22,7 @@ public class CampagneFormController {
     @FXML private ImageView imageView;
     @FXML private Button boutonEnregistrer;
     @FXML private Label labelTitre;
+    @FXML private Label titreError, descriptionError, debutError, finError, imageError;
 
     private CampagneService service;
     private Campagne currentCampagne;
@@ -56,28 +57,102 @@ public class CampagneFormController {
 
     @FXML
     private void handleSave() {
-        if (currentCampagne == null) {
-            currentCampagne = new Campagne(
-                    titreField.getText(),
-                    descriptionArea.getText(),
-                    debutDatePicker.getValue().toString(),
-                    finDatePicker.getValue().toString(),
-                    imageField.getText()
-            );
+        if (validateInput()) {
+            boolean isNew = currentCampagne == null;
+            if (isNew) {
+                currentCampagne = new Campagne(
+                        titreField.getText(),
+                        descriptionArea.getText(),
+                        debutDatePicker.getValue().toString(),
+                        finDatePicker.getValue().toString(),
+                        imageField.getText()
+                );
+            } else {
+                currentCampagne.setTitre(titreField.getText());
+                currentCampagne.setDescription(descriptionArea.getText());
+                currentCampagne.setDate_debut(debutDatePicker.getValue().toString());
+                currentCampagne.setDate_fin(finDatePicker.getValue().toString());
+                currentCampagne.setImage(imageField.getText());
+            }
+
+            if (isNew) {
+                service.save(currentCampagne);
+                showAlert("Success", "New campaign created successfully!");
+            } else {
+                service.update(currentCampagne);
+                showAlert("Success", "Campaign updated successfully!");
+            }
+            closeStage();
+        }
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private boolean validateInput() {
+        boolean isValid = true;
+        clearErrors();
+
+        if (titreField.getText() == null || titreField.getText().isEmpty()) {
+            titreError.setText("Title is required.");
+            titreField.getStyleClass().add("error");
+            isValid = false;
         } else {
-            currentCampagne.setTitre(titreField.getText());
-            currentCampagne.setDescription(descriptionArea.getText());
-            currentCampagne.setDate_debut(debutDatePicker.getValue().toString());
-            currentCampagne.setDate_fin(finDatePicker.getValue().toString());
-            currentCampagne.setImage(imageField.getText());
+            titreField.getStyleClass().remove("error");
         }
 
-        if (currentCampagne.getId() == 0) {
-            service.save(currentCampagne);
+        if (descriptionArea.getText() == null || descriptionArea.getText().isEmpty()) {
+            descriptionError.setText("Description is required.");
+            descriptionArea.getStyleClass().add("error");
+            isValid = false;
         } else {
-            service.update(currentCampagne);
+            descriptionArea.getStyleClass().remove("error");
         }
-        closeStage();
+
+        if (debutDatePicker.getValue() == null || debutDatePicker.getValue().isBefore(LocalDate.now())) {
+            debutError.setText("Start date must be today or later.");
+            debutDatePicker.getStyleClass().add("error");
+            isValid = false;
+        } else {
+            debutDatePicker.getStyleClass().remove("error");
+        }
+
+        if (finDatePicker.getValue() == null || (debutDatePicker.getValue() != null && finDatePicker.getValue().isBefore(debutDatePicker.getValue()))) {
+            finError.setText("End date must be after the start date.");
+            finDatePicker.getStyleClass().add("error");
+            isValid = false;
+        } else {
+            finDatePicker.getStyleClass().remove("error");
+        }
+
+        if (imageField.getText() == null || imageField.getText().isEmpty() || !new File(imageField.getText()).exists()) {
+            imageError.setText("A valid image file must be selected.");
+            imageField.getStyleClass().add("error");
+            isValid = false;
+        } else {
+            imageField.getStyleClass().remove("error");
+        }
+
+        return isValid;
+    }
+
+    private void clearErrors() {
+        titreError.setText("");
+        descriptionError.setText("");
+        debutError.setText("");
+        finError.setText("");
+        imageError.setText("");
+
+        titreField.getStyleClass().remove("error");
+        descriptionArea.getStyleClass().remove("error");
+        debutDatePicker.getStyleClass().remove("error");
+        finDatePicker.getStyleClass().remove("error");
+        imageField.getStyleClass().remove("error");
     }
 
     @FXML
