@@ -13,9 +13,12 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.scene.image.ImageView;
 import java.io.File;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.scene.control.ChoiceBox;
-public class PersonnelController  {
+public class PersonnelController{
     private final PersonnelService personnelService=new PersonnelService();
 
     @FXML
@@ -48,27 +51,22 @@ public class PersonnelController  {
     private ChoiceBox<String> roleChoiceBox;
     @FXML
     private ImageView imageView;
+    @FXML
+    private TableColumn<Personnel, Integer> experience;
 
     @FXML
-    private TableView<?> personnelTableView;
+    private TableColumn<Personnel, Integer> idpersonnel;
+    @FXML
+    private TableColumn<Personnel,String> nompersonnel;
+    @FXML
+    private TableView<Personnel> tablePersonnel;
+    @FXML
+    private TableColumn<Personnel,String> prenompersonnel;
+
+
     @FXML
     private Button SupprimerPersonnelBtn;
-    @FXML
-    private TableColumn<?, ?> DisponibilitePersonnelColumn;
-    @FXML
-    private TableColumn<?, ?> ExperiencePersonnelColumn;
-    @FXML
-    private TableColumn<?, ?> NomPersonnelColumn;
 
-    @FXML
-    private TableColumn<?, ?> PrenomPersonnelColumn;
-    @FXML
-    private TableColumn<?, ?> RatingPersonnelColumn;
-
-    @FXML
-    private TableColumn<?, ?> RolePersonnelColumn;
-    @FXML
-    private TableColumn<?, ?> idPersonnelColumn;
     @FXML
     private Button AjouterPersonnelBtn;
 
@@ -90,11 +88,11 @@ public class PersonnelController  {
 
 
 
-        String imageURL=personnel.getImage();
+       /* String imageURL=personnel.getImage();
         if (imageURL != null && !imageURL.isEmpty()) {
             Image image = new Image(imageURL);
             this.imageView.setImage(image);
-        }
+        }*/
 
 
         // Populate the roleChoiceBox with options
@@ -112,50 +110,34 @@ public class PersonnelController  {
 
     }
 @FXML
-        void initialize(){
-
-
- personnelTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-        if(newValue!=null)
-        {
-            this.populateFields(newValue);
-        }
-        if (newValue != null) {
-            // Get the image URL from the selected Personnel object
-            String imageUrl = newValue.getimage();
-            // Load the image into the ImageView
-            if (imageUrl != null && !imageUrl.isEmpty()) {
-                Image image = new Image(imageUrl);
-                imageView.setImage(image);
-            } else {
-                // If image URL is null or empty, clear the ImageView
-                imageView.setImage(null);
-            }
-        }
-
-    });
-            this.configureTableView();
-            this.refreshTableView();
+void initialize(){
+    configureTableView();
+    loadPersonnels();
 }
-
     private void configureTableView() {
-        this.idPersonnelColumn.setCellValueFactory(new PropertyValueFactory("id"));
-        this.NomPersonnelColumn.setCellValueFactory(new PropertyValueFactory("Nom"));
-        this.DisponibilitePersonnelColumn.setCellValueFactory(new PropertyValueFactory("Disponibilite"));
-        this.PrenomPersonnelColumn.setCellValueFactory(new PropertyValueFactory("PrenomPersonnel"));
-        this.ExperiencePersonnelColumn.setCellValueFactory(new PropertyValueFactory("Experience"));
-        this.RatingPersonnelColumn.setCellValueFactory(new PropertyValueFactory("Rating"));
+        System.out.println("Configuration de la TableView...");
+        idpersonnel.setCellValueFactory(new PropertyValueFactory<>("id_personnel"));
+        nompersonnel.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenompersonnel.setCellValueFactory(new PropertyValueFactory<>("prenom_personnel"));
+        experience.setCellValueFactory(new PropertyValueFactory<>("experience"));
+       loadPersonnels();
     }
-    private void refreshTableView() {
-        List<Personnel> personnelList = PersonnelService.getAll();
-        ObservableList<Personnel> personnelObservableList = FXCollections.observableArrayList(Personnel);
-        this.personnelTableView.setItems(personnelObservableList);
+    private void loadPersonnels() {
+        System.out.println("Chargement des personnels depuis la base de données...");
+        List<Personnel> Personnels = personnelService.getAll();
+        System.out.println("Nombre de personnels récupérés : " + Personnels.size());
+        ObservableList<Personnel> observablePersonnels = FXCollections.observableArrayList(Personnels);
+        System.out.println("Personnels chargés avec succès.");
+        tablePersonnel.setItems(observablePersonnels);
     }
+
+
 
     @FXML
     void handleAjouterPersonnel(ActionEvent event) {
 
         String Nom = this.Nom.getText();
+        String prenom = this.Prenom_personnel.getText();
 
         if (Nom.length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -167,7 +149,7 @@ public class PersonnelController  {
         }
 
 
-        String Role = RolePersonnelColumn.getText();
+       /* String Role = roleChoiceBox.getText();
 
         if (Role.length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -176,10 +158,10 @@ public class PersonnelController  {
             alert.setContentText("Erreur : Veuillez entrer un role.");
             alert.show();
             return;
-        }
+        }*/
 
         Integer experience = Integer.parseInt(experiencePersonnel.getText());
-
+        Integer rating = Integer.parseInt(RatingPersonnel.getText());
         if (experience<0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -203,6 +185,9 @@ public class PersonnelController  {
             return;
         }
 
+       /* Personnel newPer = new Personnel(Nom,prenom,disponibilite,Role,experience,image, rating, 8);
+        this.personnelService.add(newPer);
+        this.refreshTableView();*/
 
     }
 

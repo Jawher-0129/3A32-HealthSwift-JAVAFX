@@ -28,19 +28,16 @@
       <Button fx:id="AjouterPersonnelBtn" layoutX="16.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleAjouterPersonnel" text="Ajouter" />
       <Button fx:id="choisir" layoutX="73.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleChoisirImage" text="Choisir une image" />
       <ChoiceBox fx:id="roleChoiceBox" layoutX="98.0" layoutY="201.0" prefWidth="150.0" />
-      <TableView fx:id="personnelTableView" layoutX="363.0" layoutY="18.0" prefHeight="353.0" prefWidth="413.0">
-        <columns>
-          <TableColumn fx:id="idPersonnelColumn" prefWidth="66.66668701171875" text="identifiant" />
-          <TableColumn fx:id="NomPersonnelColumn" prefWidth="34.0" text="Nom" />
-            <TableColumn fx:id="PrenomPersonnelColumn" prefWidth="50.66668701171875" text="Prenom" />
-            <TableColumn fx:id="ExperiencePersonnelColumn" prefWidth="72.6666259765625" text="Experience" />
-            <TableColumn fx:id="RolePersonnelColumn" prefWidth="39.999969482421875" text="Role" />
-            <TableColumn fx:id="RatingPersonnelColumn" prefWidth="48.0" text="Rating" />
-            <TableColumn fx:id="DisponibilitePersonnelColumn" prefWidth="48.0" text="Disponibilite" />
-        </columns>
-      </TableView>
       <Button fx:id="ModifierPersonnelBtn" layoutX="107.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleModifierPersonnel" text="Modifier" />
       <Button fx:id="SupprimerPersonnelBtn" layoutX="614.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleSupprimerPersonnel" text="Supprimer" />
       <ImageView fx:id="imageView" fitHeight="121.0" fitWidth="198.0" layoutX="370.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView fx:id="tablePersonnel" layoutX="260.0" layoutY="85.0" prefHeight="200.0" prefWidth="436.0">
+        <columns>
+          <TableColumn fx:id="idpersonnel" prefWidth="75.0" text="C1" />
+          <TableColumn fx:id="nompersonnel" prefWidth="75.0" text="C2" />
+            <TableColumn fx:id="prenompersonnel" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="experience" prefWidth="75.0" text="Column X" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

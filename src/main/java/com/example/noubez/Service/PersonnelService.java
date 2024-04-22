@@ -73,7 +73,7 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
 
 
 
-    @Override
+   /* @Override
     public List<Personnel> getAll() {
         String requete="Select * from personnel";
         List<Personnel> list=new ArrayList<>();
@@ -97,6 +97,35 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
         }
         return list;
 
+    }*/
+    @Override
+    public List<Personnel> getAll(){
+        String requete = "SELECT * FROM personnel";
+        List<Personnel> list = new ArrayList<>();
+
+        try {
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(requete);
+
+            while (resultSet.next()) {
+                int id_personnel = resultSet.getInt("id_personnel");
+                int user_id_id = resultSet.getInt("user_id_id");
+                int experience = resultSet.getInt("experience");
+                int disponibilite = resultSet.getInt("disponibilite");
+                int rating = resultSet.getInt("rating");
+                String nom = resultSet.getString("nom");
+                String prenom_personnel = resultSet.getString("prenom_personnel");
+                String role = resultSet.getString("role");
+                String image = resultSet.getString("image");
+
+                Personnel pers = new Personnel(id_personnel, nom, prenom_personnel, disponibilite, role, experience, image, rating,user_id_id);
+                list.add(pers);
+            }
+
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération des demandes : " + e.getMessage());
+        }
     }
 
     @Override
