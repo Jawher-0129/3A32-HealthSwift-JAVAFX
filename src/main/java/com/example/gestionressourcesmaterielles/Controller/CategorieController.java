@@ -104,6 +104,11 @@ public class CategorieController {
             Categorie newCategorie = new Categorie(libelle);
             this.categorieService.add(newCategorie);
             this.refreshTableView();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Succès");
+            alert.setHeaderText(null);
+            alert.setContentText("Ajout effectuee !");
+            alert.showAndWait();
             this.newCategorieLibelleField.clear();
         }
         else

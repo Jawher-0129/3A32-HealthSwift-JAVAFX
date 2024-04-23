@@ -24,7 +24,6 @@ public class DataSource {
         if (instance == null) {
             instance = new DataSource();
         }
-
         return instance;
     }
 

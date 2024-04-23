@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,8 +18,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
+
 import com.itextpdf.layout.element.Cell;
 
 import com.itextpdf.io.image.ImageDataFactory;
@@ -29,7 +33,7 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 
-public class MaterielController {
+public class MaterielController implements Initializable {
     private final CategorieService categorieService = new CategorieService();
     private final MaterielService materielService=new MaterielService();
 
@@ -96,9 +100,6 @@ public class MaterielController {
     private TextField rechercheTextField;
 
     @FXML
-    private TextField imagefield;
-
-    @FXML
     private Button rechercheButton;
 
     @FXML
@@ -130,13 +131,12 @@ public class MaterielController {
 
         ObservableList<String> categories = categorieChoiceBox.getItems();
         if (libelleCategorie != null) {
-            // Définir le libellé de la catégorie comme valeur sélectionnée dans la ChoiceBox
             categorieChoiceBox.setValue(libelleCategorie);
         }
     }
 
 
-    @FXML
+   /* @FXML
     void initialize() {
         List<String> CategoriesLibelle = categorieService.afficherLibellesCategories();
         ObservableList<String> idCategoriesList = FXCollections.observableArrayList(CategoriesLibelle);
@@ -165,7 +165,7 @@ public class MaterielController {
         });
             this.configureTableView();
             this.refreshTableView();
-    }
+    }*/
 
     private void configureTableView() {
         this.idMaterielColumn.setCellValueFactory(new PropertyValueFactory("id"));
@@ -174,8 +174,6 @@ public class MaterielController {
         this.disponibiliteColumn.setCellValueFactory(new PropertyValueFactory("Disponibilite"));
         this.descriptionColumn.setCellValueFactory(new PropertyValueFactory("Description"));
         this.prixColumn.setCellValueFactory(new PropertyValueFactory("Prix"));
-
-
     }
 
     private void refreshTableView() {
@@ -194,7 +192,6 @@ public class MaterielController {
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
             imageView.setImage(image);
-            imagefield.setText(selectedFile.toURI().toString());
         }
     }
 
@@ -204,7 +201,7 @@ public class MaterielController {
         String libelle = this.libelleMaterielTextField.getText();
 
         if (libelle.length() == 0) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("Erreur : Veuillez entrer un libelle");
@@ -245,7 +242,7 @@ public class MaterielController {
 
 
         if (imageURL==null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("Erreur : Veuillez choisir une image");
@@ -253,14 +250,11 @@ public class MaterielController {
             return;
         }
 
-
-
-
         String categorieLibelle=categorieChoiceBox.getValue();
 
         if(categorieLibelle==null)
         {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("Erreur : Veuillez sélectionner une catégorie.");
@@ -274,12 +268,18 @@ public class MaterielController {
         Materiel nouveauMateriel = new Materiel(libelle, description, disponibilite, image, prix, idCategorie);
 
         materielService.add(nouveauMateriel);
-        System.out.println("Nouveau matériel ajouté avec succès !");
+        //System.out.println("Nouveau matériel ajouté avec succès !");
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Succès");
+        alert.setHeaderText(null);
+        alert.setContentText("Nouveau matériel ajouté avec succès !");
+        alert.showAndWait();
 
         libelleMaterielTextField.setText("");
         descriptionTextArea.setText("");
         prixTextField.setText("");
-        disponibleRadioButton.setSelected(true); // Réinitialiser à Disponible
+        disponibleRadioButton.setSelected(true);
         imageView.setImage(null);
        // categorieChoiceBox.getSelectionModel().clearSelection();
         refreshTableView();
@@ -308,7 +308,13 @@ public class MaterielController {
         String descriptionTextArea = this.descriptionTextArea.getText().trim();
         double prix = Double.parseDouble(prixTextField.getText());
         int disponibilite = disponibleRadioButton.isSelected() ? 1 : 0;
-        String image = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+        //String image = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+
+          String imageURL = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+        String imageName = imageURL != null ? new File(imageURL).getName() : null;
+        String image="C:\\Users\\jawhe\\OneDrive\\Bureau\\3A32HealthSwiftIntegration (2)\\3A32HealthSwiftIntegration\\3A32HealthSwift\\public\\uploads\\"+imageName;
+
+
 
         //int idCategorie = categorieChoiceBox.getValue();
         String libelleCategorie=categorieChoiceBox.getValue();
@@ -318,7 +324,7 @@ public class MaterielController {
         if (selectedMateriel != null) {
 
             if (libelleMaterielTextField.length() == 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Information Dialog");
                 alert.setHeaderText(null);
                 alert.setContentText("Erreur : Veuillez entrer un libelle");
@@ -327,7 +333,7 @@ public class MaterielController {
             }
 
             if (descriptionTextArea.length() == 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Information Dialog");
                 alert.setHeaderText(null);
                 alert.setContentText("Erreur : Veuillez entrer une description de materiel.");
@@ -336,20 +342,10 @@ public class MaterielController {
             }
 
             if (prix<0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Information Dialog");
                 alert.setHeaderText(null);
                 alert.setContentText("Erreur : Veuillez entrer un prix positif");
-                alert.show();
-                return;
-            }
-
-
-            if (image==null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("Erreur : Veuillez choisir une image");
                 alert.show();
                 return;
             }
@@ -359,9 +355,17 @@ public class MaterielController {
             selectedMateriel.setPrix(prix);
             selectedMateriel.setDisponibilite(disponibilite);
             selectedMateriel.setImageMateriel(image);
+
             selectedMateriel.setId_categorie(idCategorie);
             this.materielService.update(selectedMateriel, selectedMateriel.getId());
             System.out.println("Modification effectuée");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Succès");
+            alert.setHeaderText(null);
+            alert.setContentText("Modification effectuée !");
+            alert.showAndWait();
+
+
             this.refreshTableView();
             this.libelleMaterielTextField.clear();
 
@@ -469,8 +473,33 @@ public class MaterielController {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<String> CategoriesLibelle = categorieService.afficherLibellesCategories();
+        ObservableList<String> idCategoriesList = FXCollections.observableArrayList(CategoriesLibelle);
+        categorieChoiceBox.setItems(idCategoriesList);
 
+        materielTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue!=null)
+            {
+                this.populateFields(newValue);
+            }
+            if (newValue != null) {
+                // Get the image URL from the selected Materiel object
+                String imageUrl = newValue.getImageMateriel();
+                // Load the image into the ImageView
+                if (imageUrl != null && !imageUrl.isEmpty()) {
+                    Image image = new Image(imageUrl);
+                    imageView.setImage(image);
 
+                } else {
+                    // If image URL is null or empty, clear the ImageView
+                    imageView.setImage(null);
+                }
+            }
 
-
+        });
+        this.configureTableView();
+        this.refreshTableView();
+    }
 }
