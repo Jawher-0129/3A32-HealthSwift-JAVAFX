@@ -31,25 +31,27 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
 
     @Override
     public void delete(int id_personnel) {
-        String requete="delete from personnel where id_personnel=?";
         try {
-            pst=cnx.prepareStatement(requete);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            pst.setInt(1,id_personnel);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            pst.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Suppression Personnel effectué");
+            // Delete associated records in chambre table
+            String chambreDeleteQuery = "DELETE FROM chambre WHERE personnel = ?";
+            try (PreparedStatement chambreDeleteStmt = cnx.prepareStatement(chambreDeleteQuery)) {
+                chambreDeleteStmt.setInt(1, id_personnel);
+                chambreDeleteStmt.executeUpdate();
+            }
 
+            // Delete personnel record
+            String personnelDeleteQuery = "DELETE FROM personnel WHERE id_personnel = ?";
+            try (PreparedStatement personnelDeleteStmt = cnx.prepareStatement(personnelDeleteQuery)) {
+                personnelDeleteStmt.setInt(1, id_personnel);
+                personnelDeleteStmt.executeUpdate();
+            }
+
+            System.out.println("Suppression Personnel effectuée");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     @Override
     public void update(Personnel p, int id_personnel) {
