@@ -108,13 +108,6 @@ public class PersonnelController {
 
 
 
-       /* String imageURL=personnel.getImage();
-        if (imageURL != null && !imageURL.isEmpty()) {
-            Image image = new Image(imageURL);
-            this.imageView.setImage(image);
-        }*/
-
-
         // Populate the roleChoiceBox with options
         ObservableList<String> personnels = FXCollections.observableArrayList("Radiologie", "Chirurgie", "Infirmier", "Neurologie");
         roleChoiceBox.setItems(personnels);
