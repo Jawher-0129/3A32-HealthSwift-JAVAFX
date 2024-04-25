@@ -11,42 +11,41 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="748.0" prefWidth="1183.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionressourcesmaterielles.Controller.MaterielController">
 
     <!-- Libelle Materiel -->
-    <Label layoutX="279.0" layoutY="514.0" stylesheets="@mainFormDesign.css" text="Libellé Materiel:" />
+    <Label layoutX="35.0" layoutY="509.0" stylesheets="@mainFormDesign.css" text="Libellé Materiel:" />
     <TextField fx:id="rechercheTextField" layoutX="490.0" layoutY="338.0" prefHeight="30.0" prefWidth="181.0" styleClass="text-field" />
 
     <!-- Description -->
-    <Label layoutX="279.0" layoutY="568.0" prefHeight="18.0" prefWidth="70.0" stylesheets="@mainFormDesign.css" text="Description:" />
-    <TextArea fx:id="descriptionTextArea" layoutX="381.0" layoutY="548.0" prefHeight="100.0" prefWidth="217.0" />
+    <Label layoutX="42.0" layoutY="570.0" prefHeight="18.0" prefWidth="70.0" stylesheets="@mainFormDesign.css" text="Description:" />
+    <TextArea fx:id="descriptionTextArea" layoutX="133.0" layoutY="557.0" prefHeight="100.0" prefWidth="217.0" />
 
     <!-- Prix -->
-    <Label layoutX="321.0" layoutY="662.0" stylesheets="@mainFormDesign.css" text="Prix:" />
-    <TextField fx:id="prixTextField" layoutX="381.0" layoutY="658.0" />
+    <Label layoutX="66.0" layoutY="662.0" stylesheets="@mainFormDesign.css" text="Prix:" />
+    <TextField fx:id="prixTextField" layoutX="133.0" layoutY="660.0" />
 
     <!-- Disponibilité -->
-    <Label layoutX="649.0" layoutY="546.0" stylesheets="@mainFormDesign.css" text="Disponibilité:" />
-    <RadioButton fx:id="disponibleRadioButton" layoutX="759.0" layoutY="546.0" text="Disponible">
+    <Label layoutX="420.0" layoutY="509.0" stylesheets="@mainFormDesign.css" text="Disponibilité:" />
+    <RadioButton fx:id="disponibleRadioButton" layoutX="525.0" layoutY="509.0" text="Disponible">
       <toggleGroup>
          <ToggleGroup fx:id="dispo" />
       </toggleGroup></RadioButton>
-    <RadioButton fx:id="nonDisponibleRadioButton" layoutX="857.0" layoutY="546.0" selected="true" text="Non Disponible" toggleGroup="$dispo" />
+    <RadioButton fx:id="nonDisponibleRadioButton" layoutX="623.0" layoutY="509.0" selected="true" text="Non Disponible" toggleGroup="$dispo" />
 
     <!-- Image -->
-    <Label layoutX="675.0" layoutY="598.0" stylesheets="@mainFormDesign.css" text="Image:" />
+    <Label layoutX="429.0" layoutY="561.0" stylesheets="@mainFormDesign.css" text="Image:" />
 
     <!-- Catégorie -->
-    <Label layoutX="665.0" layoutY="649.0" stylesheets="@mainFormDesign.css" text="Catégorie:" />
-    <ChoiceBox fx:id="categorieChoiceBox" layoutX="773.0" layoutY="645.0" prefHeight="26.0" prefWidth="138.0" styleClass="table-column" stylesheets="@mainFormDesign.css" />
+    <Label layoutX="420.0" layoutY="613.0" stylesheets="@mainFormDesign.css" text="Catégorie:" />
+    <ChoiceBox fx:id="categorieChoiceBox" layoutX="534.0" layoutY="608.0" prefHeight="26.0" prefWidth="138.0" styleClass="table-column" stylesheets="@mainFormDesign.css" />
 
     <!-- Bouton Sauvegarder -->
-    <Button fx:id="AjouterMaterielBtn" layoutX="1028.0" layoutY="658.0" onAction="#handleAjouterMateriel" prefHeight="26.0" prefWidth="91.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Ajouter" />
-   <Button fx:id="choisir" layoutX="762.0" layoutY="594.0" mnemonicParsing="false" onAction="#handleChoisirImage" prefHeight="26.0" prefWidth="150.0" stylesheets="@mainFormDesign.css" text="Choisir une image" />
-   <ImageView fx:id="imageView" fitHeight="99.0" fitWidth="118.0" layoutX="1015.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" />
-   <TableView fx:id="materielTableView" layoutX="274.0" layoutY="14.0" prefHeight="294.0" prefWidth="781.0" stylesheets="@mainFormDesign.css">
+    <Button fx:id="AjouterMaterielBtn" layoutX="844.0" layoutY="642.0" onAction="#handleAjouterMateriel" prefHeight="26.0" prefWidth="91.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Ajouter" />
+   <Button fx:id="choisir" layoutX="528.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleChoisirImage" prefHeight="26.0" prefWidth="150.0" stylesheets="@mainFormDesign.css" text="Choisir une image" />
+   <ImageView fx:id="imageView" fitHeight="99.0" fitWidth="118.0" layoutX="876.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true" />
+   <TableView fx:id="materielTableView" layoutX="91.0" layoutY="20.0" prefHeight="294.0" prefWidth="720.0" stylesheets="@mainFormDesign.css">
      <columns>
        <TableColumn fx:id="idMaterielColumn" prefWidth="75.0" text="Identifiant" />
        <TableColumn fx:id="idCategorieMColumn" prefWidth="75.0" text="Id_categorie" />
@@ -57,41 +56,12 @@
 
      </columns>
    </TableView>
-   <Button fx:id="supprimerMaterielBtn" layoutX="1025.0" layoutY="564.0" mnemonicParsing="false" onAction="#handleSupprimerMateriel" prefHeight="30.0" prefWidth="91.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Supprimer" />
-   <Button fx:id="modifierMaterielBtn" layoutX="1028.0" layoutY="607.0" mnemonicParsing="false" onAction="#handleModifierrMateriel" prefHeight="26.0" prefWidth="91.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Modifier" />
-   <AnchorPane layoutX="2.0" layoutY="6.0" prefHeight="727.0" prefWidth="258.0">
-      <children>
-         <AnchorPane layoutY="8.0" prefHeight="727.2" prefWidth="258.4" styleClass="nav-form" stylesheets="@mainFormDesign.css" AnchorPane.bottomAnchor="-7.2000000000000455" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="8.0">
-            <children>
-               <AnchorPane layoutY="-13.0" prefHeight="100.0" prefWidth="258.0" styleClass="header" stylesheets="@mainFormDesign.css" AnchorPane.bottomAnchor="640.1999999999999" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
-                  <children>
-                     <Label layoutX="55.0" layoutY="27.0" text="Healthswift" textFill="#f4f4f4">
-                        <font>
-                           <Font size="30.0" />
-                        </font>
-                     </Label>
-                  </children>
-               </AnchorPane>
-               <Label layoutX="14.0" layoutY="96.0" text="Bienvenue" textFill="WHITE">
-                  <font>
-                     <Font size="30.0" />
-                  </font></Label>
-               <Label layoutX="129.0" layoutY="142.0" prefHeight="27.0" prefWidth="70.0" text="Jawher" textFill="WHITE">
-                  <font>
-                     <Font size="18.0" />
-                  </font>
-               </Label>
-               <Button layoutX="14.0" layoutY="198.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="DASHBOARD" />
-               <Button fx:id="buttonMaterielAdmin" layoutX="14.0" layoutY="256.0" mnemonicParsing="false" onAction="#PageAdminMateriel" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="MATERIELS" />
-               <Button fx:id="buttonCategorieAdmin" layoutX="14.0" layoutY="314.0" mnemonicParsing="false" onAction="#PageAdminCategorie" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesign.css" text="CATEGORIES" />
-            </children>
-         </AnchorPane>
-      </children>
-   </AnchorPane>
-   <Button fx:id="qrcodeBtn" layoutX="268.0" layoutY="424.0" mnemonicParsing="false" onAction="#PageQrCode" prefHeight="26.0" prefWidth="91.0" text="QR CODE" />
+   <Button fx:id="supprimerMaterielBtn" layoutX="838.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleSupprimerMateriel" prefHeight="30.0" prefWidth="91.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Supprimer" />
+   <Button fx:id="modifierMaterielBtn" layoutX="844.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleModifierrMateriel" prefHeight="26.0" prefWidth="91.0" styleClass="btn" stylesheets="@mainFormDesign.css" text="Modifier" />
    <Button fx:id="rechercheButton" layoutX="685.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleRecherche" prefHeight="30.0" prefWidth="105.0" text="Rechercher" />
-   <TextField fx:id="libelleMaterielTextField" layoutX="381.0" layoutY="507.0" prefHeight="30.0" prefWidth="181.0" styleClass="text-field" />
-   <Button fx:id="bouttonStatMateriel" layoutX="268.0" layoutY="461.0" mnemonicParsing="false" onAction="#PageStatMateriel" prefHeight="26.0" prefWidth="91.0" text="Statistique" />
-   <Button fx:id="buttonPDFMateriel" layoutX="1025.0" layoutY="518.0" mnemonicParsing="false" onAction="#GenererPdfMateriel" prefHeight="26.0" prefWidth="91.0" text="PDF" />
+   <TextField fx:id="libelleMaterielTextField" layoutX="132.0" layoutY="503.0" prefHeight="30.0" prefWidth="181.0" styleClass="text-field" />
+   <Button fx:id="bouttonStatMateriel" layoutX="268.0" layoutY="388.0" mnemonicParsing="false" onAction="#PageStatMateriel" prefHeight="26.0" prefWidth="91.0" text="Statistique" />
+   <Button fx:id="buttonPDFMateriel" layoutX="838.0" layoutY="504.0" mnemonicParsing="false" onAction="#GenererPdfMateriel" prefHeight="26.0" prefWidth="91.0" text="PDF" />
+   <ImageView fx:id="qrCodeImageView" fitHeight="263.0" fitWidth="281.0" layoutX="844.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
 
 </AnchorPane>

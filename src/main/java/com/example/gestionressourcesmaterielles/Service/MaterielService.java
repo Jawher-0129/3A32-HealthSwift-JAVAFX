@@ -14,6 +14,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
+
+
 import javax.swing.text.Document;
 import java.sql.*;
 import java.util.ArrayList;
@@ -214,6 +220,24 @@ public class MaterielService implements IService<Materiel> {
         int startMarker = response.indexOf("content")+11; // Marker for where the content starts.
         int endMarker = response.indexOf("\"", startMarker); // Marker for where the content ends.
         return response.substring(startMarker, endMarker); // Returns the substring containing only the response.
+    }
+
+
+    public void envoyerSMS(String numeroDestinataire, String message) {
+        // Remplacez les valeurs suivantes par vos propres informations Twilio
+        String ACCOUNT_SID = "ACd2cd1ce44c341e483a5ad603a337cd2a";
+        String AUTH_TOKEN = "81e3e74d46f2ce6022ccc67d89b644c3";
+        String TWILIO_NUMERO = "+18066922677";
+
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+        Message twilioMessage = Message.creator(
+                        new PhoneNumber(numeroDestinataire),
+                        new PhoneNumber(TWILIO_NUMERO),
+                        message)
+                .create();
+
+        System.out.println("SMS envoyé avec succès avec l'ID : " + twilioMessage.getSid());
     }
 
 
