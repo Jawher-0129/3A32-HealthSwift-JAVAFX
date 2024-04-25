@@ -4,6 +4,9 @@ import com.example.gestionressourcesmaterielles.Model.Categorie;
 import com.example.gestionressourcesmaterielles.Model.Materiel;
 import com.example.gestionressourcesmaterielles.Service.CategorieService;
 import com.example.gestionressourcesmaterielles.Service.MaterielService;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +18,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +45,11 @@ public class MaterielController implements Initializable {
 
     @FXML
     private Button bouttonStatMateriel;
+
+    @FXML
+    private ImageView qrCodeImageView;
+
+    private MainController mainController;
     @FXML
     private Button choisirImageButton;
 
@@ -133,6 +144,26 @@ public class MaterielController implements Initializable {
         if (libelleCategorie != null) {
             categorieChoiceBox.setValue(libelleCategorie);
         }
+            String data = materiel.getLibelleMateriel() + "\n"
+                    + materiel.getDescription() + "\n"+ materiel.getPrix()+"\n"+materiel.getId_categorie()+"\n"+materiel.getDisponibilite();
+            // Set the size of the QR code image
+            int width = 300;
+            int height = 300;
+            try {
+                // Generate the QR code
+                BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, width, height);
+                // Convert the BitMatrix to an Image
+                Image qrCodeImage = toFXImage(bitMatrix);
+
+                // Display the QR code image in the ImageView
+                qrCodeImageView.setImage(qrCodeImage);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
     }
 
 
@@ -274,6 +305,8 @@ public class MaterielController implements Initializable {
         alert.setTitle("Succès");
         alert.setHeaderText(null);
         alert.setContentText("Nouveau matériel ajouté avec succès !");
+        String msg="Bonjour Mr(Mme) Jawher Nous vous informe qu'un nouveau produits a été ajoutée à notre centre c'est "+nouveauMateriel.getLibelleMateriel();
+        materielService.envoyerSMS("+21629036051",msg);
         alert.showAndWait();
 
         libelleMaterielTextField.setText("");
@@ -379,15 +412,10 @@ public class MaterielController implements Initializable {
         }
     }
 
-    @FXML
-    void PageQrCode(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/QRcode.fxml"));
-            Parent root=loader.load();
-            qrcodeBtn.getScene().setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+
+    public void initMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
     @FXML
@@ -409,32 +437,6 @@ public class MaterielController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/StatMateriel.fxml"));
             Parent root=loader.load();
             qrcodeBtn.getScene().setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    @FXML
-    void PageAdminMateriel(ActionEvent event) {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/MaterielInterfaceAdmin.fxml"));
-            Parent root=loader.load();
-            buttonMaterielAdmin.getScene().setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    @FXML
-    void PageAdminCategorie(ActionEvent event) {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/CategorieInterfaceAdmin.fxml"));
-            Parent root=loader.load();
-            buttonMaterielAdmin.getScene().setRoot(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -502,4 +504,23 @@ public class MaterielController implements Initializable {
         this.configureTableView();
         this.refreshTableView();
     }
+
+    private Image toFXImage(BitMatrix bitMatrix) {
+        int width = bitMatrix.getWidth();
+        int height = bitMatrix.getHeight();
+
+        WritableImage writableImage = new WritableImage(width, height);
+        PixelWriter pixelWriter = writableImage.getPixelWriter();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                boolean bit = bitMatrix.get(x, y);
+                Color color = bit ? Color.BLACK : Color.WHITE;
+                pixelWriter.setColor(x, y, color);
+            }
+        }
+
+        return writableImage;
+    }
+
 }

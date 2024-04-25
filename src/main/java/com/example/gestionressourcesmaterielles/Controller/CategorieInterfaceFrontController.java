@@ -98,8 +98,6 @@ public class CategorieInterfaceFrontController implements Initializable {
                 }
             }
         });
-
-
         card.getChildren().addAll(imageView, label, voirMaterielButton); // Ajout de l'image, du libellé et du bouton à la VBox
         return card;
     }

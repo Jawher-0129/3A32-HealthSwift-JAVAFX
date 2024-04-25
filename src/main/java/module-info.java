@@ -7,6 +7,7 @@ module com.example.gestionressourcesmaterielles {
     requires kernel;
     requires layout;
     requires io;
+    requires twilio;
     opens com.example.gestionressourcesmaterielles.Model;
     opens com.example.gestionressourcesmaterielles.Controller to javafx.fxml;
 
