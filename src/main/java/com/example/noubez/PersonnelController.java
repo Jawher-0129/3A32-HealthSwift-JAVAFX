@@ -205,17 +205,17 @@ public class PersonnelController {
 
 
 
-      /*  if (Nom.length() == 0) {
+        if (Nom.length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("Erreur : Veuillez entrer un Nom");
             alert.show();
             return;
-        }*/
+        }
 
 
-       /* String Role = roleChoiceBox.getText();
+        String Role = roleChoiceBox.getValue();
 
         if (Role.length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -224,10 +224,10 @@ public class PersonnelController {
             alert.setContentText("Erreur : Veuillez entrer un role.");
             alert.show();
             return;
-        }*/
+        }
 
-       /* Integer experience = Integer.parseInt(experiencePersonnel.getText());
-        Integer rating = Integer.parseInt(RatingPersonnel.getText());
+
+
         if (experience<0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -238,10 +238,6 @@ public class PersonnelController {
         }
 
 
-        int disponibilite = DisponibleRadioButton.isSelected() ? 1 : 0;
-
-        String image = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
-
         if (image==null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -249,7 +245,7 @@ public class PersonnelController {
             alert.setContentText("Erreur : Veuillez choisir une image");
             alert.show();
             return;
-        }*/
+        }
 
         Personnel newPer = new Personnel(Nom, prenom, disponibilite, role, experience, image, rating, 8);
         this.personnelService.add(newPer);

@@ -2,7 +2,7 @@ package com.example.noubez.Service;
 
 import com.example.noubez.Model.Personnel;
 import com.example.noubez.util.DataSource;
-
+import com.example.noubez.Model.Chambre;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +103,27 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
             throw new RuntimeException("Erreur lors de la récupération des demandes : " + e.getMessage());
         }
     }
+    public  List<Integer> afficherpersonnel() {
+        List<Integer> id_personnel = new ArrayList<>();
+        String requete = "select id_personnel from Personnel";
+        try {
+            // Vérifier si la connexion est ouverte
+            if (cnx != null && !cnx.isClosed()) {
+                PreparedStatement pst = cnx.prepareStatement(requete);
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    id_personnel.add(rs.getInt("id_personnel"));
+                }
+            } else {
+                // Gestion de l'erreur de connexion
+                System.out.println("La connexion à la base de données n'est pas ouverte.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id_personnel;
+    }
+
 
     @Override
     public Personnel getById(int id_personnel) {

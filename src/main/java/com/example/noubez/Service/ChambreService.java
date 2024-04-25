@@ -1,5 +1,5 @@
 package com.example.noubez.Service;
-
+import com.example.noubez.Model.Personnel;
 import com.example.noubez.Model.Chambre;
 import com.example.noubez.util.DataSource;
 import java.sql.*;
@@ -53,20 +53,21 @@ import java.util.List;
 
         @Override
         public void update(Chambre c, int numero) {
-            String requete = "update chambre set numero=?,personnel=?,disponibilite=?,nombre_lits_total=?,nmbr_lits_disponible=? where numero=?";
-            try{
+            String requete = "update chambre set numero=?, personnel=?, disponibilite=?, nombre_lits_total=?, nmbr_lits_disponible=? where numero=?";
+            try {
                 pst = cnx.prepareStatement(requete);
                 pst.setInt(1, c.getNumero());
                 pst.setInt(2, c.getPersonnel());
-                pst.setInt(3, c.getDisponibilite());
+                pst.setBoolean(3, c.getDisponibilite() == 1);
                 pst.setInt(4, c.getNombre_lits_total());
                 pst.setInt(5, c.getNmbr_lits_disponible());
+                pst.setInt(6, numero); // Utilisation de l'ancien numéro de chambre pour la clause WHERE
 
-                this.pst.executeUpdate();
+                pst.executeUpdate();
+                pst.close(); // Fermeture du PreparedStatement
 
-
-            }catch (SQLException e) {
-                throw  new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
 
@@ -87,6 +88,7 @@ import java.util.List;
                             rs.getInt("nombre_lits_total"),
                             rs.getInt("nmbr_lits_disponible")));
 
+
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -94,6 +96,27 @@ import java.util.List;
             return list;
 
         }
+        public  List<Integer> afficherchambre() {
+            List<Integer> numero = new ArrayList<>();
+            String requete = "select numero from Chambre";
+            try {
+                // Vérifier si la connexion est ouverte
+                if (cnx != null && !cnx.isClosed()) {
+                    PreparedStatement pst = cnx.prepareStatement(requete);
+                    ResultSet rs = pst.executeQuery();
+                    while (rs.next()) {
+                        numero.add(rs.getInt("Numero"));
+                    }
+                } else {
+                    // Gestion de l'erreur de connexion
+                    System.out.println("La connexion à la base de données n'est pas ouverte.");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return numero;
+        }
+
 
         @Override
         public Chambre getById(int numero) {
