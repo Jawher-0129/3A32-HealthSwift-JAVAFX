@@ -10,6 +10,9 @@ import entite.Campagne;
 import java.time.LocalDate;
 import java.util.List;
 import javafx.util.StringConverter;
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import service.EmailService;
 
 public class DonFormController {
 
@@ -24,6 +27,7 @@ public class DonFormController {
 
     private DonService serviceDon = new DonService();
     private CampagneService serviceCampagne = new CampagneService();
+    private EmailService emailService = new EmailService();
     private Don donActuel;
 
     public void initialize() {
@@ -84,6 +88,12 @@ public class DonFormController {
                 Don donEnregistre = serviceDon.save(donActuel);
                 if (donEnregistre != null) {
                     afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Don ajouté avec succès.");
+                    try {
+                        emailService.sendDonationConfirmationEmail("tesnimesat@gmail.com", "Recipient Name");  // Replace with dynamic recipient info if available
+                        System.out.println("Confirmation email sent successfully.");
+                    } catch (MailjetException | MailjetSocketTimeoutException e) {
+                        System.err.println("Failed to send confirmation email: " + e.getMessage());
+                    }
                 } else {
                     afficherAlerte(Alert.AlertType.ERROR, "Erreur", "L'ajout du don a échoué.");
                 }
@@ -96,12 +106,19 @@ public class DonFormController {
                 Don donMisAJour = serviceDon.update(donActuel);
                 if (donMisAJour != null) {
                     afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Don mis à jour avec succès.");
+                    try {
+                        emailService.sendDonationConfirmationEmail("tesnimesat@gmail.com", "Recipient Name");  // Replace with dynamic recipient info if available
+                        System.out.println("Confirmation email sent successfully.");
+                    } catch (MailjetException | MailjetSocketTimeoutException e) {
+                        System.err.println("Failed to send confirmation email: " + e.getMessage());
+                    }
                 } else {
                     afficherAlerte(Alert.AlertType.ERROR, "Erreur", "La mise à jour du don a échoué.");
                 }
             }
         }
     }
+
 
     private boolean validerSaisie() {
         boolean isValid = true;

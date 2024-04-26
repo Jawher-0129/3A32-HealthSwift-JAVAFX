@@ -27,7 +27,7 @@
 }
 
 .nav-form{
-    -fx-background-color:linear-gradient(to bottom right, #2d658c, #2ca772);
+    -fx-background-color:linear-gradient(to bottom right, #2d658c, #4aa3df);
 }
 
 .nav-btn{
@@ -78,6 +78,7 @@
     -fx-font-family: "Tahoma";
     -fx-font-size: 14px;
     -fx-padding: 0px 0px 0px 28px;
+    -fx-max-width: 250px;
 }
 
 .search:focused {

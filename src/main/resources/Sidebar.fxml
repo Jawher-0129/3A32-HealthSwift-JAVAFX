@@ -25,6 +25,12 @@
                   <String fx:value="nav-btn" />
                   <String fx:value="white-border-text-field" />
                </styleClass></Button>
+
+                <Button layoutX="64.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleStat" prefHeight="54.0" prefWidth="122.0" text="Statistics ">
+                    <styleClass>
+                        <String fx:value="nav-btn" />
+                        <String fx:value="white-border-text-field" />
+                    </styleClass></Button>
             </children>
         </AnchorPane>
     </left>

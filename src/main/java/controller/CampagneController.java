@@ -14,6 +14,10 @@ import java.time.LocalDate;
 import entite.Campagne;
 import service.CampagneService;
 import java.util.List;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
+import java.util.stream.Collectors;
 
 public class CampagneController {
 
@@ -30,6 +34,8 @@ public class CampagneController {
     @FXML private TableColumn<Campagne, String> colDateDebut;
     @FXML private TableColumn<Campagne, String> colDateFin;
     @FXML private TableColumn<Campagne, String> colImage;
+    @FXML
+    private TextField searchField;
 
     private CampagneService campagneService = new CampagneService();
 
@@ -61,6 +67,36 @@ public class CampagneController {
                 fillInputFieldsWithSelectedCampaign(newSelection);
             }
         });
+
+        searchTimeline.setCycleCount(1);
+        searchTimeline.getKeyFrames().add(new KeyFrame(Duration.millis(300), evt -> filterTable()));
+        searchTimeline.setAutoReverse(false);
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchTimeline.stop(); // Stop any running delay
+            searchTimeline.playFromStart(); // Restart the delay
+        });
+    }
+
+    private Timeline searchTimeline = new Timeline();
+    @FXML
+    private void filterTable() {
+        String searchText = searchField.getText().toLowerCase().trim();
+        if (searchText.isEmpty()) {
+            tableView.setItems(FXCollections.observableArrayList(campagneService.findAll()));
+            return;
+        }
+
+        ObservableList<Campagne> filteredList = FXCollections.observableArrayList(campagneService.findAll()).stream()
+                .filter(campagne -> campagne.getTitre().toLowerCase().contains(searchText) ||
+                        campagne.getDescription().toLowerCase().contains(searchText) ||
+                        campagne.getDate_debut().contains(searchText) ||
+                        campagne.getDate_fin().contains(searchText))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        tableView.setItems(filteredList);
+
+
     }
 
     private boolean validateInput() {

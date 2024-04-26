@@ -24,6 +24,13 @@ public class SidebarController {
         loadUI("/Don.fxml");
     }
 
+
+    @FXML
+    private void handleStat() {
+        loadUI("/Statistics.fxml");
+    }
+
+
     private void loadUI(String ui) {
         if (mainController != null) { // Check if mainController is not null
             try {

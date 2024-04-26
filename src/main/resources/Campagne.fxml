@@ -23,6 +23,9 @@
                                 <Insets bottom="10.0" top="10.0" />
                             </VBox.margin>
                         </Label>
+                        <!-- Add this TextField within the VBox containing your TableView -->
+                        <TextField fx:id="searchField" layoutX="10" layoutY="10" onKeyReleased="#filterTable" prefHeight="28.0" prefWidth="250.0" promptText="Rechercher dans Campagnes..." styleClass="search" stylesheets="@StyleSheets/Style.css" />
+
                         <TableView fx:id="tableView" maxHeight="283.0" prefHeight="283.0" prefWidth="944.0" styleClass="table-view" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="colId" prefWidth="75.0" styleClass="header-cell" text="ID" />
@@ -38,40 +41,40 @@
                         <Insets left="20.0" />
                     </padding>
                 </VBox>
-                <AnchorPane layoutY="355.0" prefHeight="445.0" prefWidth="985.0" stylesheets="@StyleSheets/form.css">
+                <AnchorPane layoutY="388.0" prefHeight="412.0" prefWidth="985.0" stylesheets="@StyleSheets/form.css">
                     <children>
-                        <Label layoutX="43.0" layoutY="20.0" styleClass="form-label" text="Titre">
+                        <Label layoutX="46.0" layoutY="44.0" styleClass="form-label" text="Titre">
                             <font>
                                 <Font size="15.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="titreField" layoutX="127.0" layoutY="14.0" prefHeight="28.0" prefWidth="220.0" styleClass="form-textfield" stylesheets="@StyleSheets/form.css" />
-                        <Label layoutX="27.0" layoutY="66.0" styleClass="form-label" text="Description">
+                        <TextField fx:id="titreField" layoutX="127.0" layoutY="37.0" prefHeight="28.0" prefWidth="220.0" styleClass="form-textfield" stylesheets="@StyleSheets/form.css" />
+                        <Label layoutX="27.0" layoutY="84.0" styleClass="form-label" text="Description">
                             <font>
                                 <Font size="15.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="descriptionField" layoutX="127.0" layoutY="59.0" prefHeight="28.0" prefWidth="220.0" styleClass="form-textfield" />
-                        <Label layoutX="26.0" layoutY="115.0" styleClass="form-label" text="Date Début">
+                        <TextField fx:id="descriptionField" layoutX="127.0" layoutY="77.0" prefHeight="28.0" prefWidth="220.0" styleClass="form-textfield" />
+                        <Label layoutX="27.0" layoutY="137.0" styleClass="form-label" text="Date Début">
                             <font>
                                 <Font size="15.0" />
                             </font>
                         </Label>
-                        <DatePicker fx:id="dateDebutField" layoutX="126.0" layoutY="103.0" prefHeight="29.0" prefWidth="222.0" styleClass="form-datepicker" />
-                        <Label layoutX="37.0" layoutY="163.0" styleClass="form-label" text="Date Fin">
+                        <DatePicker fx:id="dateDebutField" layoutX="126.0" layoutY="125.0" prefHeight="29.0" prefWidth="222.0" styleClass="form-datepicker" />
+                        <Label layoutX="40.0" layoutY="192.0" styleClass="form-label" text="Date Fin">
                             <font>
                                 <Font size="15.0" />
                             </font>
                         </Label>
-                        <DatePicker fx:id="dateFinField" layoutX="126.0" layoutY="151.0" prefHeight="25.0" prefWidth="222.0" styleClass="form-datepicker" />
-                        <Label layoutX="44.0" layoutY="245.0" styleClass="form-label" text="Image">
+                        <DatePicker fx:id="dateFinField" layoutX="126.0" layoutY="180.0" prefHeight="25.0" prefWidth="222.0" styleClass="form-datepicker" />
+                        <Label layoutX="46.0" layoutY="262.0" styleClass="form-label" text="Image">
                             <font>
                                 <Font size="15.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="imageField" layoutX="126.0" layoutY="213.0" prefHeight="34.0" prefWidth="164.0" styleClass="form-textfield" />
-                        <Button fx:id="chooseImageButton" layoutX="127.0" layoutY="265.0" onAction="#chooseImage" styleClass="form-button" text="Choose Image" />
-                        <ImageView fx:id="imageView" fitHeight="85.0" fitWidth="164.0" layoutX="307.0" layoutY="213.0" preserveRatio="true" />
+                        <TextField fx:id="imageField" layoutX="126.0" layoutY="238.0" prefHeight="34.0" prefWidth="164.0" styleClass="form-textfield" />
+                        <Button fx:id="chooseImageButton" layoutX="127.0" layoutY="280.0" onAction="#chooseImage" styleClass="form-button" text="Choose Image" />
+                        <ImageView fx:id="imageView" fitHeight="85.0" fitWidth="164.0" layoutX="307.0" layoutY="230.0" preserveRatio="true" />
                         <Button fx:id="insertButton" layoutX="666.0" layoutY="54.0" mnemonicParsing="false" onAction="#insert" prefHeight="46.0" prefWidth="87.0" styleClass="form-button" text="Insert" />
                         <Button fx:id="updateButton" layoutX="570.0" layoutY="54.0" mnemonicParsing="false" onAction="#update" prefHeight="46.0" prefWidth="87.0" styleClass="form-button" text="Update" />
                         <Button fx:id="clearButton" layoutX="471.0" layoutY="54.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="46.0" prefWidth="87.0" styleClass="form-button" text="Clear" />

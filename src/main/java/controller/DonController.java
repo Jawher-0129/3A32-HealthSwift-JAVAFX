@@ -13,6 +13,10 @@ import service.CampagneService;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.util.StringConverter;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
+import java.util.stream.Collectors;
 
 
 public class DonController {
@@ -28,6 +32,8 @@ public class DonController {
     @FXML private TableColumn<Don, String> colDateRemise;
     @FXML private TableColumn<Don, Integer> colCampagneId;
     @FXML private ComboBox<Campagne> campagneComboBox;
+    @FXML
+    private TextField searchField;
 
     private DonService donService = new DonService();
     private CampagneService campagneService = new CampagneService();
@@ -51,6 +57,37 @@ public class DonController {
                 populateForm(newSelection);
             }
         });
+
+        searchTimeline.setCycleCount(1);
+        searchTimeline.getKeyFrames().add(new KeyFrame(Duration.millis(300), evt -> filterTable()));
+        searchTimeline.setAutoReverse(false);
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchTimeline.stop(); // Stop any running delay
+            searchTimeline.playFromStart(); // Restart the delay
+        });
+    }
+
+
+
+    // Use a Timeline for delaying search activation (throttling)
+    private Timeline searchTimeline = new Timeline();
+    @FXML
+    private void filterTable() {
+        String searchText = searchField.getText().toLowerCase().trim();
+        if (searchText.isEmpty()) {
+            tableView.setItems(FXCollections.observableArrayList(donService.findAll()));
+            return;
+        }
+
+        ObservableList<Don> filteredList = tableView.getItems().stream()
+                .filter(don -> don.getType().toLowerCase().contains(searchText) ||
+                        String.valueOf(don.getMontant()).contains(searchText) ||
+                        don.getDate_remise().toString().contains(searchText) ||
+                        (don.getCampagne_id() != null && String.valueOf(don.getCampagne_id()).contains(searchText)))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        tableView.setItems(filteredList);
     }
 
     private void loadCampagnes() {

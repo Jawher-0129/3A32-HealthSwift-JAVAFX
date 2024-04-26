@@ -9,4 +9,9 @@ module com.example.healthswift1 {
     opens entite to javafx.base, javafx.fxml;
     exports controller to javafx.fxml;
 
+    requires java.base;
+    requires mailjet.client;  // This is hypothetical; replace with actual module name if available
+    requires org.json;
+
+
 }
