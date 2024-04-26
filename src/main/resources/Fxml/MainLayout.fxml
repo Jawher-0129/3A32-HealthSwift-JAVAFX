@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="mainBorderPane" prefHeight="700.0" prefWidth="1350.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+    <!-- Top Area with a Menu Bar -->
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem onAction="#handleExit" text="Exit" />
+            </Menu>
+            <Menu text="Help">
+                <MenuItem onAction="#handleAbout" text="About" />
+            </Menu>
+        </MenuBar>
+
+    </top>
+
+    <!-- Left Area: Sidebar -->
+
+    <!-- Center Area: Main content -->
+    <!-- Center Area: Main content -->
+    <center>
+        <VBox style="-fx-padding: 20;">
+            <Label style="-fx-font-size: 20pt;" text="Welcome to the Application" />
+        </VBox>
+    </center>
+
+
+    <!-- Bottom Area: Status Bar -->
+    <bottom>
+        <Label style="-fx-padding: 10; -fx-background-color: #E1E1E1;" text="Ready" />
+    </bottom>
+</BorderPane>

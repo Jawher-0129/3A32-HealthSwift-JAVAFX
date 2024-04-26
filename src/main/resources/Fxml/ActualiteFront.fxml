@@ -6,7 +6,6 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.ActualiteFront" prefHeight="600" prefWidth="800">
     <children>
-        <!-- Add a title -->
         <Label>
             <text>
                 Tous les Actualités
@@ -26,5 +25,6 @@
                 </TilePane>
             </content>
         </ScrollPane>
+        <!--Pagination fx:id="pagination" prefWidth="800" /-->
     </children>
 </VBox>

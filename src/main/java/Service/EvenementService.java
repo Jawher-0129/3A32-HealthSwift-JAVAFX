@@ -4,10 +4,8 @@ import entite.Evenement;
 import util.DataSource;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.sql.Date;
+import java.util.*;
 
 public class EvenementService implements IService<Evenement> {
     private Connection cnx;
@@ -216,6 +214,15 @@ public class EvenementService implements IService<Evenement> {
             e.printStackTrace();
         }
         return titles;
+    }
+    public List<Evenement> getLatestEvents(int count) {
+        List<Evenement> allEvents = getAll();
+
+        // Sort the events by date in descending order
+        Collections.sort(allEvents, Comparator.comparing(Evenement::getDate).reversed());
+
+        // Take the first 'count' events
+        return allEvents.subList(0, Math.min(count, allEvents.size()));
     }
 }
 

@@ -4,31 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteFront.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteBack.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteFront.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementBack.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementCard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/Styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image/actualite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image/download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image/eventImage.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image/testcard.jpg" afterDir="false" />
+    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="first">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/PaginationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/SidebarController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Test/Main2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/MainLayout.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Sidebar.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/event.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/ActualiteLogo.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ActualiteFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementCard.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Service/ActualiteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/ActualiteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Service/IService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/IService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gestionevenement/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gestionevenement/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entite/Evenement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entite/Evenement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteBack.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteBack.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteFront.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Actualites.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Actualites.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementBack.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementBack.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementCard.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/Styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/testcard.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +130,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test.Main2" />
+      <module name="GestionEvenement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainFx" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Test.MainFx" />
       <module name="GestionEvenement" />
@@ -168,6 +185,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainFx" />
+        <item itemvalue="Application.Main2" />
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.Main" />
       </list>
@@ -215,11 +233,39 @@
       <workItem from="1713648960565" duration="2457000" />
       <workItem from="1713653698109" duration="190000" />
       <workItem from="1713656427924" duration="297000" />
-      <workItem from="1713657510199" duration="864000" />
+      <workItem from="1713657510199" duration="1206000" />
+      <workItem from="1713658908601" duration="66000" />
+      <workItem from="1713659363154" duration="166000" />
+      <workItem from="1713705662683" duration="1138000" />
+      <workItem from="1713712605523" duration="532000" />
+      <workItem from="1713728137316" duration="2094000" />
+      <workItem from="1713731896660" duration="145000" />
+      <workItem from="1713795256930" duration="3020000" />
+      <workItem from="1713812052322" duration="14378000" />
+      <workItem from="1713864813911" duration="678000" />
+      <workItem from="1713876183976" duration="3027000" />
+      <workItem from="1713996374616" duration="8633000" />
+      <workItem from="1714049726293" duration="53000" />
+      <workItem from="1714071784456" duration="6782000" />
+      <workItem from="1714079400592" duration="282000" />
+      <workItem from="1714135506635" duration="16166000" />
     </task>
+    <task id="LOCAL-00001" summary="first">
+      <option name="closed" value="true" />
+      <created>1713658588880</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713658588880</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first" />
+    <option name="LAST_COMMIT_MESSAGE" value="first" />
   </component>
 </project>

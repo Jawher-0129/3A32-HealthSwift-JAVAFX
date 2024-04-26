@@ -72,8 +72,10 @@
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titre" />
                                     <TextField fx:id="idtitre" styleClass="textfield" stylesheets="@../css/Style.css" />
+                                    <Label fx:id="titreErrorLabel" textFill="red" />
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
                                     <TextField fx:id="iddescr" styleClass="textfield" stylesheets="@../css/Style.css" />
+                                    <Label fx:id="descriptionErrorLabel" textFill="red" />
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type public cible" />
                                     <ComboBox fx:id="idtype" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css">
                                        <items>
@@ -85,6 +87,7 @@
                                           </FXCollections>
                                        </items>
                                     </ComboBox>
+                                    <Label fx:id="typeErrorLabel" textFill="red" />
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Theme" />
                                     <ComboBox fx:id="idtheme" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css">
                                        <items>
@@ -98,9 +101,10 @@
                                           </FXCollections>
                                        </items>
                                     </ComboBox>
+                                    <Label fx:id="themeErrorLabel" textFill="red" />
                                  </children>
                               </VBox>
-                              <TableView fx:id="table" layoutX="320.0" layoutY="107.0" onMouseClicked="#selectData" prefHeight="272.0" prefWidth="567.0" stylesheets="@../css/Style.css">
+                              <TableView fx:id="table" layoutX="320.0" layoutY="107.0" onMouseClicked="#selectData" prefHeight="327.0" prefWidth="567.0" stylesheets="@../css/Style.css">
                                  <columns>
                                     <TableColumn fx:id="colId" prefWidth="45.0" text="Id" />
                                     <TableColumn fx:id="colTitre" prefWidth="123.0" text="Titre" />
@@ -110,7 +114,7 @@
                                  </columns>
                               </TableView>
                               <Label alignment="CENTER" layoutX="239.0" layoutY="31.0" stylesheets="@../css/Style.css" text="Liste des Actualites" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="40.0" />
-                              <ButtonBar layoutX="67.0" layoutY="392.0" prefHeight="40.0" prefWidth="200.0">
+                              <ButtonBar layoutX="145.0" layoutY="454.0" prefHeight="40.0" prefWidth="200.0">
                                  <buttons>
                                     <Button fx:id="btnSave" mnemonicParsing="false" onAction="#AddActualite" styleClass="add-btn" stylesheets="@../css/Style.css" text="Save" />
                                     <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#UpdateActualite" styleClass="update-btn" stylesheets="@../css/Style.css" text="Update" />

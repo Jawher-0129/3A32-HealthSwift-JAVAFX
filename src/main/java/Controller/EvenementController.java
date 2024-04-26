@@ -19,6 +19,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import Service.EvenementService;
+import org.controlsfx.control.Notifications;
 
 import java.io.File;
 import java.io.IOException;
@@ -104,6 +105,7 @@ public class EvenementController implements Initializable {
     private TableView<Evenement> tableEvent;
     private ObservableList<Evenement> evementList;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         evenementService = new EvenementService();
@@ -148,6 +150,7 @@ public class EvenementController implements Initializable {
             return;
         }
 
+
         // Validate duree
         try {
             int dureeValue = Integer.parseInt(event_duree.getText());
@@ -177,7 +180,7 @@ public class EvenementController implements Initializable {
 
         try {
             evenementService.add(newEvenement);
-            showAlert(Alert.AlertType.INFORMATION, "Information Message", null, "Successfully Added!");
+            showNotification("Successfully Added!", "Success");
             ClearEvent(null);
             loadData();
         } catch (IllegalArgumentException e) {
@@ -210,7 +213,7 @@ public class EvenementController implements Initializable {
 
         evenementService.delete(selectedEvent.getId_evenement());
 
-        showAlert(Alert.AlertType.INFORMATION, "Information Message", null, "Event successfully deleted!");
+        showNotification("Event successfully deleted!", "Success");
 
         ClearEvent(null);
         loadData();
@@ -270,7 +273,7 @@ public class EvenementController implements Initializable {
 
         try {
             evenementService.update(updatedEvenement, selectedEvent.getId_evenement());
-            showAlert(Alert.AlertType.INFORMATION, "Information Message", null, "Successfully Updated!");
+            showNotification("Successfully updated the data!", "Success");
             loadData();
         } catch (IllegalArgumentException e) {
             showAlert(Alert.AlertType.ERROR, "Error Message", null, e.getMessage());
@@ -380,5 +383,11 @@ public class EvenementController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+    private void showNotification(String message, String title) {
+        Notifications.create()
+                .title(title)
+                .text(message)
+                .showInformation();
     }
 }

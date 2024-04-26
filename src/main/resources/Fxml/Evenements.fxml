@@ -10,17 +10,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="480.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EvenementController">
+<AnchorPane prefHeight="700.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EvenementController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="20.0" prefHeight="427.0" prefWidth="222.0">
+      <AnchorPane layoutX="14.0" layoutY="20.0" prefHeight="493.0" prefWidth="381.0">
          <children>
-            <AnchorPane layoutX="51.0" layoutY="8.0" prefHeight="110.0" prefWidth="110.0">
-               <children>
-                  <ImageView fx:id="imageView" fitHeight="110.0" fitWidth="110.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </AnchorPane>
+            <AnchorPane layoutX="109.0" layoutY="8.0" prefHeight="110.0" prefWidth="110.0" />
             <Label layoutX="13.0" layoutY="160.0" stylesheets="@../css/Style.css" text="Titre" />
-            <TextField fx:id="enent_title" layoutX="63.0" layoutY="156.0" styleClass="textfield" stylesheets="@../css/Style.css" />
+            <TextField fx:id="enent_title" layoutX="63.0" layoutY="156.0" prefHeight="25.0" prefWidth="202.0" styleClass="textfield" stylesheets="@../css/Style.css" />
             <Label layoutX="13.0" layoutY="189.0" stylesheets="@../css/Style.css" text="Date" />
             <Label layoutX="10.0" layoutY="227.0" stylesheets="@../css/Style.css" text="Duree" />
             <Label layoutX="14.0" layoutY="257.0" stylesheets="@../css/Style.css" text="Lieu" />
@@ -33,24 +29,25 @@
             <Button fx:id="UpdateEvent_btn" layoutX="94.0" layoutY="351.0" mnemonicParsing="false" onAction="#UpdateEvent" styleClass="update-btn" stylesheets="@../css/Style.css" text="Update" />
             <Button fx:id="clearEvent_Btn" layoutX="24.0" layoutY="388.0" mnemonicParsing="false" onAction="#ClearEvent" prefHeight="25.0" prefWidth="55.0" styleClass="clear-btn" stylesheets="@../css/Style.css" text="Clear" />
             <Button fx:id="deleteEvent_btn" layoutX="94.0" layoutY="388.0" mnemonicParsing="false" onAction="#DeleteEvent" prefHeight="26.0" prefWidth="64.0" styleClass="delete-btn" stylesheets="@../css/Style.css" text="Delete" />
-            <Button fx:id="event_importBtn" layoutX="61.0" layoutY="119.0" mnemonicParsing="false" onAction="#importImage" prefHeight="25.0" prefWidth="103.0" styleClass="insert-btn" stylesheets="@../css/Style.css" text="insert image " />
+            <Button fx:id="event_importBtn" layoutX="121.0" layoutY="118.0" mnemonicParsing="false" onAction="#importImage" prefHeight="25.0" prefWidth="103.0" styleClass="insert-btn" stylesheets="@../css/Style.css" text="insert image " />
             <Label layoutX="6.0" layoutY="317.0" prefHeight="17.0" prefWidth="57.0" stylesheets="@../css/Style.css" text="Actualite" />
             <ComboBox fx:id="ActualiteRelated" layoutX="63.0" layoutY="313.0" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css" />
+            <ImageView fx:id="imageView" fitHeight="110.0" fitWidth="110.0" layoutX="117.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="233.0" layoutY="22.0" prefHeight="435.0" prefWidth="496.0" stylesheets="@../css/Style.css">
+      <AnchorPane layoutX="363.0" layoutY="26.0" prefHeight="532.0" prefWidth="735.0" stylesheets="@../css/Style.css">
          <children>
              <TextField fx:id="chercherEvent" layoutX="14.0" layoutY="14.0" onKeyTyped="#chercherEvenement" promptText="search" styleClass="search" stylesheets="@../css/Style.css" />
-             <TableView fx:id="tableEvent" layoutX="8.0" layoutY="62.0" onMouseClicked="#selectData" prefHeight="364.0" prefWidth="471.0">
+             <TableView fx:id="tableEvent" layoutX="8.0" layoutY="62.0" onMouseClicked="#selectData" prefHeight="406.0" prefWidth="646.0">
               <columns>
                 <TableColumn fx:id="colIdEvent" prefWidth="43.0" text="Id" />
-                <TableColumn fx:id="colTitreEvent" prefWidth="62.0" text="Titre" />
-                  <TableColumn fx:id="colDateEvent" prefWidth="63.0" text="Date" />
-                  <TableColumn fx:id="colDureeEvent" prefWidth="57.0" text="Duree" />
-                  <TableColumn fx:id="colLieuEvent" prefWidth="41.0" text="Lieu" />
-                  <TableColumn fx:id="colObjEvent" prefWidth="63.0" text="Objective" />
-                  <TableColumn fx:id="colImageEvent" prefWidth="72.0" text="Image" />
-                  <TableColumn fx:id="colActualiteId" prefWidth="69.0" text="Actualite" />
+                <TableColumn fx:id="colTitreEvent" prefWidth="94.0" text="Titre" />
+                  <TableColumn fx:id="colDateEvent" prefWidth="101.0" text="Date" />
+                  <TableColumn fx:id="colDureeEvent" prefWidth="60.0" text="Duree" />
+                  <TableColumn fx:id="colLieuEvent" prefWidth="89.0" text="Lieu" />
+                  <TableColumn fx:id="colObjEvent" prefWidth="96.0" text="Objective" />
+                  <TableColumn fx:id="colImageEvent" prefWidth="75.0" text="Image" />
+                  <TableColumn fx:id="colActualiteId" prefWidth="92.0" text="Actualite" />
               </columns>
             </TableView>
          </children>

@@ -11,14 +11,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.control.Alert.AlertType;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 
 public class ActualiteController implements Initializable {
     private ActualiteService actualiteService = new ActualiteService();
@@ -58,6 +59,18 @@ public class ActualiteController implements Initializable {
     @FXML
     private TableColumn<Actualite, String> colTheme;
 
+    @FXML
+    private Label titreErrorLabel;
+
+    @FXML
+    private Label descriptionErrorLabel;
+
+    @FXML
+    private Label themeErrorLabel;
+
+    @FXML
+    private Label typeErrorLabel;
+
     private ObservableList<Actualite> actualiteList = FXCollections.observableArrayList();
 
     @Override
@@ -87,22 +100,63 @@ public class ActualiteController implements Initializable {
         String type_pub_cible = idtype.getValue();
         String theme = idtheme.getValue();
 
-        if (titre != null && !titre.isEmpty() &&
-                description != null && !description.isEmpty() &&
-                type_pub_cible != null && !type_pub_cible.isEmpty() &&
-                theme != null && !theme.isEmpty()) {
+        boolean isValid = true;
+
+        if (titre == null || titre.isEmpty()) {
+            idtitre.setStyle("-fx-border-color: red;");
+            titreErrorLabel.setText("Please enter a title.");
+            titreErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            idtitre.setStyle("");
+            titreErrorLabel.setVisible(false);
+        }
+
+        if (description == null || description.isEmpty()) {
+            iddescr.setStyle("-fx-border-color: red;");
+            descriptionErrorLabel.setText("Please enter a description.");
+            descriptionErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            iddescr.setStyle("");
+            descriptionErrorLabel.setVisible(false);
+        }
+
+        if (type_pub_cible == null || type_pub_cible.isEmpty()) {
+            idtype.setStyle("-fx-border-color: red;");
+            typeErrorLabel.setText("Please select a type.");
+            typeErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            idtype.setStyle("");
+            typeErrorLabel.setVisible(false);
+        }
+
+        if (theme == null || theme.isEmpty()) {
+            idtheme.setStyle("-fx-border-color: red;");
+            themeErrorLabel.setText("Please select a theme.");
+            themeErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            idtheme.setStyle("");
+            themeErrorLabel.setVisible(false);
+        }
+
+        if (isValid) {
             try {
                 Actualite newActualite = new Actualite(0, titre, description, type_pub_cible, theme);
                 actualiteService.add(newActualite);
                 loadData();
-                showAlert(AlertType.INFORMATION, "Success", "Success", "Successfully added the data!");
+                ClearActualite(null);
+                showNotification("Successfully added the data!", "Success");
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }
-        } else {
-            showAlert(AlertType.ERROR, "Error Message", "Error", "Please fill in all fields.");
         }
     }
+
+
+
 
     @FXML
     void ClearActualite(ActionEvent event) {
@@ -110,8 +164,20 @@ public class ActualiteController implements Initializable {
         iddescr.clear();
         idtype.getSelectionModel().clearSelection();
         idtheme.getSelectionModel().clearSelection();
+
+        // Reset the text field borders and hide the error labels
+        idtitre.setStyle("");
+        iddescr.setStyle("");
+        idtype.setStyle("");
+        idtheme.setStyle("");
+        titreErrorLabel.setVisible(false);
+        descriptionErrorLabel.setVisible(false);
+        typeErrorLabel.setVisible(false);
+        themeErrorLabel.setVisible(false);
+
         showAlert(AlertType.INFORMATION, "Success", "Success", "Cleared all fields.");
     }
+
 
     @FXML
     void DeleteActualite(ActionEvent event) {
@@ -121,7 +187,8 @@ public class ActualiteController implements Initializable {
             try {
                 actualiteService.delete(id_actualite);
                 loadData();
-                showAlert(AlertType.INFORMATION, "Success", "Success", "Successfully deleted the data!");
+                showNotification("Successfully deleted the data!", "Success");
+                ClearActualite(null);
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }
@@ -140,28 +207,67 @@ public class ActualiteController implements Initializable {
             String type_pub_cible = idtype.getValue();
             String theme = idtheme.getValue();
 
-            if (titre.isEmpty() || description.isEmpty() ||
-                    type_pub_cible == null || theme == null) {
-                showAlert(AlertType.ERROR, "Error Message", "Error", "Please enter all required fields.");
-                return;
+            boolean isValid = true;
+
+            if (titre == null || titre.isEmpty()) {
+                idtitre.setStyle("-fx-border-color: red;");
+                titreErrorLabel.setText("Please enter a title.");
+                titreErrorLabel.setVisible(true);
+                isValid = false;
+            } else {
+                idtitre.setStyle(""); // Reset the style
+                titreErrorLabel.setVisible(false);
             }
 
-            try {
-                Actualite updatedActualite = new Actualite(id_actualite, titre, description, type_pub_cible, theme);
-                actualiteService.update(updatedActualite, id_actualite);
-                loadData();
-                idtitre.clear();
-                iddescr.clear();
-                idtype.getSelectionModel().clearSelection();
-                idtheme.getSelectionModel().clearSelection();
-                showAlert(AlertType.INFORMATION, "Success", "Success", "Successfully updated the data!");
-            } catch (RuntimeException e) {
-                e.printStackTrace();
+            if (description == null || description.isEmpty()) {
+                iddescr.setStyle("-fx-border-color: red;");
+                descriptionErrorLabel.setText("Please enter a description.");
+                descriptionErrorLabel.setVisible(true);
+                isValid = false;
+            } else {
+                iddescr.setStyle(""); // Reset the style
+                descriptionErrorLabel.setVisible(false);
+            }
+
+            if (type_pub_cible == null || type_pub_cible.isEmpty()) {
+                idtype.setStyle("-fx-border-color: red;");
+                typeErrorLabel.setText("Please select a type.");
+                typeErrorLabel.setVisible(true);
+                isValid = false;
+            } else {
+                idtype.setStyle(""); // Reset the style
+                typeErrorLabel.setVisible(false);
+            }
+
+            if (theme == null || theme.isEmpty()) {
+                idtheme.setStyle("-fx-border-color: red;");
+                themeErrorLabel.setText("Please select a theme.");
+                themeErrorLabel.setVisible(true);
+                isValid = false;
+            } else {
+                idtheme.setStyle(""); // Reset the style
+                themeErrorLabel.setVisible(false);
+            }
+
+            if (isValid) {
+                try {
+                    Actualite updatedActualite = new Actualite(id_actualite, titre, description, type_pub_cible, theme);
+                    actualiteService.update(updatedActualite, id_actualite);
+                    loadData();
+                    idtitre.clear();
+                    iddescr.clear();
+                    idtype.getSelectionModel().clearSelection();
+                    idtheme.getSelectionModel().clearSelection();
+                    showNotification("Successfully updated the data!", "Success");
+                } catch (RuntimeException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             showAlert(AlertType.ERROR, "Error Message", "Error", "Please select an item to update.");
         }
     }
+
 
     @FXML
     public void selectData() {
@@ -211,7 +317,7 @@ public class ActualiteController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/EvenementBack.fxml"));
             Parent root = loader.load();
-            // Get the scene from any node in the current scene
+            // ne5ou l scene from any node in the current scene
             Scene scene = GotoEvent_Btn.getScene();
             // Set the loaded FXML file as the root of the scene
             scene.setRoot(root);
@@ -219,5 +325,12 @@ public class ActualiteController implements Initializable {
             e.printStackTrace();
         }
     }
+    private void showNotification(String message, String title) {
+        Notifications.create()
+                .title(title)
+                .text(message)
+                .showInformation();
+    }
+
 
 }
