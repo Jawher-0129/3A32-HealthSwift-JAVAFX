@@ -13,5 +13,10 @@ module com.example.healthswift1 {
     requires mailjet.client;  // This is hypothetical; replace with actual module name if available
     requires org.json;
 
+    requires java.desktop; // Add this line to include javax.imageio module
+    requires com.google.zxing;
+    requires javafx.swing;
+
+
 
 }

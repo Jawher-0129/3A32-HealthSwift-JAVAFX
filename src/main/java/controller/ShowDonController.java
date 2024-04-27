@@ -14,6 +14,20 @@ import java.io.IOException;
 import javafx.scene.control.ButtonType;
 import javafx.geometry.Insets;
 import java.util.Optional;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import javafx.scene.image.Image;
+import javafx.embed.swing.SwingFXUtils;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import javafx.scene.image.ImageView;
+
+
 
 import entite.Don;
 import service.DonService;
@@ -30,6 +44,9 @@ public class ShowDonController {
     private DonService donService = new DonService();
 
     @FXML
+    private ImageView qrCodeImage;
+
+    @FXML
     public void initialize() {
         // Set padding programmatically to avoid FXML load issues
         vbox.setPadding(new Insets(20, 20, 20, 20));
@@ -44,6 +61,34 @@ public class ShowDonController {
         dateLabel.setText("Date de remise: " + don.getDate_remise());
         updateButton.setOnAction(e -> showDonForm(don));
         deleteButton.setOnAction(e -> deleteDon(don.getId()));
+        generateAndDisplayQRCode(don);
+    }
+
+    private void generateAndDisplayQRCode(Don don) {
+        try {
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            String data = "Don ID: " + don.getId() + ", Type: " + don.getType() + ", Montant: " + don.getMontant() + ", Date: " + don.getDate_remise();
+            BitMatrix bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 200, 200);
+
+            BufferedImage bufferedImage = createBufferedImage(bitMatrix);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            qrCodeImage.setImage(image);
+        } catch (WriterException e) {
+            e.printStackTrace(); // Proper error handling should be added here
+        }
+    }
+
+    private BufferedImage createBufferedImage(BitMatrix bitMatrix) {
+        int width = bitMatrix.getWidth();
+        int height = bitMatrix.getHeight();
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
+            }
+        }
+        return image;
     }
 
     private void showDonForm(Don don) {

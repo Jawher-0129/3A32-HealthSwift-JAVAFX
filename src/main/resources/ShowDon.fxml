@@ -16,6 +16,7 @@
                 <Label fx:id="typeLabel" text="Type:" styleClass="label"/>
                 <Label fx:id="amountLabel" text="Montant:" styleClass="label"/>
                 <Label fx:id="dateLabel" text="Date de remise:" styleClass="label"/>
+                <ImageView fx:id="qrCodeImage" fitWidth="100" fitHeight="100" />
 
                 <HBox spacing="10" alignment="CENTER"> <!-- Panneau pour les boutons Modifier et Supprimer -->
                     <Button fx:id="updateButton" text="Modifier" styleClass="button"/>
