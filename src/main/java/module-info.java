@@ -12,6 +12,7 @@ module com.example.gestionevenement {
     opens com.example.gestionevenement to javafx.fxml;
     exports com.example.gestionevenement;
     requires org.controlsfx.controls;
-    requires poi;
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
 
 }

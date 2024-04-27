@@ -4,35 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="first">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/PaginationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/SidebarController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Test/Main2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/MainLayout.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Sidebar.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/event.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image/ActualiteLogo.jpg" afterDir="false" />
+    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="second push">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/DashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/ExcelExporter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/DashboardEvent.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ActualiteFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteFront.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementCard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SidebarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SidebarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteBack.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteBack.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/ActualiteFront.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Actualites.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Actualites.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementBack.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementBack.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementCard.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/Styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/testcard.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Sidebar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Sidebar.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +28,8 @@
       <list>
         <option value="Interface" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -249,6 +233,7 @@
       <workItem from="1714071784456" duration="6782000" />
       <workItem from="1714079400592" duration="282000" />
       <workItem from="1714135506635" duration="16166000" />
+      <workItem from="1714167359695" duration="10199000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -258,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713658588880</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="second push">
+      <option name="closed" value="true" />
+      <created>1714167439179</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714167439179</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +259,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first" />
-    <option name="LAST_COMMIT_MESSAGE" value="first" />
+    <MESSAGE value="second push" />
+    <option name="LAST_COMMIT_MESSAGE" value="second push" />
   </component>
 </project>

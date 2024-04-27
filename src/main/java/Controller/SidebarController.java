@@ -1,6 +1,7 @@
 package Controller;
 
 import Controller.MainController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,6 +25,9 @@ public class SidebarController {
     private void handleSettings() {
         loadUI("/Fxml/Actualites.fxml");
     }
+    public void handleDashboard() {
+        loadUI("/Fxml/DashboardEvent.fxml");
+    }
 
     private void loadUI(String ui) {
         if (mainController != null) { // Check if mainController is not null
@@ -39,5 +43,6 @@ public class SidebarController {
             System.out.println("MainController is null. Cannot set center.");
         }
     }
+
 
 }

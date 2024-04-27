@@ -11,15 +11,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.Notifications;
+import util.ExcelExporter;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 
 public class ActualiteController implements Initializable {
     private ActualiteService actualiteService = new ActualiteService();
@@ -58,7 +61,6 @@ public class ActualiteController implements Initializable {
 
     @FXML
     private TableColumn<Actualite, String> colTheme;
-
     @FXML
     private Label titreErrorLabel;
 
@@ -147,14 +149,12 @@ public class ActualiteController implements Initializable {
                 Actualite newActualite = new Actualite(0, titre, description, type_pub_cible, theme);
                 actualiteService.add(newActualite);
                 loadData();
-                ClearActualite(null);
-                showNotification("Successfully added the data!", "Success");
+                showNotification("Successfully Added!", "Success");
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
 
 
@@ -187,8 +187,7 @@ public class ActualiteController implements Initializable {
             try {
                 actualiteService.delete(id_actualite);
                 loadData();
-                showNotification("Successfully deleted the data!", "Success");
-                ClearActualite(null);
+                showNotification("Event successfully deleted!", "Success");
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }
@@ -317,12 +316,27 @@ public class ActualiteController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/EvenementBack.fxml"));
             Parent root = loader.load();
-            // ne5ou l scene from any node in the current scene
+            // Get the scene from any node in the current scene
             Scene scene = GotoEvent_Btn.getScene();
             // Set the loaded FXML file as the root of the scene
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    @FXML
+    void exportToExcel(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+            File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                ExcelExporter.exportToExcel(table, "Actualite Data", file.getAbsolutePath());
+                showAlert(AlertType.INFORMATION, "Success", "Export Successful", "Data exported to Excel successfully.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Export Failed", "An error occurred while exporting data to Excel.");
         }
     }
     private void showNotification(String message, String title) {
@@ -331,6 +345,5 @@ public class ActualiteController implements Initializable {
                 .text(message)
                 .showInformation();
     }
-
 
 }

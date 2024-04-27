@@ -224,5 +224,93 @@ public class EvenementService implements IService<Evenement> {
         // Take the first 'count' events
         return allEvents.subList(0, Math.min(count, allEvents.size()));
     }
+    public int getTotalEvents() {
+        String query = "SELECT COUNT(*) AS total FROM evenement";
+        try {
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                return resultSet.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getAvailableEvents() {
+        String query = "SELECT COUNT(*) AS total FROM evenement WHERE date >= CURRENT_DATE";
+        try {
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                return resultSet.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<String> getDistinctDatesOfEvents() {
+        List<String> dates = new ArrayList<>();
+        String query = "SELECT DISTINCT DATE_FORMAT(date, '%Y-%m-%d') AS event_date FROM evenement";
+        try {
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                dates.add(resultSet.getString("event_date"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dates;
+    }
+
+    public int getEventCountByDate(String date) {
+        String query = "SELECT COUNT(*) AS event_count FROM evenement WHERE DATE_FORMAT(date, '%Y-%m-%d') = ?";
+        try {
+            PreparedStatement preparedStatement = cnx.prepareStatement(query);
+            preparedStatement.setString(1, date);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("event_count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Integer> getDistinctDurationsOfEvents() {
+        List<Integer> durations = new ArrayList<>();
+        String query = "SELECT DISTINCT duree FROM evenement";
+        try {
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                durations.add(resultSet.getInt("duree"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return durations;
+    }
+
+    public int getEventCountByDuration(int duration) {
+        String query = "SELECT COUNT(*) AS event_count FROM evenement WHERE duree = ?";
+        try {
+            PreparedStatement preparedStatement = cnx.prepareStatement(query);
+            preparedStatement.setInt(1, duration);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("event_count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }
 

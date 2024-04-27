@@ -19,8 +19,10 @@
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titre" />
                 <TextField fx:id="idtitre" styleClass="textfield" stylesheets="@../css/Style.css" />
+                <Label fx:id="titreErrorLabel" textFill="red" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
                 <TextField fx:id="iddescr" styleClass="textfield" stylesheets="@../css/Style.css" />
+                <Label fx:id="descriptionErrorLabel" textFill="red" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type public cible" />
                 <ComboBox fx:id="idtype" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css">
                     <items>
@@ -32,6 +34,7 @@
                         </FXCollections>
                     </items>
                 </ComboBox>
+                <Label fx:id="typeErrorLabel" textFill="red" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Theme" />
                 <ComboBox fx:id="idtheme" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css">
                     <items>
@@ -45,6 +48,7 @@
                         </FXCollections>
                     </items>
                 </ComboBox>
+                <Label fx:id="themeErrorLabel" textFill="red" />
             </children>
         </VBox>
         <TableView fx:id="table" layoutX="320.0" layoutY="107.0" onMouseClicked="#selectData" prefHeight="340.0" prefWidth="579.0" stylesheets="@../css/Style.css">
@@ -57,12 +61,13 @@
             </columns>
         </TableView>
         <Label alignment="CENTER" layoutX="239.0" layoutY="31.0" stylesheets="@../css/Style.css" text="Liste des Actualites" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="40.0" />
-        <ButtonBar layoutX="401.0" layoutY="475.0" prefHeight="40.0" prefWidth="322.0">
+        <ButtonBar layoutX="364.0" layoutY="475.0" prefHeight="40.0" prefWidth="535.0">
             <buttons>
                 <Button fx:id="btnSave" mnemonicParsing="false" onAction="#AddActualite" styleClass="add-btn" stylesheets="@../css/Style.css" text="Save" />
                 <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#UpdateActualite" styleClass="update-btn" stylesheets="@../css/Style.css" text="Update" />
                 <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#DeleteActualite" styleClass="delete-btn" stylesheets="@../css/Style.css" text="Delete" />
                 <Button fx:id="btnClear" mnemonicParsing="false" onAction="#ClearActualite" styleClass="clear-btn" stylesheets="@../css/Style.css" text="Clear" />
+            <Button fx:id="exportBtn" layoutX="218.0" layoutY="17.0" mnemonicParsing="false" onAction="#exportToExcel" styleClass="update-btn" stylesheets="@../css/Style.css" text="ExportExcel" />
             </buttons>
         </ButtonBar>
       <TextField fx:id="idSearchActualite" layoutX="320.0" layoutY="70.0" onKeyTyped="#SearchActualite" promptText="search..." styleClass="search" stylesheets="@../css/Style.css" />
