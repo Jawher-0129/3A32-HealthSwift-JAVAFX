@@ -1,0 +1,122 @@
+package com.exemple.pidevd.Service;
+
+import com.exemple.pidevd.Model.Demande;
+import com.exemple.pidevd.Model.Don;
+import com.exemple.pidevd.Model.IService;
+import com.exemple.pidevd.Model.RendezVous;
+import com.exemple.pidevd.Util.DataSource;
+
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+public class RendezVousService implements IService<RendezVous>{
+    private Connection cnx;
+    private Statement ste;
+    private PreparedStatement pst;
+
+    public RendezVousService() {
+        cnx = DataSource.getInstance().getConnection();
+    }
+
+    @Override
+    public void add(RendezVous r) {
+        String requete = "INSERT INTO rendez_vous (demande, date, lieu, objective) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, r.getDemande());
+            pst.setTimestamp(2, r.getDate());
+            pst.setString(3, r.getLieu());
+            pst.setString(4, r.getObjective());
+            pst.executeUpdate();
+            System.out.println("RendezVous ajoutée avec succès.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void delete(int id_rendezvous){
+        String requete = "DELETE FROM rendez_vous WHERE id_rendezvous=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, id_rendezvous);
+
+            int rowsDeleted = pst.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("le rendez-Vous  a été supprimée avec succès.");
+            } else {
+                System.out.println("Aucune rendez_vous n'a été supprimée.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la suppression de la rendez-vous : " + e.getMessage());
+        }
+    }
+
+
+    public void update(RendezVous rv,int id_rendezvous) {
+        String requete = "UPDATE demande SET demande=?, date=?, lieu=?, objective=? WHERE id_rendezvous=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, rv.getDemande());
+            pst.setDate(2, new java.sql.Date(rv.getDate().getTime()));
+            pst.setString(3, rv.getLieu());
+            pst.setString(4, rv.getObjective());
+            int rowsUpdated = pst.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Le rendezvous a été mise à jour avec succès.");
+            } else {
+                System.out.println("Aucune rendezvous n'a été mise à jour.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la mise à jour de la rendezvous : " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<RendezVous> getAll() {
+        String requete = "SELECT id_rendezvous,demande, date, lieu, objective FROM rendez_vous";
+        List<RendezVous> list = new ArrayList<>();
+
+        try (Statement statement = cnx.createStatement();
+             ResultSet resultSet = statement.executeQuery(requete)) {
+
+            while (resultSet.next()) {
+                int idRendezVous = resultSet.getInt("id_rendezvous");
+                int demande = resultSet.getInt("demande");
+                Timestamp date = resultSet.getTimestamp("date");
+                String lieu = resultSet.getString("lieu");
+                String objective = resultSet.getString("objective");
+
+                RendezVous nouvelleR = new RendezVous(idRendezVous, date, lieu, objective, demande);
+                list.add(nouvelleR);
+            }
+
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération des demandes : " + e.getMessage());
+        }
+    }
+
+    public Map<Integer, String> getAllTypesWithIds() {
+        Map<Integer, String> typesDeDon = new HashMap<>();
+        String query = "SELECT id_demande , titre FROM demande";
+        try (PreparedStatement statement = cnx.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_demande");
+                String titre = resultSet.getString("titre");
+                typesDeDon.put(id, titre);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer l'exception selon les besoins de votre application
+        }
+        return typesDeDon;
+    }
+
+}

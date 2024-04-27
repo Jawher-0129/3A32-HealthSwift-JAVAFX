@@ -1,21 +1,13 @@
-module com.example.gestionevenement {
+module com.exemple.pidevd {
     requires javafx.controls;
     requires javafx.fxml;
+
+    requires com.dlsc.formsfx;
+    requires org.kordamp.bootstrapfx.core;
     requires java.sql;
-    exports Test to javafx.graphics;
-    exports Controller;
-    opens Controller;
-    opens entite to javafx.base;
-    requires java.desktop;
-    requires javafx.graphics;
+    opens com.exemple.pidevd.Model;
+    opens com.exemple.pidevd.Controller to javafx.fxml;
 
-    opens com.example.gestionevenement to javafx.fxml;
-    exports com.example.gestionevenement;
-    requires org.controlsfx.controls;
-    requires org.apache.poi.poi;
-    requires org.apache.poi.ooxml;
-    requires java.mail;
-    requires twilio;
-    //requires java.sdk;//for mailling
-
+    opens com.exemple.pidevd to javafx.fxml;
+    exports com.exemple.pidevd;
 }
