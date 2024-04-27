@@ -15,12 +15,22 @@ import javafx.geometry.Insets;
 import java.util.Optional;
 import javafx.scene.Parent;
 import javafx.stage.Modality;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import java.awt.image.BufferedImage;
+import javafx.embed.swing.SwingFXUtils;
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 
 public class ShowCampagneController {
 
     @FXML private VBox detailsBox;
     @FXML private Label titleLabel, titleValue, descriptionLabel, descriptionValue, startDateLabel, startDateValue, endDateLabel, endDateValue;
-    @FXML private ImageView imageView;
+    @FXML private ImageView imageView ,qrCodeImage;
     @FXML private Button modifyButton, deleteButton;
 
 
@@ -41,7 +51,37 @@ public class ShowCampagneController {
             imageView.setFitHeight(100);
             imageView.setFitWidth(100);
         }
+        generateAndDisplayQRCode();
     }
+
+
+
+    private void generateAndDisplayQRCode() {
+        try {
+            String qrData = String.format("Title: %s\nDescription: %s\nStart: %s\nEnd: %s",
+                    currentCampagne.getTitre(), currentCampagne.getDescription(), currentCampagne.getDate_debut(), currentCampagne.getDate_fin());
+
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BitMatrix bitMatrix = qrCodeWriter.encode(qrData, BarcodeFormat.QR_CODE, 200, 200);
+
+            BufferedImage bufferedImage = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+            for (int y = 0; y < 200; y++) {
+                for (int x = 0; x < 200; x++) {
+                    bufferedImage.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
+                }
+            }
+
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", os);
+            Image qrcode = new Image(new ByteArrayInputStream(os.toByteArray()));
+            qrCodeImage.setImage(qrcode);
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     @FXML
     private void handleBack() {
         // Logic to navigate back goes here

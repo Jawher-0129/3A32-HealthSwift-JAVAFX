@@ -22,6 +22,7 @@
                 <Label fx:id="endDateLabel" text="Date de Fin:" styleClass="label"/>
                 <Label fx:id="endDateValue" styleClass="label"/>
                 <ImageView fx:id="imageView" fitWidth="200" fitHeight="200" preserveRatio="true"/>
+                <ImageView fx:id="qrCodeImage" fitWidth="100" fitHeight="100" />
                 <HBox spacing="10" alignment="CENTER">
                 <Button fx:id="updateButton" text="Modifier" styleClass="button" onAction="#handleModify"/>
                 <Button fx:id="deleteButton" text="Supprimer" styleClass="button" onAction="#handleDelete"/>
