@@ -77,7 +77,7 @@ public class AdminPage {
         User currentUser = SessionManager.getCurrentUser();
 
         // Display the name and role of the connected user
-        NameUser.setText("Welcome : " + currentUser.getNom() + " " + currentUser.getPrenom());
+        NameUser.setText( currentUser.getNom() + " " + currentUser.getPrenom());
 
         // Set up the TableView columns
 
@@ -157,7 +157,7 @@ public class AdminPage {
 
     }
     @FXML
-    void stat(ActionEvent event) {
+    void statis(ActionEvent event) {
         switchScene("/StatController.fxml", event);
 
     }
@@ -196,7 +196,7 @@ public class AdminPage {
     }
     @FXML
     void logout(ActionEvent event) {
-        // Confirm logout with a dialog box
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Logout");
         alert.setHeaderText("Logout");
@@ -252,61 +252,47 @@ public class AdminPage {
             contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 700); // Starting position
-// Specify a font that supports the characters you need
             PDType1Font font = PDType1Font.HELVETICA;
-            String text = "This is a multi-line message.";
+
+            String text = "List of Users.";
             String[] lines = text.split("\n");
 
             for (String line : lines) {
                 contentStream.newLineAtOffset(15, -15);
-                // Use the specified font for displaying text
                 contentStream.setFont(font, 12);
                 contentStream.showText(line);
                 contentStream.newLine();
             }
 
             ObservableList<User> userList = UserTable.getItems();
-            // Initialize vertical position
-            float currentY = 1000;
+            float startY = 650; // Initial vertical position
+            float lineHeight = 15; // Height of each line
 
-// Loop through each user
-            // Loop through each user
-            // Loop through each user
-            // Loop through each user
             for (User user : userList) {
-                // Display user information
-                contentStream.showText("Nom: " + user.getNom());
-                contentStream.newLine();
-                contentStream.showText("Prénom: " + user.getPrenom());
-                contentStream.newLine();
-                contentStream.showText("Email: " + user.getEmail());
-                contentStream.newLine();
-                contentStream.newLine(); // Add an extra line for spacing
-                contentStream.showText("Adresse: " + user.getAdresse());
-                contentStream.newLine();
-                contentStream.newLine(); // Add an extra line for spacing
-                contentStream.showText("Téléphone: " + user.getTelephone());
-                contentStream.newLine();
-                contentStream.newLine(); // Add an extra line for spacing
-                contentStream.showText("Rôles: " + user.getRoles());
-                contentStream.newLine();
-                contentStream.newLine(); // Add an extra line for spacing
+                contentStream.newLineAtOffset(0, -20); // Add some space between each user
 
-                // Move to the next position
-                contentStream.newLineAtOffset(0, -200); // Move down 200 units
+                contentStream.showText("Nom: " + user.getNom());
+                contentStream.newLineAtOffset(0, -lineHeight); // Move to the next line
+                contentStream.showText("Prénom: " + user.getPrenom());
+                contentStream.newLineAtOffset(0, -lineHeight);
+                contentStream.showText("Email: " + user.getEmail());
+                contentStream.newLineAtOffset(0, -lineHeight);
+                contentStream.showText("Adresse: " + user.getAdresse());
+                contentStream.newLineAtOffset(0, -lineHeight);
+                contentStream.showText("Téléphone: " + user.getTelephone());
+                contentStream.newLineAtOffset(0, -lineHeight);
+                contentStream.showText("Rôles: " + user.getRoles());
+                contentStream.newLineAtOffset(0, -lineHeight);
+
+                contentStream.newLineAtOffset(0, -20); // Add some space between each user
             }
 
-
-
-// End text and close content stream
             contentStream.endText();
             contentStream.close();
 
-// Save the PDF document
             document.save("user_list.pdf");
             document.close();
 
-            // Show a dialog box to inform the user that the PDF has been generated
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("PDF Généré");
             alert.setHeaderText(null);
@@ -314,7 +300,6 @@ public class AdminPage {
             alert.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-            // Show an error dialog box if an error occurs
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText("Erreur lors de la génération du PDF");
@@ -322,6 +307,7 @@ public class AdminPage {
             alert.showAndWait();
         }
     }
+
 
 }
 

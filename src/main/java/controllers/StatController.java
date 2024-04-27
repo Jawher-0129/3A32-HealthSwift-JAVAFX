@@ -58,7 +58,7 @@ public class StatController {
         pieChart.setData(pieChartData);
 
         // Définir la taille du PieChart
-        pieChart.setPrefSize(450, 400); // Ajustez la taille selon vos besoins
+        pieChart.setPrefSize(400, 400); // Ajustez la taille selon vos besoins
     }
 
     private void switchScene(String fxmlFile, ActionEvent event) {

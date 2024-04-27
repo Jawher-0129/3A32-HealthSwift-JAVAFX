@@ -36,8 +36,22 @@ public class ForgotPassword {
     private TextField emailField;
 
     @FXML
-    private TextField verificationCodeField;
+    private TextField box1;
 
+    @FXML
+    private TextField box2;
+
+    @FXML
+    private TextField box3;
+
+    @FXML
+    private TextField box4;
+
+    @FXML
+    private TextField box5;
+
+    @FXML
+    private TextField box6;
 
     private void switchScene(String fxmlFile, String email, ActionEvent event) {
         try {
@@ -60,7 +74,7 @@ public class ForgotPassword {
     @FXML
     void resetPassword(ActionEvent event) {
         String email = emailField.getText();
-        String verificationCode = verificationCodeField.getText();
+        String verificationCode = box1.getText() + box2.getText() + box3.getText() + box4.getText() + box5.getText() + box6.getText();
 
         // Check if the verification code is correct
         Usercrud y = new Usercrud();
@@ -100,15 +114,15 @@ public class ForgotPassword {
         }
         // Send the verification code via email using SendGrid API
         sendVerificationCodeViaSendGrid(email);
-
     }
+
     private void sendVerificationCodeViaSendGrid(String email) {
         Email from = new Email("firaszighni90@gmail.com");
         String subject = "Verification Code";
         Email to = new Email(email);
         String verificationCode = generateVerificationCode();
         Usercrud x = new Usercrud();
-        x.updateVerificationCode(email,verificationCode);
+        x.updateVerificationCode(email, verificationCode);
         String bodyContent = "Your verification code is: " + verificationCode;
         Content content = new Content("text/plain", bodyContent);
         Mail mail = new Mail(from, subject, to, content);
@@ -123,7 +137,7 @@ public class ForgotPassword {
             if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Verification code sent to your email.");
             } else {
-                showAlert(Alert.AlertType.ERROR, "Error", "Failed to send verification code. Please try again later.");
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to send verification code. Please try again.");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -164,16 +178,21 @@ public class ForgotPassword {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     private boolean isValidEmail(String email) {
         // Your email validation logic here
         return email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
     }
 
-
     @FXML
     void initialize() {
         assert emailField != null : "fx:id=\"emailField\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
-        assert verificationCodeField != null : "fx:id=\"verificationCodeField\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
+        assert box1 != null : "fx:id=\"box1\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
+        assert box2 != null : "fx:id=\"box2\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
+        assert box3 != null : "fx:id=\"box3\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
+        assert box4 != null : "fx:id=\"box4\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
+        assert box5 != null : "fx:id=\"box5\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
+        assert box6 != null : "fx:id=\"box6\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
 
     }
 

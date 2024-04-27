@@ -20,7 +20,7 @@
         <Pane layoutX="451.0" layoutY="38.0" prefHeight="439.0" prefWidth="419.0" AnchorPane.bottomAnchor="69.99999999999994" AnchorPane.topAnchor="38.0">
 
             <children>
-                <TextField fx:id="email" layoutX="46.0" layoutY="196.0" onKeyReleased="#handleEmailFieldTextChanged" prefHeight="34.0" prefWidth="275.0" promptText="Email" />
+                <TextField fx:id="email" layoutX="46.0" layoutY="196.0"  prefHeight="34.0" prefWidth="275.0" promptText="Email" />
                 <Label fx:id="lblEmailError" layoutX="46.0" layoutY="234.0" prefWidth="275.0" textFill="#ff0000" />
 
                 <PasswordField fx:id="password" layoutX="46.0" layoutY="257.0" prefHeight="34.0" prefWidth="275.0" promptText="password" stylesheets="@../styling/fullpackstyling.css" />
@@ -47,7 +47,6 @@
                 <Hyperlink layoutX="47.0" layoutY="429.0" text="Don't have An Account Yet  ?" />
 
                 <!-- Add ListView to display suggested emails -->
-                <ListView fx:id="suggestedEmailsListView" layoutX="46.0" layoutY="230.0" onMouseClicked="#handleSuggestedEmailSelected" prefHeight="100.0" prefWidth="247.0" visible="false" />
             </children>
 
         </Pane>

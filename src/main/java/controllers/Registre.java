@@ -90,13 +90,9 @@ public class Registre {
         String password = this.password.getText();
 
         if (!checkFieldsNotEmpty()) {
-            // Si des champs sont vides, arrêter le processus d'inscription
             return;
         }
-        // Check if the email is valid
-            // Check if the email is valid
             if (!isValidEmail(email)) {
-                // Display an error message in red in the email error label
                 setErrorLabel(emailErrorLabel, " invalid email address");
                 return;
             }
@@ -106,7 +102,6 @@ public class Registre {
                 return;
             }
 
-            // Check if a role is selected
         String selectedRole = roleComboBox.getValue();
         if (selectedRole == null || selectedRole.isEmpty()) {
             // Display an alert if no role is selected

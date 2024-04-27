@@ -1,7 +1,6 @@
 package controllers;
 import javafx.scene.control.CheckBox;
 import javafx.scene.paint.Color;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
@@ -14,13 +13,10 @@ import Entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import java.util.prefs.Preferences;
-import java.util.List; // Add this import for List interface
-import java.util.Arrays; // Add this import for Arrays class
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import org.mindrot.jbcrypt.BCrypt;
 import service.Usercrud;
-
 import javafx.scene.control.Alert;
 
 
