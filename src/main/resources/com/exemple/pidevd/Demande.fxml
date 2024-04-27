@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="432.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple.pidevd.Controller.DemandeController">
+   <children>
+      <VBox layoutX="41.0" layoutY="72.0" prefHeight="241.0" prefWidth="217.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titre" />
+            <TextField fx:id="titre" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+            <TextArea fx:id="description" prefHeight="79.0" prefWidth="186.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
+            <TextField fx:id="status" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Don" />
+            <ChoiceBox fx:id="don" prefWidth="150.0" />
+         </children>
+      </VBox>
+      <TableView fx:id="demandeTable" layoutX="226.0" layoutY="70.0" prefHeight="200.0" prefWidth="398.0">
+        <columns>
+          <TableColumn fx:id="id_demande" prefWidth="61.0" text="id_demande" />
+          <TableColumn fx:id="titreD" prefWidth="57.0" text="titre" />
+            <TableColumn fx:id="descriptionD" minWidth="0.0" prefWidth="0.0" text="description" />
+            <TableColumn fx:id="date" minWidth="0.0" prefWidth="28.0" text="date" />
+            <TableColumn fx:id="statusD" prefWidth="66.0" text="status" />
+            <TableColumn fx:id="donD" prefWidth="70.0" text="don" />
+            <TableColumn fx:id="ActionC" prefWidth="111.0" text="Action" />
+        </columns>
+      </TableView>
+      <ButtonBar layoutX="159.0" layoutY="318.0" prefHeight="40.0" prefWidth="351.0">
+        <buttons>
+          <Button fx:id="add" mnemonicParsing="false" onAction="#handleAddDemande" text="add" />
+            <Button fx:id="update" mnemonicParsing="false" onAction="#handleUpdateDemande" text="update" />
+            <Button fx:id="delete" mnemonicParsing="false" onAction="#handleDeleteDemande" text="delete" />
+            <Button fx:id="clear" mnemonicParsing="false" onAction="#PageQrCode" text="clear" />
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>
