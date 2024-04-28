@@ -1,3 +1,4 @@
+
 package com.example.gestionressourcesmaterielles.Controller;
 
 import com.google.zxing.BarcodeFormat;

@@ -1,4 +1,5 @@
 package com.example.gestionressourcesmaterielles.Controller;
+import javafx.scene.chart.PieChart;
 
 import com.example.gestionressourcesmaterielles.Model.Categorie;
 import com.example.gestionressourcesmaterielles.Model.Materiel;
@@ -14,21 +15,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import com.itextpdf.layout.element.Cell;
 
 import com.itextpdf.io.image.ImageDataFactory;
@@ -38,6 +43,8 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class MaterielController implements Initializable {
     private final CategorieService categorieService = new CategorieService();
@@ -48,6 +55,12 @@ public class MaterielController implements Initializable {
 
     @FXML
     private ImageView qrCodeImageView;
+
+    @FXML
+    private RadioButton TriCroissantMateriel;
+
+    @FXML
+    private RadioButton TriDecroissantMateriel;
 
     private MainController mainController;
     @FXML
@@ -161,42 +174,7 @@ public class MaterielController implements Initializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
-
     }
-
-
-   /* @FXML
-    void initialize() {
-        List<String> CategoriesLibelle = categorieService.afficherLibellesCategories();
-        ObservableList<String> idCategoriesList = FXCollections.observableArrayList(CategoriesLibelle);
-        categorieChoiceBox.setItems(idCategoriesList);
-
-        materielTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue!=null)
-            {
-                this.populateFields(newValue);
-            }
-            if (newValue != null) {
-                // Get the image URL from the selected Materiel object
-                String imageUrl = newValue.getImageMateriel();
-                // Load the image into the ImageView
-                if (imageUrl != null && !imageUrl.isEmpty()) {
-                    Image image = new Image(imageUrl);
-                    imageView.setImage(image);
-                    imagefield.setText(imageUrl);
-
-                } else {
-                    // If image URL is null or empty, clear the ImageView
-                    imageView.setImage(null);
-                }
-            }
-
-        });
-            this.configureTableView();
-            this.refreshTableView();
-    }*/
 
     private void configureTableView() {
         this.idMaterielColumn.setCellValueFactory(new PropertyValueFactory("id"));
@@ -267,11 +245,7 @@ public class MaterielController implements Initializable {
         String imageURL = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
         String imageName = imageURL != null ? new File(imageURL).getName() : null;
         String image="C:\\Users\\jawhe\\OneDrive\\Bureau\\3A32HealthSwiftIntegration (2)\\3A32HealthSwiftIntegration\\3A32HealthSwift\\public\\uploads\\"+imageName;
-
-
         System.out.println(imageName);
-
-
         if (imageURL==null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Information Dialog");
@@ -292,7 +266,6 @@ public class MaterielController implements Initializable {
             alert.show();
             return;
         }
-
 
        Integer idCategorie=categorieService.getIdCategorieParLibelle(categorieLibelle);
 
@@ -347,8 +320,6 @@ public class MaterielController implements Initializable {
         String imageName = imageURL != null ? new File(imageURL).getName() : null;
         String image="C:\\Users\\jawhe\\OneDrive\\Bureau\\3A32HealthSwiftIntegration (2)\\3A32HealthSwiftIntegration\\3A32HealthSwift\\public\\uploads\\"+imageName;
 
-
-
         //int idCategorie = categorieChoiceBox.getValue();
         String libelleCategorie=categorieChoiceBox.getValue();
         int idCategorie=categorieService.getIdCategorieParLibelle(libelleCategorie);
@@ -397,11 +368,8 @@ public class MaterielController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Modification effectuée !");
             alert.showAndWait();
-
-
             this.refreshTableView();
             this.libelleMaterielTextField.clear();
-
             this.descriptionTextArea.clear();
             this.prixTextField.clear();
             this.disponibleRadioButton.setSelected(true);
@@ -411,9 +379,6 @@ public class MaterielController implements Initializable {
             System.out.println("Veuillez sélectionner une catégorie et spécifier un nouveau libellé pour effectuer la modification.");
         }
     }
-
-
-
     public void initMainController(MainController mainController) {
         this.mainController = mainController;
     }
@@ -431,12 +396,21 @@ public class MaterielController implements Initializable {
     }
 
     @FXML
-    void PageStatMateriel(ActionEvent event)
-    {
+    void PageStatMateriel(ActionEvent event){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionressourcesmaterielles/StatMateriel.fxml"));
-            Parent root=loader.load();
-            qrcodeBtn.getScene().setRoot(root);
+            Parent stat=loader.load();
+            // Create the dialog
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(bouttonStatMateriel.getScene().getWindow());
+            Scene scene = new Scene(stat);
+            dialogStage.setScene(scene);
+
+            // Show the dialog
+            dialogStage.showAndWait();
+
+           // bouttonStatMateriel.getScene().setRoot(stat);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -447,9 +421,7 @@ public class MaterielController implements Initializable {
         try (PdfWriter writer = new PdfWriter("materiels.pdf");
              PdfDocument pdf = new PdfDocument(writer);
              Document document = new Document(pdf)) {
-
             document.add(new Paragraph("Liste des Matériels"));
-
             Table table = new Table(6);
             table.addCell("ID");
             table.addCell("Libellé");
@@ -522,5 +494,50 @@ public class MaterielController implements Initializable {
 
         return writableImage;
     }
+
+
+    @FXML
+    void TriCroissantMateriel(ActionEvent event) {
+        if(TriDecroissantMateriel.isSelected())
+        {
+            TriDecroissantMateriel.setSelected(false);
+        }
+
+
+        ObservableList<Materiel> materiels = materielTableView.getItems();
+
+        // Créer un Comparator pour trier les objets Materiel selon le prix dans l'ordre croissant
+        Comparator<Materiel> comparator = Comparator.comparingDouble(Materiel::getPrix);
+
+        // Trier la liste de matériel dans l'ordre croissant selon le prix
+        Collections.sort(materiels, comparator);
+
+        // Mettre à jour la TableView avec la nouvelle liste triée
+        materielTableView.setItems(materiels);
+
+
+    }
+
+    @FXML
+    void TriDecroissantMateriel(ActionEvent event) {
+
+        if(TriCroissantMateriel.isSelected())
+        {
+            TriCroissantMateriel.setSelected(false);
+        }
+
+        ObservableList<Materiel> materiels = materielTableView.getItems();
+
+        // Créer un Comparator pour trier les objets Materiel selon le prix dans l'ordre décroissant
+        Comparator<Materiel> comparator = Comparator.comparingDouble(Materiel::getPrix).reversed();
+
+        // Trier la liste de matériel dans l'ordre décroissant selon le prix
+        Collections.sort(materiels, comparator);
+
+        // Mettre à jour la TableView avec la nouvelle liste triée
+        materielTableView.setItems(materiels);
+
+    }
+
 
 }
