@@ -8,8 +8,10 @@ module com.example.gestionressourcesmaterielles {
     requires layout;
     requires io;
     requires twilio;
+    requires org.controlsfx.controls;
     opens com.example.gestionressourcesmaterielles.Model;
     opens com.example.gestionressourcesmaterielles.Controller to javafx.fxml;
+
 
     opens com.example.gestionressourcesmaterielles to javafx.fxml;
     exports com.example.gestionressourcesmaterielles;

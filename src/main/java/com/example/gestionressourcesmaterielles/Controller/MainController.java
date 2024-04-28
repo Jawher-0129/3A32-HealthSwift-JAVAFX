@@ -15,21 +15,6 @@ public class MainController {
     public void setCenter(Node node) {
         mainBorderPane.setCenter(node);
     }
-
-    public void loadSidebar() {
-        try {
-            FXMLLoader sidebarLoader = new FXMLLoader(getClass().getResource("Sidebar.fxml"));
-            BorderPane sidebar = sidebarLoader.load();
-            SidebarController sidebarController = sidebarLoader.getController();
-            sidebarController.setMainController(this); // Pass the MainController to the SidebarController
-            mainBorderPane.setLeft(sidebar);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (java.io.IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @FXML
     private void handleExit() {
         Platform.exit();

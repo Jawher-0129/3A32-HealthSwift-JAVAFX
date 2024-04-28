@@ -24,6 +24,7 @@ public class StatMaterielController {
 
     @FXML
    Button bouttonRetourMateriel;
+    private SidebarController sidebarController;
 
     @FXML
     void displaystats(ActionEvent event) {
@@ -47,6 +48,10 @@ public class StatMaterielController {
                         new PieChart.Data("Disponible", disponibleCount),
                         new PieChart.Data("Non Disponible", nonDisponibleCount));
         pieChart.setData(pieChartData);
+    }
+
+    public void setSidebarController(SidebarController sidebarController) {
+        this.sidebarController = sidebarController;
     }
 
 

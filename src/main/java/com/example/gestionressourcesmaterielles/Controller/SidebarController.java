@@ -12,7 +12,13 @@ import java.io.IOException;
 public class SidebarController {
 
     private MainController mainController;
+    private StatMaterielController statMaterielController;
 
+
+    public void setStatController(StatMaterielController statMaterielController) {
+        System.out.println("Setting stat controller");
+        this.statMaterielController = statMaterielController;
+    }
     public void setMainController(MainController mainController) {
         System.out.println("Setting main controller");
         this.mainController = mainController;
