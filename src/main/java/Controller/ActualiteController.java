@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ActualiteController implements Initializable {
@@ -184,17 +185,34 @@ public class ActualiteController implements Initializable {
         Actualite selectedActualite = table.getSelectionModel().getSelectedItem();
         if (selectedActualite != null) {
             int id_actualite = selectedActualite.getId_actualite();
-            try {
-                actualiteService.delete(id_actualite);
-                loadData();
-                showNotification("Event successfully deleted!", "Success");
-            } catch (RuntimeException e) {
-                e.printStackTrace();
+
+            // Show confirmation dialog before deletion
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete this Actualite?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    actualiteService.delete(id_actualite);
+                    loadData();
+                    showNotification("Event successfully deleted!", "Success");
+                    // Clear fields
+                    idtitre.clear();
+                    iddescr.clear();
+                    idtype.setValue(null);
+                    idtheme.setValue(null);
+                } catch (RuntimeException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             showAlert(AlertType.ERROR, "Error Message", "Error", "Please select an item to delete.");
         }
     }
+
+
 
     @FXML
     void UpdateActualite(ActionEvent event) {

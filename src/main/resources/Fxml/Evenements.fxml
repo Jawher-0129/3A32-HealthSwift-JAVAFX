@@ -15,27 +15,28 @@
       <AnchorPane layoutX="14.0" layoutY="20.0" prefHeight="493.0" prefWidth="381.0">
          <children>
             <AnchorPane layoutX="109.0" layoutY="8.0" prefHeight="110.0" prefWidth="110.0" />
-            <Label layoutX="13.0" layoutY="160.0" stylesheets="@../css/Style.css" text="Titre" />
-            <TextField fx:id="enent_title" layoutX="63.0" layoutY="156.0" prefHeight="25.0" prefWidth="202.0" styleClass="textfield" stylesheets="@../css/Style.css" />
-            <Label layoutX="13.0" layoutY="189.0" stylesheets="@../css/Style.css" text="Date" />
-            <Label layoutX="10.0" layoutY="227.0" stylesheets="@../css/Style.css" text="Duree" />
-            <Label layoutX="14.0" layoutY="257.0" stylesheets="@../css/Style.css" text="Lieu" />
-            <Label layoutX="6.0" layoutY="286.0" prefHeight="17.0" prefWidth="57.0" stylesheets="@../css/Style.css" text="Objective" />
-            <TextField fx:id="event_duree" layoutX="63.0" layoutY="223.0" styleClass="textfield" stylesheets="@../css/Style.css" />
-            <TextField fx:id="event_lieu" layoutX="63.0" layoutY="253.0" styleClass="textfield" stylesheets="@../css/Style.css" />
-            <TextField fx:id="event_obj" layoutX="63.0" layoutY="282.0" styleClass="textfield" stylesheets="@../css/Style.css" />
-            <DatePicker fx:id="event_date" layoutX="64.0" layoutY="185.0" prefHeight="25.0" prefWidth="149.0" styleClass="textfield" stylesheets="@../css/Style.css" />
-            <Button fx:id="addEvent_btn" layoutX="23.0" layoutY="351.0" mnemonicParsing="false" onAction="#AddEvent" prefHeight="25.0" prefWidth="57.0" styleClass="add-btn" stylesheets="@../css/Style.css" text="Add" />
-            <Button fx:id="UpdateEvent_btn" layoutX="94.0" layoutY="351.0" mnemonicParsing="false" onAction="#UpdateEvent" styleClass="update-btn" stylesheets="@../css/Style.css" text="Update" />
-            <Button fx:id="clearEvent_Btn" layoutX="24.0" layoutY="388.0" mnemonicParsing="false" onAction="#ClearEvent" prefHeight="25.0" prefWidth="55.0" styleClass="clear-btn" stylesheets="@../css/Style.css" text="Clear" />
-            <Button fx:id="deleteEvent_btn" layoutX="94.0" layoutY="388.0" mnemonicParsing="false" onAction="#DeleteEvent" prefHeight="26.0" prefWidth="64.0" styleClass="delete-btn" stylesheets="@../css/Style.css" text="Delete" />
-            <Button fx:id="event_importBtn" layoutX="121.0" layoutY="118.0" mnemonicParsing="false" onAction="#importImage" prefHeight="25.0" prefWidth="103.0" styleClass="insert-btn" stylesheets="@../css/Style.css" text="insert image " />
-            <Label layoutX="6.0" layoutY="317.0" prefHeight="17.0" prefWidth="57.0" stylesheets="@../css/Style.css" text="Actualite" />
-            <ComboBox fx:id="ActualiteRelated" layoutX="63.0" layoutY="313.0" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css" />
             <ImageView fx:id="imageView" fitHeight="110.0" fitWidth="110.0" layoutX="117.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="event_importBtn" layoutX="121.0" layoutY="118.0" mnemonicParsing="false" onAction="#importImage" prefHeight="25.0" prefWidth="103.0" styleClass="insert-btn" stylesheets="@../css/Style.css" text="insert image " />
+            <Label layoutX="13.0" layoutY="160.0" stylesheets="@../css/Style.css" text="Titre" />
+            <TextField fx:id="enent_title" layoutX="73.0" layoutY="156.0" prefHeight="25.0" prefWidth="149.0" styleClass="textfield" stylesheets="@../css/Style.css" />
+             <Label fx:id="titleErrorLabel" layoutX="74.0" layoutY="181.0" prefHeight="17.0" prefWidth="149.0" textFill="red" />
+             <Label layoutX="13.0" layoutY="216.0" stylesheets="@../css/Style.css" text="Date" />
+            <DatePicker fx:id="event_date" layoutX="74.0" layoutY="212.0" prefHeight="25.0" prefWidth="149.0" styleClass="textfield" stylesheets="@../css/Style.css" />
+             <Label fx:id="dateErrorLabel" layoutX="74.0" layoutY="247.0" prefHeight="17.0" prefWidth="146.0" textFill="red" />
+             <Label layoutX="19.0" layoutY="280.0" stylesheets="@../css/Style.css" text="Duree" />
+            <TextField fx:id="event_duree" layoutX="74.0" layoutY="276.0" styleClass="textfield" stylesheets="@../css/Style.css" />
+             <Label fx:id="dureeErrorLabel" layoutX="74.0" layoutY="301.0" prefHeight="17.0" prefWidth="146.0" textFill="red" />
+             <Label layoutX="24.0" layoutY="333.0" stylesheets="@../css/Style.css" text="Lieu" />
+            <TextField fx:id="event_lieu" layoutX="73.0" layoutY="329.0" styleClass="textfield" stylesheets="@../css/Style.css" />
+             <Label fx:id="lieuErrorLabel" layoutX="73.0" layoutY="354.0" prefHeight="17.0" prefWidth="146.0" textFill="red" />
+             <Label layoutX="13.0" layoutY="381.0" prefHeight="17.0" prefWidth="57.0" stylesheets="@../css/Style.css" text="Objective" />
+            <TextField fx:id="event_obj" layoutX="72.0" layoutY="377.0" styleClass="textfield" stylesheets="@../css/Style.css" />
+             <Label fx:id="objErrorLabel" layoutX="72.0" layoutY="406.0" prefHeight="17.0" prefWidth="150.0" textFill="red" />
+             <Label layoutX="14.0" layoutY="438.0" prefHeight="17.0" prefWidth="57.0" stylesheets="@../css/Style.css" text="Actualite" />
+            <ComboBox fx:id="ActualiteRelated" layoutX="71.0" layoutY="434.0" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="363.0" layoutY="26.0" prefHeight="532.0" prefWidth="735.0" stylesheets="@../css/Style.css">
+      <AnchorPane layoutX="404.0" layoutY="26.0" prefHeight="532.0" prefWidth="735.0" stylesheets="@../css/Style.css">
          <children>
              <TextField fx:id="chercherEvent" layoutX="14.0" layoutY="14.0" onKeyTyped="#chercherEvenement" promptText="search" styleClass="search" stylesheets="@../css/Style.css" />
              <TableView fx:id="tableEvent" layoutX="8.0" layoutY="62.0" onMouseClicked="#selectData" prefHeight="406.0" prefWidth="646.0">
@@ -52,5 +53,9 @@
             </TableView>
          </children>
       </AnchorPane>
+      <Button fx:id="addEvent_btn" layoutX="214.0" layoutY="530.0" mnemonicParsing="false" onAction="#AddEvent" prefHeight="25.0" prefWidth="57.0" styleClass="add-btn" stylesheets="@../css/Style.css" text="Add" />
+      <Button fx:id="UpdateEvent_btn" layoutX="285.0" layoutY="530.0" mnemonicParsing="false" onAction="#UpdateEvent" styleClass="update-btn" stylesheets="@../css/Style.css" text="Update" />
+      <Button fx:id="clearEvent_Btn" layoutX="215.0" layoutY="567.0" mnemonicParsing="false" onAction="#ClearEvent" prefHeight="25.0" prefWidth="55.0" styleClass="clear-btn" stylesheets="@../css/Style.css" text="Clear" />
+      <Button fx:id="deleteEvent_btn" layoutX="285.0" layoutY="567.0" mnemonicParsing="false" onAction="#DeleteEvent" prefHeight="26.0" prefWidth="64.0" styleClass="delete-btn" stylesheets="@../css/Style.css" text="Delete" />
    </children>
 </AnchorPane>

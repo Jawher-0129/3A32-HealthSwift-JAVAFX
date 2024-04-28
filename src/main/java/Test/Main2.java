@@ -5,6 +5,8 @@ import Controller.SidebarController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -32,6 +34,21 @@ public class Main2 extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        //adding this part for the logout
+        stage.setOnCloseRequest(event ->{
+            event.consume();
+            logout(stage);
+        } );
+    }
+    public void logout(Stage stage){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("logout");
+        alert.setHeaderText("you're about to logout !");
+        alert.setContentText("Do you want to save before exiting ?");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            System.out.println("you successfully logged Out !");
+            stage.close();
+        }
     }
 
 }

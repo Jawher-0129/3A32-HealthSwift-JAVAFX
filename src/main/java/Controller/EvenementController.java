@@ -104,6 +104,20 @@ public class EvenementController implements Initializable {
     @FXML
     private TableView<Evenement> tableEvent;
     private ObservableList<Evenement> evementList;
+    @FXML
+    private Label titleErrorLabel;
+
+    @FXML
+    private Label dateErrorLabel;
+
+    @FXML
+    private Label dureeErrorLabel;
+
+    @FXML
+    private Label lieuErrorLabel;
+    @FXML
+    private Label objErrorLabel;
+
 
 
     @Override
@@ -143,13 +157,68 @@ public class EvenementController implements Initializable {
             actualiteId = evenementService.getActualiteIdByTitle(selectedActualite);
         }
 
-        // Check if all fields are filled
-        if (enent_title.getText().isEmpty() || event_date.getValue() == null || event_duree.getText().isEmpty()
-                || event_lieu.getText().isEmpty() || event_obj.getText().isEmpty() || imageView.getImage() == null) {
-            showAlert(Alert.AlertType.ERROR, "Error Message", null, "Please fill all fields and select an image.");
-            return;
+        // Initialize error flags
+        boolean isValid = true;
+
+        // Validate and show errors for each field
+        if (enent_title.getText().isEmpty()) {
+            enent_title.setStyle("-fx-border-color: red;");
+            // Show error label
+            titleErrorLabel.setText("Please enter a title.");
+            titleErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            enent_title.setStyle("");
+            // Hide error label
+            titleErrorLabel.setVisible(false);
         }
 
+        if (event_date.getValue() == null) {
+            event_date.setStyle("-fx-border-color: red;");
+            // Show error label
+            dateErrorLabel.setText("Please select a date.");
+            dateErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            event_date.setStyle("");
+            // Hide error label
+            dateErrorLabel.setVisible(false);
+        }
+
+        if (event_duree.getText().isEmpty()) {
+            event_duree.setStyle("-fx-border-color: red;");
+            // Show error label
+            dureeErrorLabel.setText("Please enter a duration.");
+            dureeErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            event_duree.setStyle("");
+            // Hide error label
+            dureeErrorLabel.setVisible(false);
+        }
+        if (event_lieu.getText().isEmpty()) {
+            event_lieu.setStyle("-fx-border-color: red;");
+            // Show error label
+            lieuErrorLabel.setText("Please enter a location.");
+            lieuErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            event_lieu.setStyle("");
+            // Hide error label
+            lieuErrorLabel.setVisible(false);
+        }
+
+        if (event_obj.getText().isEmpty()) {
+            event_obj.setStyle("-fx-border-color: red;");
+            // Show error label
+            objErrorLabel.setText("Please enter an objective.");
+            objErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            event_obj.setStyle("");
+            // Hide error label
+            objErrorLabel.setVisible(false);
+        }
 
         // Validate duree
         try {
@@ -163,10 +232,7 @@ public class EvenementController implements Initializable {
             return;
         }
 
-        if (event_date.getValue().isBefore(LocalDate.now())) {
-            showAlert(Alert.AlertType.ERROR, "Error Message", null, "Event date must be in the future.");
-            return;
-        }
+
 
         // cbn fama image
         if (selectedImagePath == null) {
@@ -174,22 +240,30 @@ public class EvenementController implements Initializable {
             return;
         }
 
-        Evenement newEvenement = new Evenement(0, enent_title.getText(), java.sql.Date.valueOf(event_date.getValue()),
-                Integer.parseInt(event_duree.getText()), event_lieu.getText(), event_obj.getText(),
-                selectedImagePath, actualiteId);
+        if (isValid) {
+            try {
+                if (event_date.getValue().isBefore(LocalDate.now())) {
+                    showAlert(Alert.AlertType.ERROR, "Error Message", null, "Event date must be in the future.");
+                    return;
+                }
 
-        try {
-            evenementService.add(newEvenement);
-            showNotification("Successfully Added!", "Success");
-            ClearEvent(null);
-            loadData();
-        } catch (IllegalArgumentException e) {
-            showAlert(Alert.AlertType.ERROR, "Error Message", null, e.getMessage());
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Error Message", null, "An error occurred while adding the event.");
-            e.printStackTrace();
+                Evenement newEvenement = new Evenement(0, enent_title.getText(), java.sql.Date.valueOf(event_date.getValue()),
+                        Integer.parseInt(event_duree.getText()), event_lieu.getText(), event_obj.getText(),
+                        selectedImagePath, actualiteId);
+
+                evenementService.add(newEvenement);
+                showNotification("Successfully Added!", "Success");
+                ClearEvent(null);
+                loadData();
+            } catch (IllegalArgumentException e) {
+                showAlert(Alert.AlertType.ERROR, "Error Message", null, e.getMessage());
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error Message", null, "An error occurred while adding the event.");
+                e.printStackTrace();
+            }
         }
     }
+
 
     @FXML
     void ClearEvent(ActionEvent event) {
@@ -201,6 +275,17 @@ public class EvenementController implements Initializable {
         imageView.setImage(null);
         ActualiteRelated.getSelectionModel().clearSelection();
         showAlert(Alert.AlertType.INFORMATION, "Information", "Data Cleared", "Event data has been cleared.");
+        // Reset the text field borders and hide the error labels
+        enent_title.setStyle("");
+        event_date.setStyle("");
+        event_duree.setStyle("");
+        event_lieu.setStyle("");
+        event_obj.setStyle("");
+        titleErrorLabel.setVisible(false);
+        dateErrorLabel.setVisible(false);
+        dureeErrorLabel.setVisible(false);
+        lieuErrorLabel.setVisible(false);
+        objErrorLabel.setVisible(false);
     }
 
     @FXML
@@ -211,13 +296,33 @@ public class EvenementController implements Initializable {
             return;
         }
 
-        evenementService.delete(selectedEvent.getId_evenement());
+        // Show confirmation dialog before deletion
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this Event?");
 
-        showNotification("Event successfully deleted!", "Success");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                evenementService.delete(selectedEvent.getId_evenement());
+                showNotification("Event successfully deleted!", "Success");
 
-        ClearEvent(null);
-        loadData();
+                // Clear fields
+                enent_title.clear();
+                event_date.setValue(null);
+                event_duree.clear();
+                event_lieu.clear();
+                event_obj.clear();
+                imageView.setImage(null);
+
+                loadData();
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
 
     @FXML
     void UpdateEvent(ActionEvent event) {
@@ -227,14 +332,60 @@ public class EvenementController implements Initializable {
             return;
         }
 
-        // Check if all fields are filled
-        if (enent_title.getText().isEmpty() || event_date.getValue() == null || event_duree.getText().isEmpty()
-                || event_lieu.getText().isEmpty() || event_obj.getText().isEmpty() || imageView.getImage() == null) {
-            showAlert(Alert.AlertType.ERROR, "Error Message", null, "Please fill all fields and select an image.");
-            return;
+        // Initialize error flags
+        boolean isValid = true;
+
+        // Validate and show errors for each field
+        if (enent_title.getText().isEmpty()) {
+            enent_title.setStyle("-fx-border-color: red;");
+            titleErrorLabel.setText("Please enter a title.");
+            titleErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            enent_title.setStyle("");
+            titleErrorLabel.setVisible(false);
         }
 
-        // Validate duree
+        if (event_date.getValue() == null) {
+            event_date.setStyle("-fx-border-color: red;");
+            dateErrorLabel.setText("Please select a date.");
+            dateErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            event_date.setStyle("");
+            dateErrorLabel.setVisible(false);
+        }
+
+        if (event_duree.getText().isEmpty()) {
+            event_duree.setStyle("-fx-border-color: red;");
+            dureeErrorLabel.setText("Please enter a duration.");
+            dureeErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            event_duree.setStyle("");
+            dureeErrorLabel.setVisible(false);
+        }
+        if (event_lieu.getText().isEmpty()) {
+            event_lieu.setStyle("-fx-border-color: red;");
+            lieuErrorLabel.setText("Please enter a location.");
+            lieuErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            event_lieu.setStyle("");
+            lieuErrorLabel.setVisible(false);
+        }
+
+        if (event_obj.getText().isEmpty()) {
+            event_obj.setStyle("-fx-border-color: red;");
+            objErrorLabel.setText("Please enter an objective.");
+            objErrorLabel.setVisible(true);
+            isValid = false;
+        } else {
+            event_obj.setStyle("");
+            objErrorLabel.setVisible(false);
+        }
+
+        // Validate duree positive + int
         try {
             int dureeValue = Integer.parseInt(event_duree.getText());
             if (dureeValue < 0) {
@@ -245,7 +396,7 @@ public class EvenementController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Error Message", null, "Duration must be a valid integer.");
             return;
         }
-
+        // date akber ml lyoum
         if (event_date.getValue().isBefore(LocalDate.now())) {
             showAlert(Alert.AlertType.ERROR, "Error Message", null, "Event date must be in the future.");
             return;
@@ -267,21 +418,25 @@ public class EvenementController implements Initializable {
             actualiteId = evenementService.getActualiteIdByTitle(selectedActualite);
         }
 
-        Evenement updatedEvenement = new Evenement(selectedEvent.getId_evenement(), enent_title.getText(),
-                java.sql.Date.valueOf(event_date.getValue()), Integer.parseInt(event_duree.getText()),
-                event_lieu.getText(), event_obj.getText(), selectedImagePath, actualiteId);
+        // Update the event if all fields are valid
+        if (isValid) {
+            try {
+                Evenement updatedEvenement = new Evenement(selectedEvent.getId_evenement(), enent_title.getText(),
+                        java.sql.Date.valueOf(event_date.getValue()), Integer.parseInt(event_duree.getText()),
+                        event_lieu.getText(), event_obj.getText(), selectedImagePath, actualiteId);
 
-        try {
-            evenementService.update(updatedEvenement, selectedEvent.getId_evenement());
-            showNotification("Successfully updated the data!", "Success");
-            loadData();
-        } catch (IllegalArgumentException e) {
-            showAlert(Alert.AlertType.ERROR, "Error Message", null, e.getMessage());
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Error Message", null, "An error occurred while updating the event.");
-            e.printStackTrace();
+                evenementService.update(updatedEvenement, selectedEvent.getId_evenement());
+                showNotification("Successfully updated the data!", "Success");
+                loadData();
+            } catch (IllegalArgumentException e) {
+                showAlert(Alert.AlertType.ERROR, "Error Message", null, e.getMessage());
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error Message", null, "An error occurred while updating the event.");
+                e.printStackTrace();
+            }
         }
     }
+
 
 
 
