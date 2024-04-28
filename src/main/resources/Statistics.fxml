@@ -1,48 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane hgap="10" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticsController" prefHeight="700.0" prefWidth="1200">
-
-    <!-- Define column constraints -->
+<?import javafx.scene.chart.PieChart?>
+<GridPane hgap="10" prefHeight="700.0" prefWidth="1200" stylesheets="@StyleSheets/Stat.css" vgap="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticsController">
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
         <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
     </columnConstraints>
-
-    <!-- Define row constraints -->
     <rowConstraints>
+        <RowConstraints minHeight="10" prefHeight="30" vgrow="SOMETIMES" />
         <RowConstraints percentHeight="50" vgrow="ALWAYS" />
         <RowConstraints percentHeight="50" vgrow="ALWAYS" />
     </rowConstraints>
 
-    <!-- Chart 1 -->
-    <BarChart fx:id="donationsPerCampaignChart" GridPane.columnIndex="0" GridPane.rowIndex="0">
-        <xAxis><CategoryAxis label="Campaign ID" /></xAxis>
-        <yAxis><NumberAxis label="Donations" prefHeight="311.0" prefWidth="49.0" /></yAxis>
+    <!-- Title Label -->
+    <Label prefHeight="55.0" prefWidth="1178.0" styleClass="title-label" text="Statistics" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
 
+    <!-- Chart 1 -->
+    <BarChart fx:id="donationsPerCampaignChart" animated="false" barGap="0" legendVisible="false" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <xAxis>
+            <CategoryAxis autoRanging="true" label="Campaigns" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis autoRanging="true" label="Donations" side="LEFT" />
+        </yAxis>
     </BarChart>
 
     <!-- Chart 2 -->
-    <BarChart fx:id="donationsPerMonthChart" GridPane.columnIndex="1" GridPane.rowIndex="0">
-        <xAxis><CategoryAxis label="Month" /></xAxis>
-        <yAxis><NumberAxis label="Donations" /></yAxis>
-
+    <BarChart fx:id="donationsPerMonthChart" animated="false" barGap="0" legendVisible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <xAxis>
+            <CategoryAxis autoRanging="true" label="Month" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis autoRanging="true" label="Donations" side="LEFT" />
+        </yAxis>
     </BarChart>
 
     <!-- Chart 3 -->
-    <BarChart fx:id="campaignsPerMonthChart" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
-        <xAxis><CategoryAxis label="Month" /></xAxis>
-        <yAxis><NumberAxis label="Campaigns" /></yAxis>
+    <BarChart fx:id="campaignsPerMonthChart" animated="false" barGap="0" legendVisible="false" GridPane.columnIndex="0"  GridPane.rowIndex="2">
+        <xAxis>
+            <CategoryAxis autoRanging="true" label="Month" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis autoRanging="true" label="Campaigns" side="LEFT" />
+        </yAxis>
     </BarChart>
 
-
-
-
+    <!-- Pie Chart -->
+    <PieChart fx:id="donationsWithWithoutCampaignChart" animated="false" legendVisible="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label styleClass="chart-title" text="Donations With and Without Campaign" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 </GridPane>

@@ -16,7 +16,7 @@ module com.example.healthswift1 {
     requires java.desktop; // Add this line to include javax.imageio module
     requires com.google.zxing;
     requires javafx.swing;
-
+    requires itextpdf;
 
 
 }

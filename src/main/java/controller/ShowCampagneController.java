@@ -32,7 +32,7 @@ public class ShowCampagneController {
     @FXML private Label titleLabel, titleValue, descriptionLabel, descriptionValue, startDateLabel, startDateValue, endDateLabel, endDateValue;
     @FXML private ImageView imageView ,qrCodeImage;
     @FXML private Button modifyButton, deleteButton;
-
+    @FXML private Button downloadPdfButton;
 
     private CampagneService service = new CampagneService();
     private Campagne currentCampagne;
@@ -160,4 +160,5 @@ public class ShowCampagneController {
         Stage stage = (Stage) detailsBox.getScene().getWindow();
         stage.close();
     }
+
 }

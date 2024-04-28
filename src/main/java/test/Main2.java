@@ -11,7 +11,6 @@ public class Main2 extends Application {
         launch(args);
     }
 
-
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/CampagneView.fxml"));

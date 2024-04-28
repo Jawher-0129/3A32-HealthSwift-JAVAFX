@@ -5,19 +5,23 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import entite.Don;
 import entite.Campagne;
 import service.DonService;
 import service.CampagneService;
-import java.sql.SQLException;
 import java.util.List;
 import javafx.util.StringConverter;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import java.util.stream.Collectors;
-
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class DonController {
 
@@ -68,9 +72,44 @@ public class DonController {
         });
     }
 
+    @FXML
+    private void downloadPDF() {
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("dons.pdf"));
+            document.open();
 
+            // Créer un tableau avec 5 colonnes
+            PdfPTable table = new PdfPTable(5);
+            table.setWidthPercentage(100); // Définir la largeur du tableau à 100% de la page
 
-    // Use a Timeline for delaying search activation (throttling)
+            // Ajouter les en-têtes de colonne
+            table.addCell("ID");
+            table.addCell("Type");
+            table.addCell("Montant");
+            table.addCell("Date de remise");
+            table.addCell("ID de la campagne");
+
+            List<Don> desDons = donService.findAll(); // Retrieve all donations from the service
+            for (Don don : desDons) {
+                // Ajouter les données du don dans le tableau
+                table.addCell(String.valueOf(don.getId()));
+                table.addCell(don.getType());
+                table.addCell(don.getMontant() != null ? don.getMontant().toString() : "");
+                table.addCell(don.getDate_remise());
+                table.addCell(don.getCampagne_id() != null ? don.getCampagne_id().toString() : "");
+            }
+
+            document.add(table); // Ajouter le tableau au document PDF
+
+            document.close();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "PDF created successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to create PDF: " + e.getMessage());
+        }
+    }
+        // Use a Timeline for delaying search activation (throttling)
     private Timeline searchTimeline = new Timeline();
     @FXML
     private void filterTable() {

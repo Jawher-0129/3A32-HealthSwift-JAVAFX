@@ -26,6 +26,7 @@
                 <HBox spacing="10" alignment="CENTER">
                 <Button fx:id="updateButton" text="Modifier" styleClass="button" onAction="#handleModify"/>
                 <Button fx:id="deleteButton" text="Supprimer" styleClass="button" onAction="#handleDelete"/>
+
                     <!-- New button for Donate Now -->
                     <Button text="Donate Now!" styleClass="button" onAction="#openDonationForm"/>
 

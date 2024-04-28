@@ -12,6 +12,28 @@ public class StatisticsService {
         this.cnx = DataSource.getInstance().getConnection();
     }
 
+    public Map<Boolean, Integer> countDonationsWithWithoutCampaign() {
+        Map<Boolean, Integer> results = new HashMap<>();
+        String sqlWithCampaign = "SELECT COUNT(*) FROM don WHERE campagne_id IS NOT NULL";
+        String sqlWithoutCampaign = "SELECT COUNT(*) FROM don WHERE campagne_id IS NULL";
+
+        try (Statement stmt = cnx.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sqlWithCampaign);
+            if (rs.next()) {
+                results.put(true, rs.getInt(1)); // Donations with campaign
+            }
+
+            rs = stmt.executeQuery(sqlWithoutCampaign);
+            if (rs.next()) {
+                results.put(false, rs.getInt(1)); // Donations without campaign
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+
     public Map<String, Integer> countDonationsPerCampaign() {
         String sql = "SELECT campagne_id, COUNT(*) as donation_count FROM don GROUP BY campagne_id";
         Map<String, Integer> result = new HashMap<>();
