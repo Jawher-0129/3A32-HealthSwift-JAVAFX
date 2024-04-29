@@ -58,24 +58,26 @@ public class RendezVousService implements IService<RendezVous>{
     }
 
 
-    public void update(RendezVous rv,int id_rendezvous) {
-        String requete = "UPDATE demande SET demande=?, date=?, lieu=?, objective=? WHERE id_rendezvous=?";
+    public void update(RendezVous rv, int id_rendezvous) {
+        String requete = "UPDATE rendez_vous SET demande=?, date=?, lieu=?, objective=? WHERE id_rendezvous=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1, rv.getDemande());
             pst.setDate(2, new java.sql.Date(rv.getDate().getTime()));
             pst.setString(3, rv.getLieu());
             pst.setString(4, rv.getObjective());
+            pst.setInt(5, id_rendezvous);
             int rowsUpdated = pst.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("Le rendezvous a été mise à jour avec succès.");
+                System.out.println("Le rendez-vous a été mise à jour avec succès.");
             } else {
-                System.out.println("Aucune rendezvous n'a été mise à jour.");
+                System.out.println("Aucun rendez-vous n'a été mise à jour.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la mise à jour de la rendezvous : " + e.getMessage());
+            throw new RuntimeException("Erreur lors de la mise à jour du rendez-vous : " + e.getMessage());
         }
     }
+
 
     @Override
     public List<RendezVous> getAll() {
@@ -118,5 +120,6 @@ public class RendezVousService implements IService<RendezVous>{
         }
         return typesDeDon;
     }
+
 
 }

@@ -8,7 +8,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,6 +30,7 @@ public class RendezVousController {
 
     @FXML
     private DatePicker date;
+
 
     @FXML
     private TextField lieu;
@@ -56,12 +60,23 @@ public class RendezVousController {
     private Map<Integer, String> typeDemandeMap = new HashMap<>();
     @FXML
     private ChoiceBox<String> heure;
-
-
+    @FXML
+    private TableColumn<RendezVous,Void> Action;
 
     @FXML
     private void initializeDemandeChoiceBox() {
+        rvtable.setStyle("-fx-background-color: #ffffff; -fx-font-size: 14px;");
 
+        demander.setStyle("-fx-text-fill: #000000;");
+        lieur.setStyle("-fx-text-fill: #000000;");
+        objectiver.setStyle("-fx-text-fill: #000000;");
+// Appliquer les styles au formulaire
+
+        /*add.setStyle("-fx-background-color: #FF5733; -fx-text-fill: #ffffff; -fx-font-size: 14px;");
+        delete.setStyle("-fx-background-color: #FF5733; -fx-text-fill: #ffffff; -fx-font-size: 14px;");
+        update.setStyle("-fx-background-color: #FF5733; -fx-text-fill: #ffffff; -fx-font-size: 14px;");*
+        /
+         */
         for (int hour = 0; hour < 24; hour++) {
             for (int minute = 0; minute < 60; minute += 15) {
                 String formattedHour = String.format("%02d", hour); // Ajoute un zéro en tête pour les heures < 10
@@ -88,7 +103,60 @@ public class RendezVousController {
     private void initialize() {
         initializeTable();
         initializeDemandeChoiceBox();
+        rvtable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                // Déplacer les données de la demande sélectionnée vers les champs de texte
+                lieu.setText(newSelection.getLieu());
+                objective.setText(newSelection.getObjective());
 
+
+            } else {
+                // Effacer les champs de texte si aucune demande n'est sélectionnée
+                lieu.clear();
+                objective.clear();
+
+            }
+        });
+        Action.setCellFactory(param -> new TableCell<>() {
+            private final Button updateR = new Button();
+            private final Button deleteR = new Button();
+            {
+                updateR.setOnAction(event -> {
+                    int index = getIndex();
+                    if (index >= 0 && index < getTableView().getItems().size()) {
+                       updateAPPO(index);
+                    }
+                });
+
+                deleteR.setOnAction(event -> {
+                    int index = getIndex();
+                    if (index >= 0 && index < getTableView().getItems().size()) {
+                        DeleteAPPo(index);
+                    }
+                });
+
+                Glyph suppressionIcon = new Glyph("FontAwesome", FontAwesome.Glyph.TRASH);
+                suppressionIcon.setColor(Color.RED);
+                deleteR.setGraphic(suppressionIcon);
+                deleteR.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
+
+                Glyph updateIcon = new Glyph("FontAwesome", FontAwesome.Glyph.REFRESH);
+                updateIcon.setColor(Color.BLUE);
+                updateR.setGraphic(updateIcon);
+                updateR.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    HBox buttons = new HBox(5, updateR, deleteR);
+                    setGraphic(buttons);
+                }
+            }
+        });
 
     }
     private void initializeTable() {
@@ -148,9 +216,9 @@ public class RendezVousController {
                 RendezVous nouvelleR = new RendezVous(timestamp, lieuText, objectiveText,demandeId);
                 // Ajoutez la nouvelle demande via le service
                 rendezVousService.add(nouvelleR);
-
-                demandeService.Acceptee(demandeId);
-                showAlert(Alert.AlertType.INFORMATION, "Succès", "Demande Ajout", "La demande a été ajoutée avec succès.");
+                demandeService.Acceptee(demandeId,nouvelleR.getId_rendezvous());
+                loadRV();
+                showAlert(Alert.AlertType.INFORMATION, "Succès", "RendezVous Ajout", "La RendezVous a été ajouté avec succès.");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Erreur", "Ajout de demande", "Veuillez sélectionner date");
             }
@@ -170,10 +238,30 @@ public class RendezVousController {
         // Utilise l'ID de la demande pour effectuer des opérations dans l'interface RendezVous.fxml
         demmm.setText(String.valueOf(idDemande));
     }
-    @FXML
-    protected void handleDeleteDemande() {
+    private void DeleteAPPo(int index) {
+        RendezVous r = rvtable.getItems().get(index);
+        int rendezVousid = r.getId_rendezvous();
+        handleDeleteDemande(rendezVousid);
+    }
+   // @FXML
+    protected void handleDeleteDemande(int id) {
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirmation");
+        confirmation.setHeaderText("Supprimer le rendez-vous");
+        confirmation.setContentText("Êtes-vous sûr de vouloir supprimer cette rendez-vous ?");
+
+        // Attendre la réponse de l'utilisateur
+        Optional<ButtonType> result = confirmation.showAndWait();
+
+        // Si l'utilisateur a confirmé la suppression
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Supprimer la demande à partir du service
+            rendezVousService.delete(id);
+
+            // Actualiser la TableView
+            loadRV();}
         // Récupérer la demande sélectionnée dans la TableView
-        RendezVous rvSelectionnee = rvtable.getSelectionModel().getSelectedItem();
+       /* RendezVous rvSelectionnee = rvtable.getSelectionModel().getSelectedItem();
 
         if (rvSelectionnee != null) {
             // Demander confirmation à l'utilisateur avant de supprimer la demande
@@ -200,30 +288,43 @@ public class RendezVousController {
             alert.setHeaderText(null);
             alert.setContentText("Veuillez sélectionner un redez-vous à supprimer.");
             alert.showAndWait();
-        }
+        }*/
     }
-    /*
-    @FXML
 
-    private void handleUpdateDemande() {
-        RendezVous rvSelectionnee = rvtable.getSelectionModel().getSelectedItem();
+    private void updateAPPO(int index) {
+        RendezVous r = rvtable.getItems().get(index);
+        handleUpdateRendezV(r);
+    }
+    protected void handleUpdateRendezV(RendezVous RendezVous) {
+        String lieuText = lieu.getText(); // Récupère la description depuis la zone de texte
+        String objectiveText = objective.getText();
+        LocalDate localDate = date.getValue(); // Récupère la date depuis le DatePicker
+        String selectedHour = heure.getValue();
+        LocalTime localTime = LocalTime.parse(selectedHour); // Convertis l'heure sélectionnée en LocalTime
+        LocalDateTime dateTime = LocalDateTime.of(localDate, localTime); // Combine la date et l'heure
+        Timestamp timestamp = Timestamp.valueOf(dateTime);
+        RendezVous nouvelleR = new RendezVous(timestamp, lieuText, objectiveText,RendezVous.getDemande());
+        rendezVousService.update(nouvelleR,RendezVous.getId_rendezvous());
+        showAlert(Alert.AlertType.INFORMATION, "Succès", "Demande mise à jour", "La demande a été mise à jour avec succès.");
+        loadRV();
+     /*  RendezVous rvSelectionnee = rvtable.getSelectionModel().getSelectedItem();
         if (rvSelectionnee != null) {
             // Récupérer les nouvelles valeurs des champs
-            String newlieu = lieu.getText();
-            String newDescription = objective.getText();
+            String lieuText = lieu.getText(); // Récupère la description depuis la zone de texte
+            String objectiveText = objective.getText();
             LocalDate localDate = date.getValue(); // Récupère la date depuis le DatePicker
             String selectedHour = heure.getValue();
-            java.sql.Date dateSql = java.sql.Date.valueOf(localDate);
-
-            int demande = rvSelectionnee.getDemande();
-            Demande demande = new Demande(donId, new Date(), newDescription, newTitre, 1);
-            demandeService.update(demande,demandeSelectionnee.getId_demande());
+            LocalTime localTime = LocalTime.parse(selectedHour); // Convertis l'heure sélectionnée en LocalTime
+            LocalDateTime dateTime = LocalDateTime.of(localDate, localTime); // Combine la date et l'heure
+            Timestamp timestamp = Timestamp.valueOf(dateTime);
+            RendezVous nouvelleR = new RendezVous(timestamp, lieuText, objectiveText,rvSelectionnee.getDemande());
+            rendezVousService.update(nouvelleR,rvSelectionnee.getId_rendezvous());
             showAlert(Alert.AlertType.INFORMATION, "Succès", "Demande mise à jour", "La demande a été mise à jour avec succès.");
-            initializeDemandeTable();
+            loadRV();
         } else {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Aucune demande sélectionnée", "Veuillez sélectionner une demande à mettre à jour.");
-        }
-    }*/
+        }*/
+    }
 
 
 }

@@ -12,7 +12,10 @@ public class Demande {
     private String titre;
     private int directeurCampagne;
 
-    public Demande(int id_demande, int id_rendezvous, int don_id, Date date, String description, String statut,String titre, int directeurCampagne) {
+    public Demande() {
+    }
+
+    public Demande(int id_demande, int id_rendezvous, int don_id, Date date, String description, String statut, String titre, int directeurCampagne) {
         this.id_demande = id_demande;
         this.id_rendezvous = id_rendezvous;
         this.don_id = don_id;
