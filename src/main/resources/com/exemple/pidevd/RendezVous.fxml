@@ -9,25 +9,33 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple.pidevd.Controller.RendezVousController">
+<AnchorPane prefHeight="555.0" prefWidth="934.0" stylesheets="@demandeBack.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple.pidevd.Controller.RendezVousController">
    <children>
-      <Button fx:id="add" layoutX="152.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleAddRendezVous" text="add" />
-      <Button layoutX="211.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleDeleteDemande" text="delete" />
-      <Button layoutX="272.0" layoutY="323.0" mnemonicParsing="false" text="update" />
-      <TextField fx:id="lieu" layoutX="37.0" layoutY="42.0" />
-      <TextArea fx:id="objective" layoutX="37.0" layoutY="78.0" prefHeight="110.0" prefWidth="149.0" />
-      <DatePicker fx:id="date" layoutX="37.0" layoutY="200.0" />
-      <ChoiceBox fx:id="heure" layoutX="27.0" layoutY="244.0" prefWidth="150.0" />
       <Label fx:id="demmm" layoutX="333.0" layoutY="78.0" />
-      <TableView fx:id="rvtable" layoutX="200.0" layoutY="78.0" prefHeight="194.0" prefWidth="380.0">
+      <TableView fx:id="rvtable" layoutX="282.0" layoutY="55.0" prefHeight="243.0" prefWidth="646.0">
         <columns>
-          <TableColumn fx:id="id_rendezvousr" prefWidth="75.0" text="id_rendezvous" />
-          <TableColumn fx:id="demander" prefWidth="75.0" text="demande" />
-            <TableColumn fx:id="dater" prefWidth="75.0" text="date" />
-            <TableColumn fx:id="lieur" prefWidth="75.0" text="lieu" />
-            <TableColumn fx:id="objectiver" prefWidth="75.0" text="objective" />
+          <TableColumn fx:id="id_rendezvousr" prefWidth="87.0" text="id_rendezvous" />
+          <TableColumn fx:id="demander" prefWidth="86.0" text="demande" />
+            <TableColumn fx:id="dater" prefWidth="52.0" text="date" />
+            <TableColumn fx:id="lieur" prefWidth="115.0" text="lieu" />
+            <TableColumn fx:id="objectiver" prefWidth="77.0" text="objective" />
+            <TableColumn fx:id="Action" prefWidth="226.0" text="Action" />
         </columns>
       </TableView>
+      <VBox fx:id="vboxx" layoutX="40.0" layoutY="65.0" prefHeight="200.0" prefWidth="224.0" styleClass="vbox-container">
+         <children>
+            <Label text="Lieu" />
+            <TextField fx:id="lieu" />
+            <Label text="Objective" />
+            <TextArea fx:id="objective" prefHeight="110.0" prefWidth="149.0" />
+            <Label text="Date" />
+            <DatePicker fx:id="date" />
+            <Label text="L'heure" />
+            <ChoiceBox fx:id="heure" prefWidth="150.0" />
+            <Button fx:id="add" mnemonicParsing="false" text="add" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -86,20 +86,49 @@ public class DemandeService implements IService<Demande> {
             throw new RuntimeException("Erreur lors de la mise à jour de la demande : " + e.getMessage());
         }
     }
-    public void Acceptee(int id_demande) {
-        String requete = "UPDATE demande SET statut = 'DEMANDE TRAITEE' WHERE id_demande = ?";
+    public void Acceptee(int id_demande, int id_rendezVous) {
+        String requete = "UPDATE demande SET statut = 'DEMANDE TRAITEE' , id_rendezvous = ? WHERE id_demande = ?";
         try {
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(1, id_demande);
+            pst.setInt(1, 35);
+            pst.setInt(2, id_demande);
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la mise à jour de la demande : " + e.getMessage());
         }
     }
 
+
     public List<Demande> getAll() {
         String requete = "SELECT * FROM demande";
         List<Demande> list = new ArrayList<>();
+
+        try {
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(requete);
+
+            while (resultSet.next()) {
+                int id_demande = resultSet.getInt("id_demande");
+                int id_rendezvous = resultSet.getInt("id_rendezvous");
+                int don_id = resultSet.getInt("don_id");
+                Date date = resultSet.getDate("date");
+                String description = resultSet.getString("description");
+                String statut = resultSet.getString("statut");
+                String titre = resultSet.getString("titre");
+                int directeurCampagne = resultSet.getInt("directeurCampagne");
+
+                Demande demande = new Demande(id_demande, id_rendezvous, don_id, date, description, statut, titre, directeurCampagne);
+                list.add(demande);
+            }
+
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération des demandes : " + e.getMessage());
+        }
+    }
+    public List<Demande> getAlltrie() {
+        //String requete = "SELECT * FROM demande ORDER BY CASE WHEN id_rendezvous IS NULL THEN 0 ELSE 1 END, id_rendezvous";
+        String requete = "SELECT d.*, COUNT(*) AS nombre_demandes FROM demande d LEFT JOIN user1 dc ON d.directeurCampagne = dc.id GROUP BY d.id_demande ORDER BY CASE WHEN d.id_rendezvous IS NULL THEN 0 ELSE 1 END, COUNT(*) DESC";      List<Demande> list = new ArrayList<>();
 
         try {
             Statement statement = cnx.createStatement();
@@ -167,8 +196,69 @@ public class DemandeService implements IService<Demande> {
 
 
     public Demande getById(int id) {
-        return null;
+        String requete = "SELECT * FROM demande WHERE id_demande = ?";
+
+        try (PreparedStatement statement = cnx.prepareStatement(requete)) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int id_demande = resultSet.getInt("id_demande");
+                    int id_rendezvous = resultSet.getInt("id_rendezvous");
+                    int don_id = resultSet.getInt("don_id");
+                    Date date = resultSet.getDate("date");
+                    String description = resultSet.getString("description");
+                    String statut = resultSet.getString("statut");
+                    String titre = resultSet.getString("titre");
+                    int directeurCampagne = resultSet.getInt("directeurCampagne");
+
+                    // Retourne la demande trouvée
+                    return new Demande(id_demande, id_rendezvous, don_id, date, description, statut, titre, directeurCampagne);
+                } else {
+                    // Aucune demande trouvée avec cet ID, retourne null
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération de la demande avec l'ID " + id + " : " + e.getMessage());
+        }
     }
+    public String getEmailDirecteur(int idDirecteur) {
+        String EmailDirecteur = null;
+        String query = "SELECT email FROM user1 WHERE id = ?";
+        // Connexion à la base de données
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, idDirecteur);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        EmailDirecteur = resultSet.getString("email");
+                    }
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return EmailDirecteur;
+    }
+    public String getNOMDirecteur(int idDirecteur) {
+        String NomDirecteur = null;
+        String PrenomDirecteur = null;
+
+        String query = "SELECT nom,prenom FROM user1 WHERE id = ?";
+        // Connexion à la base de données
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, idDirecteur);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    NomDirecteur = resultSet.getString("nom");
+                    PrenomDirecteur = resultSet.getString("prenom");
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return NomDirecteur+PrenomDirecteur;
+    }
+
 
 
 }

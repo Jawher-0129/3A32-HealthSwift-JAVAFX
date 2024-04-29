@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple.pidevd.Controller.DemandeFrontController">
+   <children>
+      <TextField fx:id="titre" layoutX="224.0" layoutY="90.0" prefHeight="25.0" prefWidth="164.0" />
+      <TextArea fx:id="description" layoutX="223.0" layoutY="125.0" prefHeight="112.0" prefWidth="164.0" />
+      <ChoiceBox fx:id="don" layoutX="230.0" layoutY="267.0" prefWidth="150.0" />
+      <Button fx:id="modifier" layoutX="223.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleUpdateDemande" prefWidth="85.0" text="Modifier" />
+      <Button layoutX="338.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Annuller" />
+      <TextField fx:id="statut" layoutX="231.0" layoutY="239.0" />
+      <Label layoutX="100.0" layoutY="102.0" text="Titre de demande:" />
+      <Label layoutX="69.0" layoutY="164.0" text="Description de demande" />
+      <Label layoutX="83.0" layoutY="243.0" text="Statut de Demande" />
+      <Label layoutX="92.0" layoutY="271.0" text="Don de demande" />
+      <Label fx:id="idDemande" layoutX="423.0" layoutY="77.0" text="Label" />
+   </children>
+</AnchorPane>
