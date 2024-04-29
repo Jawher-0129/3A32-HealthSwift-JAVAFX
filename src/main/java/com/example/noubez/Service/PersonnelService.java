@@ -2,10 +2,17 @@ package com.example.noubez.Service;
 
 import com.example.noubez.Model.Personnel;
 import com.example.noubez.util.DataSource;
-import com.example.noubez.Model.Chambre;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import java.io.IOException;
+
 
 public class PersonnelService implements com.example.noubez.Service.IService<Personnel> {
     private Connection cnx;
@@ -100,7 +107,7 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
 
             return list;
         } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la récupération des demandes : " + e.getMessage());
+            throw new RuntimeException("Erreur lors de la récupération des personnels : " + e.getMessage());
         }
     }
     public  List<Integer> afficherpersonnel() {
@@ -129,4 +136,63 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
     public Personnel getById(int id_personnel) {
         return null;
     }
+
+
+    public List<Personnel> getTopPersonnels(int rating) {
+        List<Personnel> personnelList = new ArrayList<>();
+        String query = "SELECT * FROM personnel WHERE rating = ?";
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            pst.setInt(1, rating);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id_personnel = rs.getInt("id_personnel");
+                // Récupérer les autres champs nécessaires ici
+                // Créer un objet Personnel et l'ajouter à la liste
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom_personnel");
+                String role = rs.getString("role");
+                int rat = rs.getInt("rating");
+                String image = rs.getString("image");
+                 Personnel personnel = new Personnel(nom, prenom,  role,image, rating);
+                personnelList.add(personnel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return personnelList;
+    }
+
+
+    public List<Personnel> getPersonnelsInf5(int rating) {
+        List<Personnel> personnelList = new ArrayList<>();
+        String query = "SELECT * FROM personnel WHERE rating > ?";
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            pst.setInt(1, rating);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id_personnel = rs.getInt("id_personnel");
+                // Récupérer les autres champs nécessaires ici
+                // Créer un objet Personnel et l'ajouter à la liste
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom_personnel");
+                String role = rs.getString("role");
+                int rat = rs.getInt("rating");
+                String image = rs.getString("image");
+                Personnel personnel = new Personnel(nom, prenom,  role,image, rating);
+                personnelList.add(personnel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return personnelList;
+    }
+
+
+
+
+
+
+
 }
+
+

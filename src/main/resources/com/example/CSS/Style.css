@@ -1,0 +1,31 @@
+.card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+
+.card-nom {
+    -fx-font-size: 10px;
+    -fx-font-style: italic;
+}
+
+
+.card-prenom {
+    -fx-font-size: 10px;
+    -fx-font-style: italic;
+}
+
+.card-rating {
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+}
+
+.card-image {
+    -fx-fit-width: 200px;
+    -fx-fit-height: 150px;
+    -fx-padding: 10px 0;
+}

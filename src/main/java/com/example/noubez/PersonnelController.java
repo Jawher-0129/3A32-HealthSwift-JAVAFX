@@ -20,9 +20,16 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.ChoiceBox;
+
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.layout.VBox;
+import java.io.IOException;
 public class PersonnelController {
     private final PersonnelService personnelService = new PersonnelService();
-
+    @FXML
+    private VBox personnelCardsContainer;
     @FXML
     private TextField RatingPersonnel;
 
@@ -83,10 +90,23 @@ public class PersonnelController {
     @FXML
     private Button AjouterPersonnelBtn;
 
+
+
+
+
+
+    private Image loadImage(String imageUrl) {
+        // Implement your logic to load image from URL or file
+        return new Image(imageUrl);
+    }
+
+
+
+
     @FXML
-    private void initializeDemandeChoiceBox() {
+    private void initializePersonnelChoiceBox() {
         roleChoiceBox.setItems(FXCollections.observableArrayList(
-                "Chirurgie", "Neurologie", "Infirmier", "Cardiologie"
+                "Chirurgie", "Neurologie", "Infirmier", "Cardiologie", "médecin Généraliste", "Médecin urgentiste", "ophtalmologue"
         ));
         roleChoiceBox.setValue("Chirurgie"); // Définir la valeur initiale
 
@@ -126,11 +146,11 @@ public class PersonnelController {
     @FXML
     void initialize() {
         configureTableView();
-        initializeDemandeChoiceBox();
+        initializePersonnelChoiceBox();
         // Ajouter un écouteur de sélection à la TableView
         tablePersonnel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                // Déplacer les données de la demande sélectionnée vers les champs de texte
+                // Déplacer les données du personnel sélectionnée vers les champs de texte
                 Nom.setText(newSelection.getNom());
                 Prenom_personnel.setText(newSelection.getPrenom_personnel());
                 roleChoiceBox.setValue(newSelection.getRole());
@@ -139,7 +159,7 @@ public class PersonnelController {
 
                 // don.setValue(newSelection.getDon_id());
             } else {
-                // Effacer les champs de texte si aucune demande n'est sélectionnée
+                // Effacer les champs de texte si aucun personnel n'est sélectionné
                 Nom.clear();
                 Prenom_personnel.clear();
                 experiencePersonnel.clear();
@@ -192,7 +212,10 @@ public class PersonnelController {
         } else {
             disponibilite = 1;
         }
-        String image = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+        String imageURL = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
+        String imageName = imageURL != null ? new File(imageURL).getName() : null;
+        String image="C:\\\\Users\\\\Admin\\\\Desktop\\\\3A32HealthSwift\\\\public\\\\uploads\\\\"+imageName;
+
 
         if (image == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -246,6 +269,7 @@ public class PersonnelController {
             alert.show();
             return;
         }
+        System.out.println(image);
 
         Personnel newPer = new Personnel(Nom, prenom, disponibilite, role, experience, image, rating, 8);
         this.personnelService.add(newPer);
@@ -268,8 +292,8 @@ public class PersonnelController {
 
     @FXML
     void handleModifierPersonnel(ActionEvent event) {
-        Personnel demandeSelectionnee = tablePersonnel.getSelectionModel().getSelectedItem();
-        if (demandeSelectionnee != null) {
+        Personnel personnelSelectionne = tablePersonnel.getSelectionModel().getSelectedItem();
+        if (personnelSelectionne != null) {
             String Nom = this.Nom.getText();
             String prenom = this.Prenom_personnel.getText();
             String role = this.roleChoiceBox.getValue();
@@ -296,13 +320,13 @@ public class PersonnelController {
                 return;
             }
             Personnel newPer = new Personnel(Nom, prenom, disponibilite, role, experience, image, rating, 8);
-            this.personnelService.update(newPer, demandeSelectionnee.getId_personnel());
+            this.personnelService.update(newPer, personnelSelectionne.getId_personnel());
             loadPersonnels();
 
-            showAlert(Alert.AlertType.INFORMATION, "Succès", "Personnel mis à jour", "La demande a été mise à jour avec succès.");
+            showAlert(Alert.AlertType.INFORMATION, "Succès", "Personnel mis à jour", "Le personnel a été mis à jour avec succès.");
 
         } else {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Aucun personnel sélectionnée", "Veuillez sélectionner une demande à mettre à jour.");
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Aucun personnel sélectionnée", "Veuillez sélectionner une personnel à mettre à jour.");
         }
     }
 

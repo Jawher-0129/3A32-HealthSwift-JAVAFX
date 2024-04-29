@@ -2,14 +2,18 @@ package com.example.noubez.Model;
 
 public class Personnel {
     private int id_personnel;
-    private String nom;
-    private String prenom_personnel;
+    private  String nom;
+    private  String prenom_personnel;
     private int disponibilite;
-    private String role;
+    private  String role;
     private int experience;
     private String image;
-    private int rating;
+    private  int rating;
     private int user_id_id;
+
+
+
+
 
     public Personnel(int id_personnel, String nom, String prenom_personnel, int disponibilite, String role, int experience, String image, int rating, int user_id_id) {
         this.id_personnel = id_personnel;
@@ -42,7 +46,7 @@ public class Personnel {
         this.id_personnel = id_personnel;
     }
 
-    public String getNom() {
+    public  String getNom() {
         return nom;
     }
 
@@ -50,7 +54,7 @@ public class Personnel {
         this.nom = nom;
     }
 
-    public String getPrenom_personnel() {
+    public  String getPrenom_personnel() {
         return prenom_personnel;
     }
 
@@ -66,7 +70,7 @@ public class Personnel {
         this.disponibilite = disponibilite;
     }
 
-    public String getRole() {
+    public  String getRole() {
         return role;
     }
 
@@ -90,7 +94,7 @@ public class Personnel {
         this.image = image;
     }
 
-    public int getRating() {
+    public  int getRating() {
         return rating;
     }
 
@@ -104,6 +108,15 @@ public class Personnel {
 
     public void setUser_id_id(int user_id_id) {
         this.user_id_id = user_id_id;
+    }
+
+
+    public Personnel(String nom, String prenom_personnel, String role, String image, int rating) {
+        this.nom = nom;
+        this.prenom_personnel = prenom_personnel;
+        this.role = role;
+        this.image = image;
+        this.rating = rating;
     }
 
     @Override
