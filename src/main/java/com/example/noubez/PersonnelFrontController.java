@@ -23,6 +23,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.geometry.Pos;
 import javafx.animation.TranslateTransition;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
@@ -105,7 +107,8 @@ public class PersonnelFrontController implements Initializable {
         ratingLabel.getStyleClass().add("personnel-rating");
         card.getChildren().add(ratingLabel);
 
-
+        HBox ratingStars = createRatingStars(personnel.getRating());
+        card.getChildren().add(ratingStars);
 
         card.setOnMouseClicked(Personnel -> {
             if (Personnel.getClickCount() == 2) {
@@ -197,6 +200,10 @@ public class PersonnelFrontController implements Initializable {
         card.getChildren().add(ratingLabel);
 
 
+        // Appel à la méthode createRatingStars pour générer les étoiles de rating
+        HBox ratingStars = createRatingStars(personnel.getRating());
+        card.getChildren().add(ratingStars);
+
         ImageView imageView = new ImageView();
         try {
             Image image = new Image(personnel.getImage());
@@ -217,7 +224,29 @@ public class PersonnelFrontController implements Initializable {
         });
 
         return card;
+
     }
+    // Méthode pour générer une image d'étoile dorée en fonction du rating
+    // Dans votre méthode createRatingStars
+    private HBox createRatingStars(int rating) {
+        HBox starsBox = new HBox(5);
+        int maxRating = 5; // Nombre maximum d'étoiles
+        for (int i = 0; i < maxRating; i++) {
+            ImageView starImageView = new ImageView();
+            if (i < rating) {
+                // Si l'index est inférieur au rating, affichez une étoile dorée
+                starImageView.setImage(new Image("C:\\Users\\Admin\\Desktop\\3A32HealthSwift\\public\\uploads/etoile.png")); // Remplacez par le chemin de votre image d'étoile dorée
+            } else {
+                // Sinon, affichez une étoile vide ou grise
+                starImageView.setImage(new Image("C:\\Users\\Admin\\Desktop\\3A32HealthSwift\\public\\uploads/etoilevide.png")); // Remplacez par le chemin de votre image d'étoile vide ou grise
+            }
+            starImageView.setFitWidth(20); // Ajustez la largeur de l'étoile selon vos préférences
+            starImageView.setFitHeight(20); // Ajustez la hauteur de l'étoile selon vos préférences
+            starsBox.getChildren().add(starImageView);
+        }
+        return starsBox;
+    }
+
     private void animateTopPersonnels() {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(10), TopPersonnelsBox);
         transition.setToX(-200);

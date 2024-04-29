@@ -14,15 +14,20 @@
 .personnel-nom {
     -fx-font-size: 10px;
     -fx-text-fill: #666666;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0070C0;
 }
 
 .personnel-prenom {
     -fx-font-size: 10px;
     -fx-text-fill: #666666;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0070C0;
 
 }
 
 .personnel-rating {
     -fx-font-size: 10px;
     -fx-text-fill: #666666;
+    -fx-text-fill: white;
 }
