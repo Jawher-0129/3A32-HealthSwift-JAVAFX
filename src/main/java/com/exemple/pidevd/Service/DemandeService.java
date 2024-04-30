@@ -86,12 +86,12 @@ public class DemandeService implements IService<Demande> {
             throw new RuntimeException("Erreur lors de la mise à jour de la demande : " + e.getMessage());
         }
     }
-    public void Acceptee(int id_demande, int id_rendezVous) {
-        String requete = "UPDATE demande SET statut = 'DEMANDE TRAITEE' , id_rendezvous = ? WHERE id_demande = ?";
-        try {
-            PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(1, 35);
-            pst.setInt(2, id_demande);
+    public void Acceptee(int id_demande , int id_rendezvous) {
+        String requete = "UPDATE demande SET statut = ? , id_rendezvous = ? WHERE id_demande = ?";
+        try (PreparedStatement pst = cnx.prepareStatement(requete)) {
+            pst.setString(1, "DEMANDE TRAITEE");
+            pst.setInt(2, id_rendezvous);
+            pst.setInt(3, id_demande);
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la mise à jour de la demande : " + e.getMessage());

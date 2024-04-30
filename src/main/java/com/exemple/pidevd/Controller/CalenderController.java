@@ -136,7 +136,7 @@ public class CalenderController implements Initializable {
             LocalTime rendezVousTime = localDateTime.toLocalTime();
 
             Rectangle activityRectangle = new Rectangle();
-            activityRectangle.setFill(Color.GREEN);
+            activityRectangle.setFill(Color.rgb(255, 153, 153));
             activityRectangle.setWidth(rectangleWidth);
             double activityRectangleHeight = rectangleHeight / 2;
             activityRectangle.setHeight(activityRectangleHeight);

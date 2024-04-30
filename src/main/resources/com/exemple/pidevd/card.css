@@ -1,0 +1,43 @@
+
+#PassDemande{
+    -fx-pref-height: 35px;
+    -fx-pref-width: 200px;
+    -fx-font-size: 14px;
+    -fx-background-color: #ff8080; /* Rouge clair */
+    -fx-text-fill: #ffffff;
+}
+
+#PassDemande:hover,
+#PassDemande:pressed {
+    -fx-background-color: #6699ff; /* Bleu clair */
+    -fx-border-color: #6699ff; /* Bleu clair */
+}
+#ConsulterRendezV{
+    -fx-pref-height: 35px;
+    -fx-pref-width: 200px;
+    -fx-font-size: 14px;
+    -fx-background-color: #ff8080; /* Rouge clair */
+    -fx-text-fill: #ffffff;
+}
+
+#ConsulterRendezV:hover,
+#ConsulterRendezV:pressed {
+    -fx-background-color: #6699ff; /* Bleu clair */
+    -fx-border-color: #6699ff; /* Bleu clair */
+}
+
+
+
+
+.vbox-card {
+    -fx-background-color: #ffffff; /* Couleur de fond */
+    -fx-background-radius: 20px; /* Rayon des coins augmenté */
+    -fx-padding: 10px; /* Marge interne */
+    -fx-spacing: 5px; /* Espacement entre les enfants */
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 10,0,0,1 );
+}
+
+/* Style des enfants du VBox (contenu de la carte) */
+.vbox-card .card-content {
+    -fx-padding: 5px; /* Marge interne */
+}
