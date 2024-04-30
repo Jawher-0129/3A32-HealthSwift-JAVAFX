@@ -5,21 +5,44 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple.pidevd.Controller.DemandeFrontController">
+<AnchorPane prefHeight="723.0" prefWidth="1399.0" style="-fx-background-color: #f2fafc;" styleClass="style-form" stylesheets="@form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple.pidevd.Controller.DemandeFrontController">
    <children>
-      <TextField fx:id="titre" layoutX="224.0" layoutY="90.0" prefHeight="25.0" prefWidth="164.0" />
-      <TextArea fx:id="description" layoutX="223.0" layoutY="125.0" prefHeight="112.0" prefWidth="164.0" />
-      <ChoiceBox fx:id="don" layoutX="230.0" layoutY="267.0" prefWidth="150.0" />
-      <Button fx:id="modifier" layoutX="223.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleUpdateDemande" prefWidth="85.0" text="Modifier" />
-      <Button layoutX="338.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Annuller" />
-      <TextField fx:id="statut" layoutX="231.0" layoutY="239.0" />
-      <Label layoutX="100.0" layoutY="102.0" text="Titre de demande:" />
-      <Label layoutX="69.0" layoutY="164.0" text="Description de demande" />
-      <Label layoutX="83.0" layoutY="243.0" text="Statut de Demande" />
-      <Label layoutX="92.0" layoutY="271.0" text="Don de demande" />
       <Label fx:id="idDemande" layoutX="423.0" layoutY="77.0" text="Label" />
+      <VBox fx:id="vboxx" alignment="TOP_RIGHT" layoutX="816.0" layoutY="139.0" prefHeight="491.0" prefWidth="427.0" spacing="10" style="-fx-background-color: white;" styleClass="vbox-container">
+         <children>
+            <Label text="Titre de demande:" />
+            <TextField fx:id="titre" prefHeight="25.0" prefWidth="164.0" />
+            <Label text="Description de demande" />
+            <TextArea fx:id="description" prefHeight="112.0" prefWidth="164.0" />
+            <Label text="Statut de Demande" />
+            <TextField fx:id="statut" />
+            <Label text="Don de demande" />
+            <ChoiceBox fx:id="don" prefWidth="150.0" />
+            <Button fx:id="modifier" mnemonicParsing="false" onAction="#handleUpdateDemande" prefWidth="85.0" text="Modifier" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Annuller" />
+         </children>
+      </VBox>
+      <HBox layoutY="-1.0" prefHeight="74.0" prefWidth="1415.0" style="-fx-background-color: white;">
+         <children>
+            <Region prefHeight="67.0" prefWidth="107.0" />
+            <ImageView fitHeight="69.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/healthqwift.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <ImageView fitHeight="574.0" fitWidth="812.0" layoutX="7.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/8b6b0410-cce1-4bec-aa85-7820473d6e58-removebg-preview.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -62,6 +62,27 @@ public class ControllerSMS {
             System.out.println("Données exportées vers Excel.");
         });
     }
+    private void exportToExcel(List<List<String>> data, String filePath) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Data");
+
+            int rowNum = 0;
+            for (List<String> rowData : data) {
+                Row row = sheet.createRow(rowNum++);
+                int colNum = 0;
+                for (String cellData : rowData) {
+                    Cell cell = row.createCell(colNum++);
+                    cell.setCellValue(cellData);
+                }
+            }
+
+            try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+                workbook.write(outputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void SendSMS() {

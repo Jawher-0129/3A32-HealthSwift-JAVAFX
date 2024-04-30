@@ -22,7 +22,8 @@ public class DemandeFrontController {
 
     @FXML
     private Button add;
-
+    @FXML
+    private Button Cancel;
     @FXML
     private Button add1;
     @FXML
@@ -49,6 +50,7 @@ public class DemandeFrontController {
         demandeService = new DemandeService();
     }
     public void initData(int iddemande) {
+        idDemande.setVisible(false);
         Demande demande =  demandeService.getById(iddemande);
        titre.setText(demande.getTitre());
        description.setText(demande.getDescription());
@@ -146,6 +148,16 @@ public class DemandeFrontController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/exemple/pidevd/card.fxml"));
             Parent root = loader.load();
             modifier.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    private void handleCancel() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/exemple/pidevd/card.fxml"));
+            Parent root = loader.load();
+            Cancel.getScene().setRoot(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

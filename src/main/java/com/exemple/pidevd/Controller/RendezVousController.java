@@ -3,12 +3,18 @@ import com.exemple.pidevd.Model.Demande;
 import com.exemple.pidevd.Model.RendezVous;
 import com.exemple.pidevd.Service.DemandeService;
 import com.exemple.pidevd.Service.RendezVousService;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
@@ -26,7 +32,7 @@ public class RendezVousController {
 
 
     @FXML
-    private Button add;
+    private Button Ajouter;
 
     @FXML
     private DatePicker date;
@@ -216,9 +222,12 @@ public class RendezVousController {
                 RendezVous nouvelleR = new RendezVous(timestamp, lieuText, objectiveText,demandeId);
                 // Ajoutez la nouvelle demande via le service
                 rendezVousService.add(nouvelleR);
-                demandeService.Acceptee(demandeId,nouvelleR.getId_rendezvous());
-                loadRV();
                 showAlert(Alert.AlertType.INFORMATION, "Succès", "RendezVous Ajout", "La RendezVous a été ajouté avec succès.");
+                loadRV();
+                SendSMS(nouvelleR);
+                System.out.println(rendezVousService.getIDR(demandeId));
+                demandeService.Acceptee(demandeId,rendezVousService.getIDR(demandeId));
+
             } else {
                 showAlert(Alert.AlertType.ERROR, "Erreur", "Ajout de demande", "Veuillez sélectionner date");
             }
@@ -324,6 +333,21 @@ public class RendezVousController {
         } else {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Aucune demande sélectionnée", "Veuillez sélectionner une demande à mettre à jour.");
         }*/
+    }
+
+    private void SendSMS(RendezVous r) {
+        String ACCOUNT_SID = "AC8bd6a0a5b22855c243dc60296543bf84";
+        String AUTH_TOKEN = "c49c523215ae420d2cc398261c5a1b1b";
+
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        String twilioPhoneNumber = "+19149086373";
+        String recipientPhoneNumber = "+21628749555"; // Remplacez par le numéro de téléphone du destinataire
+        String messageBody = "Votre Rendez-vous est planifiee A cette Date :"+ r.getDate();
+        Message message = Message.creator(
+                        new PhoneNumber(recipientPhoneNumber),
+                        new PhoneNumber(twilioPhoneNumber),
+                        messageBody)
+                .create();
     }
 
 

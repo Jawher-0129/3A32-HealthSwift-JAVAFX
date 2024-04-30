@@ -120,6 +120,22 @@ public class RendezVousService implements IService<RendezVous>{
         }
         return typesDeDon;
     }
+    public int getIDR(int id_demande) {
+        int id_rendezvous = 0;
+        String query = "SELECT id_rendezvous FROM rendez_vous WHERE demande = ?";
+        // Connexion à la base de données
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, id_demande);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    id_rendezvous = resultSet.getInt("id_rendezvous");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id_rendezvous;
+    }
 
 
 }

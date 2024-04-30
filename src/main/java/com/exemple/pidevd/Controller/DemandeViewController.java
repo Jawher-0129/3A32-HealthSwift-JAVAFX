@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -43,23 +44,27 @@ public class DemandeViewController {
 
     @FXML
     private Button modifier;
+    @FXML
+    private Label date;
 
     @FXML
     private Button supprimer;
-    private Controller mainController;
-    public void setMainController(Controller mainController) {
-        this.mainController = mainController;
-    }
 
   public void setData(Demande demande){
       titre.setText(demande.getTitre());
       description.setText(demande.getDescription());
+      id.setVisible(false);
       id.setText(String.valueOf(demande.getId_demande()));
-      // Style pour le titre
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+      String formattedDate = dateFormat.format(demande.getDate());
+      date.setText(formattedDate);
       titre.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+      description.setStyle("-fx-font-size: 12px;");
+      // Style pour le titre
+      /*
 
       // Style pour la description
-      description.setStyle("-fx-font-size: 12px;");
+
 
       // Style pour l'ID
       id.setStyle("-fx-font-size: 10px;");
@@ -69,7 +74,7 @@ public class DemandeViewController {
               "-fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8px 16px;");
 
       // Style pour le bouton supprimer
-      supprimer.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8px 16px;");
+      supprimer.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 8px 16px;");*/
   }
     @FXML
     protected void handleDeleteDemande() {

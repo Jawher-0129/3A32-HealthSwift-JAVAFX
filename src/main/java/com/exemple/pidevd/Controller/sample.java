@@ -1,5 +1,7 @@
 package com.exemple.pidevd.Controller;
 
+import com.exemple.pidevd.Model.Demande;
+import com.exemple.pidevd.Service.DemandeService;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class sample implements Initializable {
@@ -40,6 +46,11 @@ public class sample implements Initializable {
     @FXML
     private Button demande;
     private DemandeController demandeController;
+    private DemandeService demandeService;
+
+    public sample() {
+        demandeService = new DemandeService();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -167,4 +178,73 @@ public class sample implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void ExportExcel() {
+
+        List<Demande> demandes = demandeService.getAll();
+        String filePath = "export.xlsx";
+        exportToExcel(demandes, filePath);
+        System.out.println("Données exportées vers Excel.");
+
+    }
+
+    public void exportToExcel(List<Demande> demandes, String filePath) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Demandes");
+
+            // Style pour l'état "En cours de traitement" (noir)
+            CellStyle enCoursStyle = workbook.createCellStyle();
+            enCoursStyle.setFillForegroundColor(IndexedColors.BLACK.getIndex());
+            enCoursStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+            // Style pour l'état "Refusé" (rouge)
+            CellStyle refuseStyle = workbook.createCellStyle();
+            refuseStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
+            refuseStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+            // Style pour l'état "Demande traitée" (vert)
+            CellStyle traiteStyle = workbook.createCellStyle();
+            traiteStyle.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+            traiteStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            // Créer une ligne d'en-tête avec les attributs
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("Titre");
+            headerRow.createCell(1).setCellValue("Description");
+            headerRow.createCell(2).setCellValue("Date");
+            headerRow.createCell(3).setCellValue("ID du directeur de campagne");
+            headerRow.createCell(4).setCellValue("État");
+            headerRow.createCell(5).setCellValue("ID du rendez-vous");
+
+            // Parcourir les demandes et les écrire dans le fichier Excel
+            int rowNum = 1;
+            for (Demande demande : demandes) {
+                Row row = sheet.createRow(rowNum++);
+                int colNum = 0;
+                row.createCell(colNum++).setCellValue(demande.getTitre());
+                row.createCell(colNum++).setCellValue(demande.getDescription());
+                row.createCell(colNum++).setCellValue(demande.getDate());
+                row.createCell(colNum++).setCellValue(demandeService.getEmailDirecteur(demande.getDirecteurCampagne()));
+                Cell cell = row.createCell(colNum);
+                cell.setCellValue(demande.getStatut());
+
+                // Appliquer la mise en forme conditionnelle en fonction de l'état de la demande
+                String etat = demande.getStatut();
+                if (etat.equals("ENCOURS DE TRAITMENT")) {
+                    cell.setCellStyle(enCoursStyle);
+                } else if (etat.equals("REFUSEE")) {
+                    cell.setCellStyle(refuseStyle);
+                } else if (etat.equals("DEMANDE TRAITEE")) {
+                    cell.setCellStyle(traiteStyle);
+                    row.createCell(5).setCellValue(demande.getId_rendezvous());
+                }
+            }
+            try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+                workbook.write(outputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

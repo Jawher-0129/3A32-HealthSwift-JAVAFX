@@ -104,9 +104,6 @@ public class DemandeController implements Initializable {
     @FXML
     private TableColumn<Demande,Void> ActionC;
 
-    @FXML
-    private PieChart pieCHART;
-
     private DemandeService demandeService;
 
     public DemandeController() {
@@ -209,7 +206,7 @@ public class DemandeController implements Initializable {
     }
 private void initializeOtherComponents() {
     initializeDemandeTable();
-    statt();
+  //  statt();
     // demandeTable.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
     // Style pour l'entête de la TableView
     //  demandeTable.setStyle("-fx-control-inner-background: #2196F3;");
@@ -225,7 +222,7 @@ private void initializeOtherComponents() {
             RendezVous.setStyle("-fx-background-color: #FFFFFF; -fx-text-fill: #000000; -fx-padding: 5px;");
             directeurCompagne.setStyle("-fx-background-color: #FFFFFF; -fx-text-fill: #000000; -fx-padding: 5px;");
            */
-    // search();
+    search();
     //  initializeDonChoiceBox();
     // Ajouter un écouteur de sélection à la TableView
     demandeTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -400,7 +397,7 @@ private void initializeOtherComponents() {
         } else {
             // Appelle la méthode Rejetee du service pour rejeter la demande dans la base de données
             demandeService.Rejetee(demandeId);
-loadDemandes();
+             loadDemandes();
             // Désactive le bouton "Accepter" pour cette demande
             for (Node node : demandeTable.lookupAll(".table-cell")) {
                 if (node instanceof TableCell && ((TableCell<?, ?>) node).getIndex() == index) {
@@ -431,7 +428,7 @@ loadDemandes();
         statusD.setCellValueFactory(new PropertyValueFactory<>("statut"));
         donD.setCellValueFactory(new PropertyValueFactory<>("don_id"));
 
-        List<Demande> demandes = demandeService.getAll();
+        List<Demande> demandes = demandeService.getAlltrie();
         ObservableList<Demande> observableDemandes = FXCollections.observableArrayList(demandes);
         demandeTable.setItems(observableDemandes);
 
@@ -484,7 +481,7 @@ loadDemandes();
             showAlert(Alert.AlertType.ERROR, "Erreur", "Ajout de demande", "Veuillez sélectionner un type de don valide.");
         }
     }
-    void statt(){
+    /*void statt(){
         List<Demande> demandes = demandeService.getAll();
 
         // Comptage des demandes par directeur de campagne avec rendez-vous
@@ -514,7 +511,7 @@ loadDemandes();
         pieCHART.setData(pieChartData);
         pieCHART.setTitle("Statistiques par Directeur de Campagne");
 
-    }
+    }*/
     @FXML
     protected void Stat() {
         /*List<Demande> demandes = demandeService.getAll();
@@ -621,74 +618,6 @@ loadDemandes();
         alert.setContentText(contentText);
         alert.showAndWait();
     }
-    @FXML
-    private void ExportExcel() {
-
-        List<Demande> demandes = demandeService.getAll();
-        String filePath = "export.xlsx";
-        exportToExcel(demandes, filePath);
-        System.out.println("Données exportées vers Excel.");
-
-    }
-
-    public void exportToExcel(List<Demande> demandes, String filePath) {
-        try (Workbook workbook = new XSSFWorkbook()) {
-            Sheet sheet = workbook.createSheet("Demandes");
-
-            // Style pour l'état "En cours de traitement" (noir)
-            CellStyle enCoursStyle = workbook.createCellStyle();
-            enCoursStyle.setFillForegroundColor(IndexedColors.BLACK.getIndex());
-            enCoursStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-
-            // Style pour l'état "Refusé" (rouge)
-            CellStyle refuseStyle = workbook.createCellStyle();
-            refuseStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
-            refuseStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-
-            // Style pour l'état "Demande traitée" (vert)
-            CellStyle traiteStyle = workbook.createCellStyle();
-            traiteStyle.setFillForegroundColor(IndexedColors.GREEN.getIndex());
-            traiteStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            // Créer une ligne d'en-tête avec les attributs
-            Row headerRow = sheet.createRow(0);
-            headerRow.createCell(0).setCellValue("Titre");
-            headerRow.createCell(1).setCellValue("Description");
-            headerRow.createCell(2).setCellValue("Date");
-            headerRow.createCell(3).setCellValue("ID du directeur de campagne");
-            headerRow.createCell(4).setCellValue("État");
-            headerRow.createCell(5).setCellValue("ID du rendez-vous");
-
-            // Parcourir les demandes et les écrire dans le fichier Excel
-            int rowNum = 1;
-            for (Demande demande : demandes) {
-                Row row = sheet.createRow(rowNum++);
-                int colNum = 0;
-                row.createCell(colNum++).setCellValue(demande.getTitre());
-                row.createCell(colNum++).setCellValue(demande.getDescription());
-                row.createCell(colNum++).setCellValue(demande.getDate());
-                row.createCell(colNum++).setCellValue(demandeService.getEmailDirecteur(demande.getDirecteurCampagne()));
-                Cell cell = row.createCell(colNum);
-                cell.setCellValue(demande.getStatut());
-
-                // Appliquer la mise en forme conditionnelle en fonction de l'état de la demande
-                String etat = demande.getStatut();
-                if (etat.equals("ENCOURS DE TRAITMENT")) {
-                    cell.setCellStyle(enCoursStyle);
-                } else if (etat.equals("REFUSEE")) {
-                    cell.setCellStyle(refuseStyle);
-                } else if (etat.equals("DEMANDE TRAITEE")) {
-                    cell.setCellStyle(traiteStyle);
-                    row.createCell(5).setCellValue(demande.getId_rendezvous());
-                }
-            }
-            try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
-                workbook.write(outputStream);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 
 }
