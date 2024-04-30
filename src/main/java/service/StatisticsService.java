@@ -35,18 +35,41 @@ public class StatisticsService {
 
 
     public Map<String, Integer> countDonationsPerCampaign() {
-        String sql = "SELECT campagne_id, COUNT(*) as donation_count FROM don GROUP BY campagne_id";
+        // Cette requête SQL joint les tables campagne et don et compte les dons pour chaque campagne, y compris celles sans dons
+        String sql = "SELECT c.id, COALESCE(COUNT(d.id), 0) as donation_count " +
+                "FROM campagne c LEFT JOIN don d ON c.id = d.campagne_id " +
+                "GROUP BY c.id";
+
         Map<String, Integer> result = new HashMap<>();
         try (Statement stmt = cnx.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                result.put(rs.getString("campagne_id"), rs.getInt("donation_count"));
+                result.put(rs.getString("id"), rs.getInt("donation_count"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
+
+    public Map<String, Integer> countDonationsPerCampaign2() {
+        String sql = "SELECT c.id, c.titre as campaign_name, COALESCE(COUNT(d.id), 0) as donation_count " +
+                "FROM campagne c LEFT JOIN don d ON c.id = d.campagne_id " +
+                "GROUP BY c.id, c.titre";
+
+        Map<String, Integer> result = new HashMap<>();
+        try (Statement stmt = cnx.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                String campaignDetails = rs.getString("campaign_name") + " - " + rs.getInt("donation_count") + " donations";
+                result.put(campaignDetails, rs.getInt("donation_count"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
     public Map<String, Integer> countDonationsPerMonth() {
         String sql = "SELECT DATE_FORMAT(date_remise, '%Y-%m') as month, COUNT(*) as donation_count " +

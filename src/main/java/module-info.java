@@ -17,6 +17,7 @@ module com.example.healthswift1 {
     requires com.google.zxing;
     requires javafx.swing;
     requires itextpdf;
+    requires org.controlsfx.controls;
 
 
 }

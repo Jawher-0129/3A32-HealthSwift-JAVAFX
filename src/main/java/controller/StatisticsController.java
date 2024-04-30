@@ -1,5 +1,8 @@
 package controller;
 
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import entite.Don;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,11 +10,19 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.Tooltip;
 import javafx.scene.text.Font;
+import service.DonService;
+import service.EmailService;
 import service.StatisticsService;
+import org.controlsfx.control.Notifications;
 
+
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.List;
+ // Make sure the DonService is imported if it's being used
 
 public class StatisticsController {
     @FXML
@@ -26,12 +37,92 @@ public class StatisticsController {
     @FXML
     private PieChart donationsWithWithoutCampaignChart;
 
+    private DonService donService; // Declare the DonService
+    private EmailService emailService;
+
     @FXML
     public void initialize() {
         statisticsService = new StatisticsService();
+        emailService = new EmailService();
+        donService = new DonService(); // Initialize the DonService
         loadCharts();
         loadDonationsWithAndWithoutCampaign(); // Load pie chart data
     }
+
+    @FXML
+    private void handleSendEmail() {
+        try {
+            Map<String, Integer> donationsPerCampaign = statisticsService.countDonationsPerCampaign2();
+            String lowDonationCampaigns = donationsPerCampaign.entrySet().stream()
+                    .filter(entry -> entry.getValue() < 5) // Assuming <5 donations is considered low
+                    .map(Map.Entry::getKey)
+                    .collect(Collectors.joining("\n"));
+
+            String[] emails = {"tesnimesat@gmail.com"};
+            for (String email : emails) {
+                emailService.sendEmail(
+                        "tesnim.satouri@esprit.tn",
+                        "HealthSwift",
+                        email,
+                        "Donor",
+                        "Campaign Suggestions",
+                        "Here are some campaigns that need your support: " + lowDonationCampaigns
+                );
+            }
+            Notifications.create()
+                    .title("Email Sent")
+                    .text("Your emails have been successfully sent!")
+                    .showInformation();
+        } catch (MailjetException | MailjetSocketTimeoutException e) {
+            Notifications.create()
+                    .title("Email Sending Failed")
+                    .text("Failed to send emails: " + e.getMessage())
+                    .showError();
+        }
+    }
+
+
+    @FXML
+    private void assignDonations() {
+        try {
+            Map<String, Integer> donationsPerCampaign = statisticsService.countDonationsPerCampaign();
+            String minDonationCampaignId = Collections.min(donationsPerCampaign.entrySet(), Map.Entry.comparingByValue()).getKey();
+
+            List<Don> unassignedDons = donService.findAll().stream().filter(d -> d.getCampagne_id() == null).collect(Collectors.toList());
+            unassignedDons.forEach(don -> {
+                don.setCampagne_id(Integer.parseInt(minDonationCampaignId));
+                donService.update(don);
+            });
+            updateCharts();
+
+            Notifications.create()
+                    .title("Assignment Successful")
+                    .text("Donations have been successfully assigned!")
+                    .showInformation();
+        } catch (Exception e) {
+            Notifications.create()
+                    .title("Assignment Failed")
+                    .text("Failed to assign donations: " + e.getMessage())
+                    .showError();
+        }
+    }
+
+
+    private void updateCharts() {
+        // Clear existing data
+        donationsPerCampaignChart.getData().clear();
+        donationsPerMonthChart.getData().clear();
+        campaignsPerMonthChart.getData().clear();
+
+        // Reload data
+        loadDonationsPerCampaign();
+        loadDonationsPerMonth();
+        loadCampaignsPerMonth();
+        loadDonationsWithAndWithoutCampaign(); // Assuming you want to update this chart as well
+
+        // Additional UI updates if necessary, e.g., messages to users
+    }
+
 
 
     private void loadDonationsWithAndWithoutCampaign() {
