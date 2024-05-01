@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -36,7 +37,7 @@
             <ComboBox fx:id="ActualiteRelated" layoutX="71.0" layoutY="434.0" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="404.0" layoutY="26.0" prefHeight="532.0" prefWidth="735.0" stylesheets="@../css/Style.css">
+      <AnchorPane layoutX="404.0" layoutY="26.0" prefHeight="493.0" prefWidth="735.0" stylesheets="@../css/Style.css">
          <children>
              <TextField fx:id="chercherEvent" layoutX="14.0" layoutY="14.0" onKeyTyped="#chercherEvenement" promptText="search" styleClass="search" stylesheets="@../css/Style.css" />
              <TableView fx:id="tableEvent" layoutX="8.0" layoutY="62.0" onMouseClicked="#selectData" prefHeight="406.0" prefWidth="646.0">
@@ -53,9 +54,13 @@
             </TableView>
          </children>
       </AnchorPane>
-      <Button fx:id="addEvent_btn" layoutX="214.0" layoutY="530.0" mnemonicParsing="false" onAction="#AddEvent" prefHeight="25.0" prefWidth="57.0" styleClass="add-btn" stylesheets="@../css/Style.css" text="Add" />
-      <Button fx:id="UpdateEvent_btn" layoutX="285.0" layoutY="530.0" mnemonicParsing="false" onAction="#UpdateEvent" styleClass="update-btn" stylesheets="@../css/Style.css" text="Update" />
-      <Button fx:id="clearEvent_Btn" layoutX="215.0" layoutY="567.0" mnemonicParsing="false" onAction="#ClearEvent" prefHeight="25.0" prefWidth="55.0" styleClass="clear-btn" stylesheets="@../css/Style.css" text="Clear" />
-      <Button fx:id="deleteEvent_btn" layoutX="285.0" layoutY="567.0" mnemonicParsing="false" onAction="#DeleteEvent" prefHeight="26.0" prefWidth="64.0" styleClass="delete-btn" stylesheets="@../css/Style.css" text="Delete" />
+      <ButtonBar layoutX="310.0" layoutY="519.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+            <Button fx:id="addEvent_btn" mnemonicParsing="false" onAction="#AddEvent" prefHeight="25.0" prefWidth="57.0" styleClass="add-btn" stylesheets="@../css/Style.css" text="Add" />
+            <Button fx:id="UpdateEvent_btn" mnemonicParsing="false" onAction="#UpdateEvent" styleClass="update-btn" stylesheets="@../css/Style.css" text="Update" />
+            <Button fx:id="clearEvent_Btn" mnemonicParsing="false" onAction="#ClearEvent" prefHeight="25.0" prefWidth="55.0" styleClass="clear-btn" stylesheets="@../css/Style.css" text="Clear" />
+            <Button fx:id="deleteEvent_btn" mnemonicParsing="false" onAction="#DeleteEvent" prefHeight="26.0" prefWidth="64.0" styleClass="delete-btn" stylesheets="@../css/Style.css" text="Delete" />
+        </buttons>
+      </ButtonBar>
    </children>
 </AnchorPane>

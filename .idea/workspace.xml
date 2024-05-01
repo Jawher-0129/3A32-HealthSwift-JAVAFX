@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="thirdxl puchh">
+    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="semi final">
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/MailUtility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/logo_pi.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test/Main2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/Main2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +33,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;gharbim&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="6dc9b4a9-7e35-436d-9a5e-f3a726a9a194" />
+        <option name="url" value="https://github.com/Jawher-0129/3A32-HealthSwift-JAVAFX.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -230,7 +248,15 @@
       <workItem from="1714167359695" duration="10457000" />
       <workItem from="1714179727727" duration="772000" />
       <workItem from="1714222795966" duration="4298000" />
-      <workItem from="1714331484482" duration="1336000" />
+      <workItem from="1714331484482" duration="3131000" />
+      <workItem from="1714395749867" duration="1894000" />
+      <workItem from="1714397658703" duration="5089000" />
+      <workItem from="1714474805143" duration="477000" />
+      <workItem from="1714481358020" duration="1435000" />
+      <workItem from="1714490529872" duration="344000" />
+      <workItem from="1714512848874" duration="8539000" />
+      <workItem from="1714565895666" duration="2131000" />
+      <workItem from="1714579367590" duration="1799000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -256,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714179305508</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="semi final">
+      <option name="closed" value="true" />
+      <created>1714334230968</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714334230968</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +300,7 @@
     <MESSAGE value="first" />
     <MESSAGE value="second push" />
     <MESSAGE value="thirdxl puch" />
-    <option name="LAST_COMMIT_MESSAGE" value="thirdxl puch" />
+    <MESSAGE value="semi final" />
+    <option name="LAST_COMMIT_MESSAGE" value="semi final" />
   </component>
 </project>

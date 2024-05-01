@@ -33,6 +33,7 @@ public class Main2 extends Application {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Health Swift");
         stage.show();
         //adding this part for the logout
         stage.setOnCloseRequest(event ->{
@@ -44,7 +45,7 @@ public class Main2 extends Application {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("logout");
         alert.setHeaderText("you're about to logout !");
-        alert.setContentText("Do you want to save before exiting ?");
+        alert.setContentText("Are you sure yo want to exit ?");
         if (alert.showAndWait().get() == ButtonType.OK) {
             System.out.println("you successfully logged Out !");
             stage.close();

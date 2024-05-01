@@ -16,7 +16,7 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/EvenementFront.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/ActualiteFront.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setTitle("Health Swift");
@@ -32,7 +32,7 @@ public class MainFx extends Application {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("logout");
         alert.setHeaderText("you're about to logout !");
-        alert.setContentText("Do you want to save before exiting ?");
+        alert.setContentText("Are you sure you want to logout ?");
         if (alert.showAndWait().get() == ButtonType.OK) {
             System.out.println("you successfully logged Out !");
             stage.close();

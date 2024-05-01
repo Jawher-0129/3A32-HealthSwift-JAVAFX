@@ -14,5 +14,6 @@ module com.example.gestionevenement {
     requires org.controlsfx.controls;
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
+    requires java.mail;//for mailling
 
 }
