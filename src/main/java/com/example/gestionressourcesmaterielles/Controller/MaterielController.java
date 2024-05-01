@@ -1,5 +1,6 @@
 package com.example.gestionressourcesmaterielles.Controller;
 import javafx.scene.chart.PieChart;
+import java.time.Duration;
 
 import com.example.gestionressourcesmaterielles.Model.Categorie;
 import com.example.gestionressourcesmaterielles.Model.Materiel;
@@ -30,10 +31,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
+
 import com.itextpdf.layout.element.Cell;
 
 import com.itextpdf.io.image.ImageDataFactory;
@@ -142,8 +143,6 @@ public class MaterielController implements Initializable {
        else
            this.nonDisponibleRadioButton.setSelected(materiel.getDisponibilite()==0);
 
-
-
         String imageURL=materiel.getImageMateriel();
         if (imageURL != null && !imageURL.isEmpty()) {
             Image image = new Image(imageURL);
@@ -239,7 +238,6 @@ public class MaterielController implements Initializable {
             return;
         }
 
-
         int disponibilite = disponibleRadioButton.isSelected() ? 1 : 0;
 
         String imageURL = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
@@ -268,8 +266,10 @@ public class MaterielController implements Initializable {
         }
 
        Integer idCategorie=categorieService.getIdCategorieParLibelle(categorieLibelle);
+        LocalDateTime dateExpiration = LocalDateTime.now();
 
-        Materiel nouveauMateriel = new Materiel(libelle, description, disponibilite, image, prix, idCategorie);
+        Materiel nouveauMateriel = new Materiel(libelle, description, disponibilite, image, prix, idCategorie,dateExpiration);
+        System.out.println(dateExpiration);
 
         materielService.add(nouveauMateriel);
         //System.out.println("Nouveau matériel ajouté avec succès !");
@@ -438,7 +438,6 @@ public class MaterielController implements Initializable {
                 table.addCell(materiel.getDisponibilite() == 1 ? "Disponible" : "Non disponible");
                 table.addCell(String.valueOf(materiel.getPrix()));
             }
-
             document.add(table);
 
             System.out.println("PDF généré avec succès !");
@@ -446,7 +445,6 @@ public class MaterielController implements Initializable {
             e.printStackTrace();
         }
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> CategoriesLibelle = categorieService.afficherLibellesCategories();
@@ -473,9 +471,55 @@ public class MaterielController implements Initializable {
             }
 
         });
+
+
+        LocalDateTime now = LocalDateTime.now();
+        List<Materiel> listmateriel = materielService.getAll();
+        for (Materiel materiel : listmateriel) {
+            LocalDateTime expirationDate = materiel.getDate_expiration();
+            System.out.println(expirationDate);
+            if (expirationDate != null) {
+                Duration difference = Duration.between(expirationDate, now);
+                long secondsDifference = difference.getSeconds();
+                if (secondsDifference >864000){
+                    try {
+                        materielService.delete(materiel.getId());
+                        String msg="Bonjour Mr(Mme) Jawher nous vous informe que le matériel que vous avez utilisé "+materiel.getLibelleMateriel()+"a été expiré";
+                        materielService.envoyerSMS("+21629036051",msg);
+                        System.out.println("Suppression du matériel expiré");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
         this.configureTableView();
         this.refreshTableView();
     }
+    @FXML
+    void DateexpirationClick(ActionEvent event) {
+        LocalDateTime now = LocalDateTime.now();
+        List<Materiel> listmateriel = materielService.getAll();
+        for (Materiel materiel : listmateriel) {
+            LocalDateTime expirationDate = materiel.getDate_expiration();
+            System.out.println(expirationDate);
+            if (expirationDate != null) {
+                Duration difference = Duration.between(expirationDate, now);
+                long secondsDifference = difference.getSeconds();
+                if (secondsDifference > 60*5){
+                    try {
+                        materielService.delete(materiel.getId());
+                        String msg="Bonjour Mr(Mme) Jawher nous vous informe que le matériel que vous avez utilisé "+materiel.getLibelleMateriel()+"a été expiré";
+                        materielService.envoyerSMS("+21629036051",msg);
+                        System.out.println("Suppression du matériel expiré");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+    }
+
 
     private Image toFXImage(BitMatrix bitMatrix) {
         int width = bitMatrix.getWidth();
@@ -491,10 +535,8 @@ public class MaterielController implements Initializable {
                 pixelWriter.setColor(x, y, color);
             }
         }
-
         return writableImage;
     }
-
 
     @FXML
     void TriCroissantMateriel(ActionEvent event) {
@@ -514,10 +556,7 @@ public class MaterielController implements Initializable {
 
         // Mettre à jour la TableView avec la nouvelle liste triée
         materielTableView.setItems(materiels);
-
-
     }
-
     @FXML
     void TriDecroissantMateriel(ActionEvent event) {
 

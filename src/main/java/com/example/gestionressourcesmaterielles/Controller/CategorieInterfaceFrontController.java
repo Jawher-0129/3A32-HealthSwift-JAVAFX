@@ -91,8 +91,8 @@ public class CategorieInterfaceFrontController implements Initializable {
                     // Définissez la nouvelle scène sur le stage
                     stage.setScene(newScene);
                     stage.show();
-                    System.out.println(category.getId());
 
+                    System.out.println(category.getId());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

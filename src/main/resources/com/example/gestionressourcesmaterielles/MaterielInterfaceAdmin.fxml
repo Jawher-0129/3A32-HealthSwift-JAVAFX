@@ -65,5 +65,6 @@
    <ImageView fx:id="qrCodeImageView" fitHeight="263.0" fitWidth="281.0" layoutX="844.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
    <RadioButton fx:id="TriCroissantMateriel" layoutX="132.0" layoutY="345.0" mnemonicParsing="false" onAction="#TriCroissantMateriel" prefHeight="18.0" prefWidth="98.0" text="Tri Croissant" />
    <RadioButton fx:id="TriDecroissantMateriel" layoutX="130.0" layoutY="374.0" mnemonicParsing="false" onAction="#TriDecroissantMateriel" prefHeight="18.0" prefWidth="118.0" text="Tri Décroissant" />
+   <Button fx:id="buttonDateexpiration" layoutX="826.0" layoutY="460.0" mnemonicParsing="false" onAction="#DateexpirationClick" prefHeight="26.0" prefWidth="98.0" text="Date expiration" />
 
 </AnchorPane>
