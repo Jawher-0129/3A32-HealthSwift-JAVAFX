@@ -11,7 +11,6 @@ public interface IService<T> {
     void update(T var1, int var2);
 
     List<T> getAll();
-
     T getById(int var1);
 }
 

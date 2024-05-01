@@ -93,7 +93,6 @@ public class MaterielInterfaceFrontController implements Initializable {
         card.getChildren().addAll(imageView, nameLabel, descriptionLabel);
         return card;
     }
-
     @FXML
     void PageCategorieFront(ActionEvent event) {
         try {

@@ -1,5 +1,8 @@
 package com.example.gestionressourcesmaterielles.Model;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class Materiel {
     private int id;
 
@@ -14,12 +17,38 @@ public class Materiel {
     private double Prix;
     private int id_categorie;
 
+    private LocalDateTime date_expiration;
 
     public Materiel()
     {
 
     }
 
+    public void setDate_expiration(LocalDateTime date_expiration) {
+        this.date_expiration = date_expiration;
+    }
+
+    public Materiel(int id, String libelleMateriel, String description, int disponibilite, String imageMateriel, double prix, int id_categorie, LocalDateTime date_expiration) {
+        this.id = id;
+        LibelleMateriel = libelleMateriel;
+        Description = description;
+        Disponibilite = disponibilite;
+        ImageMateriel = imageMateriel;
+        Prix = prix;
+        this.id_categorie = id_categorie;
+        this.date_expiration = date_expiration;
+    }
+
+    public Materiel(String libelleMateriel, String description, int disponibilite, String imageMateriel, double prix, int id_categorie, LocalDateTime date_expiration) {
+        this.id = id;
+        LibelleMateriel = libelleMateriel;
+        Description = description;
+        Disponibilite = disponibilite;
+        ImageMateriel = imageMateriel;
+        Prix = prix;
+        this.id_categorie = id_categorie;
+        this.date_expiration = date_expiration;
+    }
 
     public Materiel(int id, String libelleMateriel, String description, int disponibilite, String imageMateriel, double prix, int id_categorie) {
         this.id = id;
@@ -57,6 +86,10 @@ public class Materiel {
         Disponibilite = disponibilite;
         ImageMateriel = imageMateriel;
         Prix = prix;
+    }
+
+    public LocalDateTime getDate_expiration() {
+        return date_expiration;
     }
 
     public int getId() {

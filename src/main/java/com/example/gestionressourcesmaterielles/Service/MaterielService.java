@@ -50,8 +50,8 @@ public class MaterielService implements IService<Materiel> {
 
     @Override
     public void add(Materiel materiel) {
-        String requete="insert into materiel(id_categorie,libelle,description,disponibilite,image,prix) values" +
-                "(?,?,?,?,?,?)";
+        String requete="insert into materiel(id_categorie,libelle,description,disponibilite,image,prix,date_expiration) values" +
+                "(?,?,?,?,?,?,?)";
         try {
             if(rechercherCategorie(materiel.getId_categorie())) {
                 pst = cnx.prepareStatement(requete);
@@ -61,6 +61,8 @@ public class MaterielService implements IService<Materiel> {
                 pst.setInt(4, materiel.getDisponibilite());
                 pst.setString(5, materiel.getImageMateriel());
                 pst.setDouble(6, materiel.getPrix());
+                Timestamp timestamp = Timestamp.valueOf(materiel.getDate_expiration());
+                pst.setTimestamp(7, timestamp);
                 pst.executeUpdate();
                 System.out.println("Ajout Materiel effectuee avec succees");
             }
@@ -115,7 +117,7 @@ public class MaterielService implements IService<Materiel> {
                 list.add(new Materiel(rs.getInt("id_materiel"), rs.getString("libelle"),
                         rs.getString("description"), rs.getInt("disponibilite"),
                         rs.getString("image"), rs.getDouble("prix"),
-                        rs.getInt("id_categorie")));
+                        rs.getInt("id_categorie"),rs.getTimestamp("date_expiration").toLocalDateTime()));
             }
 
         } catch (SQLException e) {
@@ -225,9 +227,9 @@ public class MaterielService implements IService<Materiel> {
 
     public void envoyerSMS(String numeroDestinataire, String message) {
         // Remplacez les valeurs suivantes par vos propres informations Twilio
-        String ACCOUNT_SID = "ACd2cd1ce44c341e483a5ad603a337cd2a";
-        String AUTH_TOKEN = "81e3e74d46f2ce6022ccc67d89b644c3";
-        String TWILIO_NUMERO = "+18066922677";
+        String ACCOUNT_SID = "ACebbc4d10fe699654c6ac232f8017525b";
+        String AUTH_TOKEN = "1e5dbe62af4f7528fb67b3ecb4783108";
+        String TWILIO_NUMERO = "+13342039180";
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
