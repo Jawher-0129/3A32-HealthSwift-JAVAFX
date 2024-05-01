@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -48,23 +48,15 @@
                 <Image url="file:/C:\Users\admin\Desktop\PIDEVJAVAFIRAS\PidevUserJava\src\main\images\Capture d'écran 2024-02-18 152610.png" />
             </image>
         </ImageView>
-        <TextField fx:id="searchField" layoutX="355.0" layoutY="42.0" onKeyReleased="#search" prefHeight="30.0" prefWidth="151.0" promptText="Search..." />
-        <Button fx:id="pdfButton" layoutX="528.0" layoutY="46.0" mnemonicParsing="false" onAction="#generatePDF" text="Pdf" />
-      <ImageView fitHeight="35.0" fitWidth="29.0" layoutX="320.0" layoutY="41.0">
+        <TextField fx:id="searchField" layoutX="365.0" layoutY="16.0" onKeyReleased="#search" prefHeight="30.0" prefWidth="151.0" promptText="Search..." />
+        <Button fx:id="pdfButton" layoutX="229.0" layoutY="446.0" mnemonicParsing="false" onAction="#generatePDF" text="Pdf" />
+      <ImageView fitHeight="35.0" fitWidth="29.0" layoutX="327.0" layoutY="16.0">
          <image>
             <Image url="file:/C:\Users\admin\Desktop\PIDEVJAVAFIRAS\PidevUserJava\src\main\images\png-clipart-magnifying-glass-computer-icons-searching-glass-share-icon.png" />
          </image>
       </ImageView>
-      <ButtonBar layoutX="235.0" layoutY="441.0" prefHeight="40.0" prefWidth="200.0">
-        <buttons>
-          <Button mnemonicParsing="false" onAction="#sortDesc" text="DESC" />
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-              <buttons>
-                <Button mnemonicParsing="false" onAction="#sortAsc" text="ASC" />
-              </buttons>
-            </ButtonBar>
-        </buttons>
-      </ButtonBar>
+          <HBox spacing="10" />
+
       <ImageView fitHeight="49.0" fitWidth="47.0" layoutX="762.0" layoutY="7.0">
          <image>
             <Image url="file:/C:\Users\admin\Desktop\PIDEVJAVAFIRAS\PidevUserJava\src\main\images/png-clipart-computer-icons-privacy-policy-admin-icon-copyright-rim.png" />
@@ -79,6 +71,8 @@
         </Label>
       <Button layoutX="757.0" layoutY="61.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
       <Button layoutX="664.0" layoutY="61.0" mnemonicParsing="false" onAction="#EditProfile" text="Edit Profile" />
+           <Button fx:id="ascButton" layoutX="365.0" layoutY="61.0" mnemonicParsing="false" onAction="#sortAsc" styleClass="sort-button" text="ASC" />
+           <Button fx:id="descButton" layoutX="461.0" layoutY="61.0" mnemonicParsing="false" onAction="#sortDesc" styleClass="sort-button" text="DESC" />
 
     </children>
 </AnchorPane>

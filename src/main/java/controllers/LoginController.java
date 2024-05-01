@@ -2,6 +2,7 @@ package controllers;
 import javafx.scene.control.CheckBox;
 import javafx.scene.paint.Color;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,8 +24,17 @@ import javafx.scene.control.Alert;
 public class LoginController {
 
 
+    @FXML
+    private Label messageLabel;
 
+    @FXML
+    private CheckBox captcha;
 
+    @FXML
+    private TextField captchaField;
+
+    @FXML
+    private Label captchaLabel;
     @FXML
     private CheckBox rememberMeCheckbox;
     @FXML
@@ -78,6 +88,11 @@ public class LoginController {
 
         String userEmail = email.getText();
         String pass = password.getText();
+        if (!verifyCaptcha()) {
+            // If captcha verification fails, return without adding the user
+            return;
+        }
+
         if (!isValidEmail(userEmail)) {
             showErrorMessage(lblEmailError, "Please enter a valid email address.");
             return;
@@ -148,6 +163,7 @@ public class LoginController {
     @FXML
     void initialize() {
         loadRememberedCredentials();
+        afficher();
 
     }
 
@@ -179,5 +195,36 @@ public class LoginController {
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception appropriately
         }
+    }
+    private boolean verifyCaptcha() {
+        String enteredCaptcha = captchaField.getText();
+        String actualCaptcha = captchaLabel.getText();
+
+        if (captcha.isSelected() && enteredCaptcha.equals(actualCaptcha)) {
+            messageLabel.setText(""); // Clear the captcha error message
+            return true;
+        } else {
+            // Update CAPTCHA
+            afficher();
+            messageLabel.setText("Please confirm that you're not a robot."); // Display the captcha error message
+            return false;
+        }
+
+    }public void afficher() {
+        // Initialize CAPTCHA
+        String captchaText = generateRandomAlphabets(6); // Adjust the length as needed
+        captchaLabel.setText(captchaText);
+
+    }
+
+    private String generateRandomAlphabets(int length) {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            char c = chars.charAt(random.nextInt(chars.length()));
+            sb.append(c);
+        }
+        return sb.toString();
     }
 }

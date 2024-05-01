@@ -2,7 +2,6 @@ package controllers;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import service.Usercrud;
 import javafx.event.ActionEvent;
@@ -10,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -25,31 +23,19 @@ import javafx.scene.control.TextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TableColumn;
 import java.util.Comparator;
-import javafx.beans.property.SimpleIntegerProperty;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 public class AdminPage {
 
-    @FXML
-    private PieChart pieChart;
-    @FXML
-    private ResourceBundle resources;
-    @FXML
-    private URL location;
+
 
     @FXML
     private Label NameUser;
-    @FXML
-    private Label RoleUser;
-    @FXML
-    private Button statisticsButton;
+
 
     @FXML
     private TableView<User> UserTable;
-    @FXML
-    private TableColumn<User, Integer> id;
 
     @FXML
     private TableColumn<User, String> Nom;
@@ -267,8 +253,26 @@ public class AdminPage {
             ObservableList<User> userList = UserTable.getItems();
             float startY = 650; // Initial vertical position
             float lineHeight = 15; // Height of each line
+            float currentY = startY;
 
             for (User user : userList) {
+                float spaceLeft = currentY - 50; // Calculate remaining space on the page
+                float requiredSpace = 6 * lineHeight + 40; // Space required for one user entry
+
+                if (spaceLeft < requiredSpace) { // If not enough space, move to the next page
+                    contentStream.endText();
+                    contentStream.close();
+
+                    page = new PDPage();
+                    document.addPage(page);
+
+                    contentStream = new PDPageContentStream(document, page);
+                    contentStream.setFont(PDType1Font.HELVETICA, 12);
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(50, 700); // Starting position
+                    currentY = startY;
+                }
+
                 contentStream.newLineAtOffset(0, -20); // Add some space between each user
 
                 contentStream.showText("Nom: " + user.getNom());
@@ -285,6 +289,7 @@ public class AdminPage {
                 contentStream.newLineAtOffset(0, -lineHeight);
 
                 contentStream.newLineAtOffset(0, -20); // Add some space between each user
+                currentY -= requiredSpace;
             }
 
             contentStream.endText();
@@ -308,7 +313,4 @@ public class AdminPage {
         }
     }
 
-
 }
-
-
