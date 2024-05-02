@@ -311,6 +311,41 @@ public class EvenementService implements IService<Evenement> {
         }
         return 0;
     }
+    public List<String> getEventNamesByDate(String date) {
+        List<String> eventNames = new ArrayList<>();
+        List<Evenement> events = getEventsByDate(date);
+        for (Evenement event : events) {
+            eventNames.add(event.getTitre());
+        }
+        return eventNames;
+    }
+
+    private List<Evenement> getEventsByDate(String date) {
+        List<Evenement> events = new ArrayList<>();
+        String query = "SELECT * FROM evenement WHERE DATE_FORMAT(date, '%Y-%m-%d') = ?";
+        try {
+            PreparedStatement preparedStatement = cnx.prepareStatement(query);
+            preparedStatement.setString(1, date);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id_evenement = resultSet.getInt("id_evenement");
+                String titre = resultSet.getString("Titre");
+                Date eventDate = resultSet.getDate("Date");
+                int duree = resultSet.getInt("Duree");
+                String lieu = resultSet.getString("lieu");
+                String objectif = resultSet.getString("Objectif");
+                String image = resultSet.getString("image");
+                int actualiteId = resultSet.getInt("actualite_id");
+
+                Evenement event = new Evenement(id_evenement, titre, eventDate, duree, lieu, objectif, image, actualiteId);
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
+
 
 }
 

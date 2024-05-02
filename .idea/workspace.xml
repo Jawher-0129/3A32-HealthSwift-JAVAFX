@@ -4,17 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="semi final">
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/MailUtility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image/logo_pi.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="try email">
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/TwilioSmsSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Test/Main2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/Main2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entite/Evenement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entite/Evenement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/DashboardEvent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/DashboardEvent.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +24,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -86,7 +85,7 @@
       <recent name="C:\Users\user\IdeaProjects\GestionEvenement\src\main\resources\image" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainFx">
+  <component name="RunManager" selected="Application.Main2">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.gestionevenement.HelloApplication" />
       <module name="GestionEvenement" />
@@ -180,8 +179,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainFx" />
         <item itemvalue="Application.Main2" />
+        <item itemvalue="Application.MainFx" />
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.Main" />
       </list>
