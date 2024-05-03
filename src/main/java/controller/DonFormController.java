@@ -84,7 +84,8 @@ public class DonFormController {
             Campagne selectedCampagne = comboCampagne.getSelectionModel().getSelectedItem();
 
             if (donActuel == null) {
-                donActuel = new Don(type, montant, dateRemise.toString(), selectedCampagne != null ? selectedCampagne.getId() : null);
+               // donActuel = new Don(type, montant, dateRemise.toString(), selectedCampagne != null ? selectedCampagne.getId() : null);
+                donActuel = new Don( selectedCampagne != null ? selectedCampagne.getId() : null,dateRemise.toString(), 9, montant,type );
                 Don donEnregistre = serviceDon.save(donActuel);
                 if (donEnregistre != null) {
                     afficherAlerte(Alert.AlertType.INFORMATION, "Succès", "Don ajouté avec succès.");

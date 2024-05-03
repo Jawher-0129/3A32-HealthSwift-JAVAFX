@@ -17,13 +17,14 @@ public class CampagneService implements CrudService<Campagne> {
 
     @Override
     public Campagne save(Campagne campagne) {
-        String sql = "INSERT INTO campagne (titre, description, date_debut, date_fin, image) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO campagne (titre, description, date_debut, date_fin, image, directeur_id) VALUES (?, ?, ?, ?, ?,?)";
         try (PreparedStatement ps = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, campagne.getTitre());
             ps.setString(2, campagne.getDescription());
             ps.setString(3, campagne.getDate_debut());
             ps.setString(4, campagne.getDate_fin());
             ps.setString(5, campagne.getImage());  // Include image
+            ps.setInt(6, campagne.getDirecteur_id());
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows > 0) {

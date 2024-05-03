@@ -13,6 +13,7 @@ public class Campagne {
     private String date_debut;
     private String date_fin;
     private String image; // New image attribute
+    private int directeur_id;
 
     // Pour représenter la relation ManyToOne
     private List<Don> dons = new ArrayList<>();
@@ -33,6 +34,33 @@ public class Campagne {
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.image = image; // Set image
+    }
+
+    public Campagne(String date_debut, String date_fin, String description, int directeur_id, List<Don> dons, int id, String image, String titre) {
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+        this.description = description;
+        this.directeur_id = directeur_id;
+        this.dons = dons;
+        this.id = id;
+        this.image = image;
+        this.titre = titre;
+    }
+    public Campagne(String date_debut, String date_fin, String description, int directeur_id, String image, String titre) {
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+        this.description = description;
+        this.directeur_id = directeur_id;
+        this.image = image;
+        this.titre = titre;
+    }
+
+    public int getDirecteur_id() {
+        return directeur_id;
+    }
+
+    public void setDirecteur_id(int directeur_id) {
+        this.directeur_id = directeur_id;
     }
 
     // Constructeur pour l'initialisation d'une nouvelle campagne sans ID

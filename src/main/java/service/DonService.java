@@ -17,7 +17,7 @@ public class DonService implements CrudService<Don> {
 
     @Override
     public Don save(Don don) {
-        String sql = "INSERT INTO don(type, montant, date_remise, campagne_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO don(type, montant, date_remise, campagne_id, Donateur) VALUES (?, ?, ?, ?,?)";
         try (PreparedStatement ps = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, don.getType());
             if (don.getMontant() == null) {
@@ -33,7 +33,7 @@ public class DonService implements CrudService<Don> {
             } else {
                 ps.setInt(4, don.getCampagne_id());
             }
-
+            ps.setInt(5, don.getDonateur());
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows > 0) {

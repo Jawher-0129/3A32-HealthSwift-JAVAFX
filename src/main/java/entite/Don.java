@@ -6,7 +6,7 @@ public class Don {
     private Integer montant;
     private String date_remise;
     private Integer campagne_id; // Clé étrangère pour la relation ManyToOne avec Campagne
-
+    private  int Donateur;
     // Constructeur avec ID, utilisé lorsque l'on récupère un Don de la base de données
     public Don(int id, String type, int montant, String date_remise, int campagne_id) {
         this.id = id;
@@ -14,6 +14,23 @@ public class Don {
         this.montant = montant;
         this.date_remise = date_remise;
         this.campagne_id = campagne_id;
+    }
+
+    public int getDonateur() {
+        return Donateur;
+    }
+
+    public Don(Integer campagne_id, String date_remise, int donateur, Integer montant, String type) {
+        this.campagne_id = campagne_id;
+        this.date_remise = date_remise;
+        Donateur = donateur;
+        this.montant = montant;
+        this.type = type;
+    }
+
+
+    public void setDonateur(int donateur) {
+        Donateur = donateur;
     }
 
     // Constructeur sans ID, utilisé pour créer un nouveau Don avant insertion dans la base de données

@@ -14,15 +14,12 @@ import service.DonService;
 import service.EmailService;
 import service.StatisticsService;
 import org.controlsfx.control.Notifications;
-
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.List;
- // Make sure the DonService is imported if it's being used
 
 public class StatisticsController {
     @FXML

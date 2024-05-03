@@ -60,19 +60,28 @@ public class CampagneFormController {
         if (validateInput()) {
             boolean isNew = currentCampagne == null;
             if (isNew) {
-                currentCampagne = new Campagne(
+             /*   currentCampagne = new Campagne(
                         titreField.getText(),
                         descriptionArea.getText(),
                         debutDatePicker.getValue().toString(),
                         finDatePicker.getValue().toString(),
                         imageField.getText()
+                );*/
+                currentCampagne = new Campagne(
+                        debutDatePicker.getValue().toString(),
+                        finDatePicker.getValue().toString(),
+                        descriptionArea.getText(),4,
+                        imageField.getText(),  titreField.getText()
                 );
+
             } else {
                 currentCampagne.setTitre(titreField.getText());
                 currentCampagne.setDescription(descriptionArea.getText());
                 currentCampagne.setDate_debut(debutDatePicker.getValue().toString());
                 currentCampagne.setDate_fin(finDatePicker.getValue().toString());
                 currentCampagne.setImage(imageField.getText());
+
+
             }
 
             if (isNew) {
