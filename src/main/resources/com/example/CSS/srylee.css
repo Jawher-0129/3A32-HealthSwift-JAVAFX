@@ -197,3 +197,14 @@
 .mouse-moved:hover{
     -fx-background-color: E4E4E4;
 }
+.delete-btn{
+    -fx-background-color:#90242f;
+    -fx-background-radius:8px;
+    -fx-cursor:hand;
+    -fx-text-fill:#fff;
+    -fx-font-size:10px;
+    -fx-font-family:"Arial";
+}
+.stat-btn:hover{
+    -fx-background-color:#00b2a9;
+}

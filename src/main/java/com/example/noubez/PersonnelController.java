@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -27,6 +29,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -97,7 +100,8 @@ public class PersonnelController {
     @FXML
     private Button downloadPdfButton;
 
-
+    @FXML
+    private Button showStaticsButton;
 
 
     private Image loadImage(String imageUrl) {
@@ -408,4 +412,30 @@ public class PersonnelController {
                 e.printStackTrace();
             }
         }
+
+
+    @FXML
+    void handlePersonnelStatics(ActionEvent event) {
+        try {
+            // Charger la fenêtre des statistiques du personnel à partir du fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PersonnelStatics.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Créer une nouvelle fenêtre
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Statistiques du Personnel");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    }
+
+
+
+

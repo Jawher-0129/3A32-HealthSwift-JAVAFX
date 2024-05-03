@@ -4,10 +4,8 @@ import com.example.noubez.Model.Personnel;
 import com.example.noubez.util.DataSource;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -187,12 +185,32 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
         return personnelList;
     }
 
+    public Map<String, Integer> countPersonnelByRole() {
+        Map<String, Integer> personnelByRole = new HashMap<>();
+        List<Personnel> personnelList = getAll();
+        for (Personnel personnel : personnelList) {
+            String role = personnel.getRole();
+            personnelByRole.put(role, personnelByRole.getOrDefault(role, 0) + 1);
+        }
+        return personnelByRole;
+    }
 
-
-
-
-
+    public Map<Integer, Integer> countPersonnelByExperience() {
+        Map<Integer, Integer> personnelByExperience = new HashMap<>();
+        List<Personnel> personnelList = getAll();
+        for (Personnel personnel : personnelList) {
+            int experience = personnel.getExperience();
+            personnelByExperience.put(experience, personnelByExperience.getOrDefault(experience, 0) + 1);
+        }
+        return personnelByExperience;
+    }
 
 }
+
+
+
+
+
+
 
 
