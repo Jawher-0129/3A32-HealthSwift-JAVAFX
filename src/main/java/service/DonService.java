@@ -33,7 +33,12 @@ public class DonService implements CrudService<Don> {
             } else {
                 ps.setInt(4, don.getCampagne_id());
             }
-            ps.setInt(5, don.getDonateur());
+            // Handling nullable Integer for Donateur
+            if (don.getDonateur() == null) {
+                ps.setNull(5, Types.INTEGER); // Set the Donateur to NULL if it is null
+            } else {
+                ps.setInt(5, don.getDonateur()); // Set the Donateur normally if not null
+            }
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows > 0) {

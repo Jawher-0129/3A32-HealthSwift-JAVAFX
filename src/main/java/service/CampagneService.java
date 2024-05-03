@@ -17,14 +17,21 @@ public class CampagneService implements CrudService<Campagne> {
 
     @Override
     public Campagne save(Campagne campagne) {
-        String sql = "INSERT INTO campagne (titre, description, date_debut, date_fin, image, directeur_id) VALUES (?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO campagne (titre, description, date_debut, date_fin, image, directeur_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, campagne.getTitre());
             ps.setString(2, campagne.getDescription());
             ps.setString(3, campagne.getDate_debut());
             ps.setString(4, campagne.getDate_fin());
-            ps.setString(5, campagne.getImage());  // Include image
-            ps.setInt(6, campagne.getDirecteur_id());
+            ps.setString(5, campagne.getImage());
+
+            // Handling nullable Integer for directeur_id
+            if (campagne.getDirecteur_id() == null) {
+                ps.setNull(6, Types.INTEGER); // Set the directeur_id to NULL if it is null
+            } else {
+                ps.setInt(6, campagne.getDirecteur_id()); // Set the directeur_id normally if not null
+            }
+
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows > 0) {
@@ -40,6 +47,8 @@ public class CampagneService implements CrudService<Campagne> {
         }
         return null;
     }
+
+
 
     @Override
     public Optional<Campagne> findById(int id) {
