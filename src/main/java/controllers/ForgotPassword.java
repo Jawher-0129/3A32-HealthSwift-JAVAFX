@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import Entity.User;
+import javafx.scene.input.KeyEvent;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -193,7 +193,36 @@ public class ForgotPassword {
         assert box4 != null : "fx:id=\"box4\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
         assert box5 != null : "fx:id=\"box5\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
         assert box6 != null : "fx:id=\"box6\" was not injected: check your FXML file 'ForgotPassword.fxml'.";
+        limitTextFieldLength(box1);
+        limitTextFieldLength(box2);
+        limitTextFieldLength(box3);
+        limitTextFieldLength(box4);
+        limitTextFieldLength(box5);
+        limitTextFieldLength(box6);
 
+        addTextFieldListener(box1, box2);
+        addTextFieldListener(box2, box3);
+        addTextFieldListener(box3, box4);
+        addTextFieldListener(box4, box5);
+        addTextFieldListener(box5, box6);
     }
+    private void limitTextFieldLength(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 1) {
+                textField.setText(newValue.substring(0, 1));
+            }
+        });
+    }
+    private void addTextFieldListener(TextField currentBox, TextField nextBox) {
+        currentBox.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (!event.getText().matches("[0-9]")) {
+                currentBox.setText("");
+                return;
+            }
 
+            if (!currentBox.getText().isEmpty()) {
+                nextBox.requestFocus();
+            }
+        });
+    }
 }
