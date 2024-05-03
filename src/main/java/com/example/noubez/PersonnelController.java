@@ -2,6 +2,8 @@ package com.example.noubez;
 
 import com.example.noubez.Model.Personnel;
 import com.example.noubez.Service.PersonnelService;
+
+import com.example.noubez.util.PDFGenerator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +27,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+
+import javax.mail.MessagingException;
 import java.io.IOException;
 public class PersonnelController {
     private final PersonnelService personnelService = new PersonnelService();
@@ -90,7 +94,8 @@ public class PersonnelController {
     @FXML
     private Button AjouterPersonnelBtn;
 
-
+    @FXML
+    private Button downloadPdfButton;
 
 
 
@@ -214,7 +219,7 @@ public class PersonnelController {
         }
         String imageURL = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
         String imageName = imageURL != null ? new File(imageURL).getName() : null;
-        String image="C:\\\\Users\\\\Admin\\\\Desktop\\\\3A32HealthSwift\\\\public\\\\uploads\\\\"+imageName;
+        String image = "C:\\\\Users\\\\Admin\\\\Desktop\\\\3A32HealthSwift\\\\public\\\\uploads\\\\" + imageName;
 
 
         if (image == null) {
@@ -225,7 +230,6 @@ public class PersonnelController {
             alert.show();
             return;
         }
-
 
 
         if (Nom.length() == 0) {
@@ -250,8 +254,7 @@ public class PersonnelController {
         }
 
 
-
-        if (experience<0) {
+        if (experience < 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -261,7 +264,7 @@ public class PersonnelController {
         }
 
 
-        if (image==null) {
+        if (image == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -275,7 +278,18 @@ public class PersonnelController {
         this.personnelService.add(newPer);
         loadPersonnels();
 
+
     }
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     void handleChoisirImage(ActionEvent event) {
@@ -366,4 +380,32 @@ public class PersonnelController {
             alert.showAndWait();
         }
     }
-}
+
+
+    @FXML
+    void handleDownloadPdfButtonAction(ActionEvent event) {
+
+            // Récupérer les données du personnel depuis votre TableView
+            ObservableList<Personnel> personnelList = tablePersonnel.getItems();
+
+            // Vérifier s'il y a des données à télécharger
+            if (personnelList.isEmpty()) {
+                showAlert(Alert.AlertType.WARNING, "Aucune donnée", "Aucun personnel à télécharger", "Veuillez ajouter du personnel avant de télécharger le PDF.");
+                return;
+            }
+
+            // Définir le chemin de fichier où vous voulez enregistrer le PDF
+        // Définir le chemin complet du fichier PDF avec une extension .pdf
+        String filePath = "C:\\Users\\Admin\\Desktop\\ListePersonnel.pdf";
+
+
+        try {
+                // Appeler la méthode pour générer le PDF avec les données récupérées
+                PDFGenerator.generatePDF(personnelList, "C:\\Users\\Admin\\Desktop\\ListePersonnel.pdf");
+                showAlert(Alert.AlertType.INFORMATION, "Téléchargement réussi", "PDF généré avec succès", "Le PDF a été enregistré avec succès à l'emplacement : " + filePath);
+            } catch (IOException e) {
+                showAlert(Alert.AlertType.ERROR, "Erreur de génération PDF", "Une erreur est survenue lors de la génération du PDF", "Veuillez réessayer ou vérifier les logs pour plus de détails.");
+                e.printStackTrace();
+            }
+        }
+    }

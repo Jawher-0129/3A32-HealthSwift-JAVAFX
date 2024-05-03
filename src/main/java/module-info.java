@@ -4,6 +4,8 @@ module com.example.noubez {
 
 
     requires java.sql;
+    requires java.mail;
+    requires org.apache.pdfbox;
     opens com.example.noubez.Model;
     opens com.example.noubez to javafx.fxml;
 
