@@ -96,8 +96,10 @@ public class PersonnelController {
 
     @FXML
     private Button showStaticsButton;
-
-
+    @FXML
+    private Button SMSButton;
+    @FXML
+    private Button EmailButton;
     private Image loadImage(String imageUrl) {
         // Implement your logic to load image from URL or file
         return new Image(imageUrl);
@@ -153,24 +155,40 @@ public class PersonnelController {
         // Ajouter un écouteur de sélection à la TableView
         tablePersonnel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                // Déplacer les données du personnel sélectionnée vers les champs de texte
+                // Déplacer les données du personnel sélectionné vers les champs de texte
                 Nom.setText(newSelection.getNom());
                 Prenom_personnel.setText(newSelection.getPrenom_personnel());
                 roleChoiceBox.setValue(newSelection.getRole());
                 experiencePersonnel.setText(String.valueOf(newSelection.getExperience()));
                 RatingPersonnel.setText(String.valueOf(newSelection.getRating()));
 
-                // don.setValue(newSelection.getDon_id());
+                // Affichage du QR Code
+                showPersonnelQRCode(newSelection);
             } else {
                 // Effacer les champs de texte si aucun personnel n'est sélectionné
-                Nom.clear();
-                Prenom_personnel.clear();
-                experiencePersonnel.clear();
-                roleChoiceBox.getSelectionModel().clearSelection();
+                clearPersonnelDetails();
             }
         });
+    }
 
+    private void showPersonnelQRCode(Personnel personnel) {
+        if (personnel != null) {
+            String qrText = "Nom: " + personnel.getNom() +
+                    ", Prénom: " + personnel.getPrenom_personnel() +
+                    ", Rôle: " + personnel.getRole() +
+                    ", Disponibilité: " + (personnel.getDisponibilite() == 1 ? "Disponible" : "Non disponible");
+            Image qrImage = personnelService.generateQRCodeImage(qrText);
+            imageView.setImage(qrImage);  // Assurez-vous que imageView est l'ImageView où vous voulez afficher le QR Code
+        }
+    }
 
+    private void clearPersonnelDetails() {
+        Nom.clear();
+        Prenom_personnel.clear();
+        experiencePersonnel.clear();
+        RatingPersonnel.clear();
+        roleChoiceBox.getSelectionModel().clearSelection();
+        imageView.setImage(null);  // Effacer l'image précédente du QR Code
     }
 
     private void configureTableView() {
@@ -420,8 +438,49 @@ public class PersonnelController {
                 e.printStackTrace();
             }
         }
+    @FXML
+    void sendEmail(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Email.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Créer une nouvelle fenêtre
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle(" Email pour notre top Personnels");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
+    @FXML
+    void envoyerSMS(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SMS.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Créer une nouvelle fenêtre
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("SMS pour notre top  Personnels");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+}
 
 
 

@@ -8,6 +8,8 @@ module com.example.noubez {
     requires java.mail;
     requires org.apache.pdfbox;
     requires twilio;
+    requires com.google.zxing;
+    requires com.google.zxing.javase;
     opens com.example.noubez.Model;
     opens com.example.noubez to javafx.fxml;
 
