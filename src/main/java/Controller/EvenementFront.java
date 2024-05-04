@@ -119,8 +119,8 @@ public class EvenementFront implements Initializable {
 
         try {
             ImageView imageView = new ImageView(new Image(new FileInputStream(evenement.getImage())));
-            imageView.setFitWidth(200);
-            imageView.setFitHeight(200);
+            imageView.setFitWidth(150);
+            imageView.setFitHeight(150);
             HBox imageBox = new HBox(imageView);
             imageBox.setAlignment(Pos.CENTER);
             vbox.getChildren().add(imageBox);
@@ -181,14 +181,14 @@ public class EvenementFront implements Initializable {
 
 
         participationButton.setOnAction(event -> {
-            registerForParticipation(evenement); 
+            registerForParticipation(evenement);
         });
 
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.setTitle("Event Details");
 
-        Scene scene = new Scene(vbox, 400, 300);
+        Scene scene = new Scene(vbox, 500, 400);
         popupStage.setScene(scene);
 
         popupStage.show();

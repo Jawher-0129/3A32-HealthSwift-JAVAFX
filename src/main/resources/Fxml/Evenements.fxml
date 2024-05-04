@@ -10,6 +10,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="700.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EvenementController">
    <children>
@@ -37,10 +39,10 @@
             <ComboBox fx:id="ActualiteRelated" layoutX="71.0" layoutY="434.0" prefWidth="150.0" styleClass="textfield" stylesheets="@../css/Style.css" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="404.0" layoutY="26.0" prefHeight="493.0" prefWidth="735.0" stylesheets="@../css/Style.css">
+      <AnchorPane layoutX="363.0" layoutY="13.0" prefHeight="506.0" prefWidth="776.0" stylesheets="@../css/Style.css">
          <children>
-             <TextField fx:id="chercherEvent" layoutX="14.0" layoutY="14.0" onKeyTyped="#chercherEvenement" promptText="search" styleClass="search" stylesheets="@../css/Style.css" />
-             <TableView fx:id="tableEvent" layoutX="8.0" layoutY="62.0" onMouseClicked="#selectData" prefHeight="406.0" prefWidth="646.0">
+             <TextField fx:id="chercherEvent" layoutX="14.0" layoutY="46.0" onKeyTyped="#chercherEvenement" promptText="search" styleClass="search" stylesheets="@../css/Style.css" />
+             <TableView fx:id="tableEvent" layoutX="8.0" layoutY="77.0" onMouseClicked="#selectData" prefHeight="406.0" prefWidth="646.0">
               <columns>
                 <TableColumn fx:id="colIdEvent" prefWidth="43.0" text="Id" />
                 <TableColumn fx:id="colTitreEvent" prefWidth="94.0" text="Titre" />
@@ -52,9 +54,14 @@
                   <TableColumn fx:id="colActualiteId" prefWidth="92.0" text="Actualite" />
               </columns>
             </TableView>
+            <Text fill="#3f4a75" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Evenements " wrappingWidth="273.724609375">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-      <ButtonBar layoutX="310.0" layoutY="519.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="310.0" layoutY="533.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button fx:id="addEvent_btn" mnemonicParsing="false" onAction="#AddEvent" prefHeight="25.0" prefWidth="57.0" styleClass="add-btn" stylesheets="@../css/Style.css" text="Add" />
             <Button fx:id="UpdateEvent_btn" mnemonicParsing="false" onAction="#UpdateEvent" styleClass="update-btn" stylesheets="@../css/Style.css" text="Update" />

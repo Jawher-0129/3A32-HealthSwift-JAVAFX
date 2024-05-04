@@ -28,14 +28,13 @@ public class Main2 extends Application {
         SidebarController sidebarController = sidebarLoader.getController();
         sidebarController.setMainController(mainController);
 
-        // Set the sidebar to the left of the main layout
+
         root.setLeft(sidebar);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Health Swift");
         stage.show();
-        //adding this part for the logout
         stage.setOnCloseRequest(event ->{
             event.consume();
             logout(stage);

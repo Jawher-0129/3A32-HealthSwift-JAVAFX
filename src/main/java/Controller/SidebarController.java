@@ -30,7 +30,7 @@ public class SidebarController {
     }
 
     private void loadUI(String ui) {
-        if (mainController != null) { // Check if mainController is not null
+        if (mainController != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(ui));
                 Node node = loader.load();

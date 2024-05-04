@@ -148,6 +148,21 @@
 .update-btn:hover{
     -fx-background-color:#22ad72;
 }
+.excel-btn {
+    -fx-background-color: #fff;
+    -fx-text-fill: #2d7755;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-cursor: hand;
+    -fx-border-color: #2d7755;
+    -fx-border-radius: 8px;
+}
+
+.excel-btn:hover{
+    -fx-background-color:#2d7755;
+    -fx-text-fill: #fff;
+}
 
 .delete-btn{
     -fx-background-color:#90242f;

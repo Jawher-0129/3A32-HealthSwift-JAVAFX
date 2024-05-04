@@ -15,8 +15,8 @@ public class PaginationController {
     @FXML
     private VBox cardsContainer;
 
-    // Total number of items, replace it with your actual total number of items
-    private int totalItems = 27; // For example, if you have 27 items in total
+
+    private int totalItems = 27;
 
     public void initialize() {
         int pageCount = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);

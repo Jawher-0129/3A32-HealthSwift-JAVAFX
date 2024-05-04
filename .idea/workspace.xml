@@ -4,16 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="try email">
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/TwilioSmsSender.java" afterDir="false" />
+    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="sms event">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/EvenementService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/PaginationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/PaginationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SidebarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SidebarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test/Main2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/Main2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entite/Evenement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entite/Evenement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/DashboardEvent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/DashboardEvent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Actualites.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Actualites.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,6 +258,13 @@
       <workItem from="1714512848874" duration="8539000" />
       <workItem from="1714565895666" duration="2131000" />
       <workItem from="1714579367590" duration="1799000" />
+      <workItem from="1714685813239" duration="147000" />
+      <workItem from="1714731080097" duration="2537000" />
+      <workItem from="1714751490178" duration="2280000" />
+      <workItem from="1714753967179" duration="1013000" />
+      <workItem from="1714771867274" duration="3234000" />
+      <workItem from="1714776579201" duration="47000" />
+      <workItem from="1714777205608" duration="465000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -289,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714334230968</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="sms event">
+      <option name="closed" value="true" />
+      <created>1714685912960</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714685912960</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,6 +317,7 @@
     <MESSAGE value="second push" />
     <MESSAGE value="thirdxl puch" />
     <MESSAGE value="semi final" />
-    <option name="LAST_COMMIT_MESSAGE" value="semi final" />
+    <MESSAGE value="sms event" />
+    <option name="LAST_COMMIT_MESSAGE" value="sms event" />
   </component>
 </project>
