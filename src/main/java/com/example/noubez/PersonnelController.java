@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,21 +16,16 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.scene.image.ImageView;
 import java.io.File;
-import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import javafx.scene.control.ChoiceBox;
 
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
 public class PersonnelController {
     private final PersonnelService personnelService = new PersonnelService();
@@ -398,41 +392,34 @@ public class PersonnelController {
                 return;
             }
 
-            // Définir le chemin de fichier où vous voulez enregistrer le PDF
-        // Définir le chemin complet du fichier PDF avec une extension .pdf
-        String filePath = "C:\\Users\\Admin\\Desktop\\ListePersonnel.pdf";
+            String filePath = "C:\\Users\\Admin\\Downloads\\Personnel.pdf";
+
+        // Appeler la méthode pour générer le PDF avec les données récupérées
+        PDFGenerator pdfGenerator = new PDFGenerator();
+        pdfGenerator.handleDownloadPdfButtonAction(filePath, personnelList);
+        showAlert(Alert.AlertType.INFORMATION, "Téléchargement réussi", "PDF généré avec succès", "Le PDF a été enregistré avec succès à l'emplacement : " + filePath);
+    }
 
 
-        try {
-                // Appeler la méthode pour générer le PDF avec les données récupérées
-                PDFGenerator.generatePDF(personnelList, "C:\\Users\\Admin\\Desktop\\ListePersonnel.pdf");
-                showAlert(Alert.AlertType.INFORMATION, "Téléchargement réussi", "PDF généré avec succès", "Le PDF a été enregistré avec succès à l'emplacement : " + filePath);
+        @FXML
+        void handlePersonnelStatics (ActionEvent event){
+            try {
+                // Charger la fenêtre des statistiques du personnel à partir du fichier FXML
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("PersonnelStatics.fxml"));
+                Parent root = loader.load();
+
+                // Créer une nouvelle scène
+                Scene scene = new Scene(root);
+
+                // Créer une nouvelle fenêtre
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Statistiques du Personnel");
+                stage.show();
             } catch (IOException e) {
-                showAlert(Alert.AlertType.ERROR, "Erreur de génération PDF", "Une erreur est survenue lors de la génération du PDF", "Veuillez réessayer ou vérifier les logs pour plus de détails.");
                 e.printStackTrace();
             }
         }
-
-
-    @FXML
-    void handlePersonnelStatics(ActionEvent event) {
-        try {
-            // Charger la fenêtre des statistiques du personnel à partir du fichier FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PersonnelStatics.fxml"));
-            Parent root = loader.load();
-
-            // Créer une nouvelle scène
-            Scene scene = new Scene(root);
-
-            // Créer une nouvelle fenêtre
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Statistiques du Personnel");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     }
 

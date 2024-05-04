@@ -30,9 +30,9 @@
             <TableColumn fx:id="litsDispo" prefWidth="75.0" text="LitsDispo" />
         </columns>
       </TableView>
-      <Button fx:id="AjouterChambreBtn" layoutX="26.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleAjouterChambre" text="Ajouter" />
-      <Button fx:id="ModifierChambreBtn" layoutX="110.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleModifierChambre" text="Modifier" />
-      <Button fx:id="SupprimerChambreBtn" layoutX="195.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleSupprimerChambre" text="Supprimer" />
+      <Button fx:id="AjouterChambreBtn" layoutX="26.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleAjouterChambre" prefHeight="25.0" prefWidth="57.0" styleClass="add-btn" stylesheets="@../CSS/srylee.css" text="Ajouter" />
+      <Button fx:id="ModifierChambreBtn" layoutX="110.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleModifierChambre" styleClass="update-btn" stylesheets="@../CSS/srylee.css" text="Modifier" />
+      <Button fx:id="SupprimerChambreBtn" layoutX="195.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleSupprimerChambre" prefHeight="26.0" prefWidth="64.0" styleClass="delete-btn" stylesheets="@../CSS/srylee.css" text="Supprimer" />
       <ChoiceBox fx:id="personnelChambre" layoutX="107.0" layoutY="91.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

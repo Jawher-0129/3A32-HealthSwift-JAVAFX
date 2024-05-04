@@ -30,7 +30,7 @@
       <ChoiceBox fx:id="roleChoiceBox" layoutX="98.0" layoutY="201.0" prefWidth="150.0" />
       <Button fx:id="ModifierPersonnelBtn" layoutX="173.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleModifierPersonnel" styleClass="update-btn" stylesheets="@../CSS/srylee.css" text="Modifier" />
       <Button fx:id="SupprimerPersonnelBtn" layoutX="283.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleSupprimerPersonnel" prefHeight="26.0" prefWidth="64.0" styleClass="delete-btn" stylesheets="@../CSS/srylee.css" text="Supprimer" />
-      <ImageView fx:id="imageView" fitHeight="121.0" fitWidth="198.0" layoutX="463.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView" fitHeight="121.0" fitWidth="198.0" layoutX="734.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
       <TableView fx:id="tablePersonnel" layoutX="264.0" layoutY="16.0" prefHeight="346.0" prefWidth="431.0">
         <columns>
           <TableColumn fx:id="idpersonnel" prefWidth="75.0" text="IdPersonnel" />
@@ -45,6 +45,6 @@
         </columns>
       </TableView>
       <Button fx:id="downloadPdfButton" layoutX="385.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleDownloadPdfButtonAction" prefHeight="25.0" prefWidth="55.0" styleClass="pdf-btn" stylesheets="@../CSS/srylee.css" text="PDF" />
-      <Button fx:id="showStaticsButton" layoutX="291.0" layoutY="506.0" mnemonicParsing="false" onAction="#handlePersonnelStatics" prefHeight="30.0" prefWidth="94.0" styleClass="stat-btn" stylesheets="@../CSS/srylee.css" text="Statistique" />
+      <Button fx:id="showStaticsButton" layoutX="480.0" layoutY="463.0" mnemonicParsing="false" onAction="#handlePersonnelStatics" prefHeight="30.0" prefWidth="94.0" styleClass="stat-btn" stylesheets="@../CSS/srylee.css" text="Statistique" />
    </children>
 </AnchorPane>

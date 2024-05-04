@@ -2,6 +2,8 @@ package com.example.noubez;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,6 +11,8 @@ import javafx.scene.layout.VBox;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.io.FileInputStream;
@@ -32,9 +36,46 @@ import javafx.scene.Scene;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+import javafx.scene.text.Text;
+
 public class PersonnelFrontController implements Initializable {
 
     private final PersonnelService personnelService = new PersonnelService();
+    // Méthode pour appeler l'API de traduction et obtenir la traduction pour le texte et la langue cible
+    private String callTranslationAPI(String text, String targetLanguage) {
+        // Ici, vous devez appeler l'API de traduction pour traduire le texte vers la langue cible
+        // Vous pouvez utiliser la bibliothèque Google Cloud Translate ou toute autre API de traduction de votre choix
+        // Cette méthode devrait retourner le texte traduit
+        // Exemple d'utilisation de la bibliothèque Google Cloud Translate (vous devez configurer votre projet pour utiliser Google Cloud Translate et avoir les autorisations nécessaires) :
+    /*
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
+    Translation translation = translate.translate(text, Translate.TranslateOption.targetLanguage(targetLanguage));
+    return translation.getTranslatedText();
+    */
+        // Pour cet exemple, je vais simplement retourner un texte factice
+        return "Texte traduit vers " + targetLanguage + ": " + text;
+    }
+
+    // Méthode pour mettre à jour l'interface utilisateur avec la traduction
+    private void updateUIWithTranslation(String originalText, String targetLanguage, String translatedText) {
+        // Ici, vous devez mettre à jour l'interface utilisateur avec le texte traduit
+        // Par exemple, vous pouvez rechercher toutes les étiquettes contenant le texte original
+        // et les remplacer par le texte traduit
+        // Voici un exemple simplifié :
+    /*
+    for (Node node : rootPane.getChildren()) {
+        if (node instanceof Label) {
+            Label label = (Label) node;
+            if (label.getText().equals(originalText)) {
+                label.setText(translatedText);
+            }
+        }
+    }
+    */
+        // Pour cet exemple, je vais simplement imprimer le texte traduit
+        System.out.println("Texte traduit vers " + targetLanguage + ": " + translatedText);
+    }
+
 
     @FXML
     private ScrollPane NosPersonnelsScrollPane;
@@ -48,7 +89,8 @@ public class PersonnelFrontController implements Initializable {
     @FXML
     private TilePane cardsContainer;
 
-
+    @FXML
+    private VBox rootPane;
     private PersonnelService PersonnelService = new PersonnelService();
 
 
@@ -57,8 +99,35 @@ public class PersonnelFrontController implements Initializable {
         loadPersonnels();
         loadTopPersonnels();
         animateTopPersonnels();
-
+        // Appel de la méthode pour récupérer tous les textes à traduire
+        List<String> textsToTranslate = getAllTextsToTranslate(rootPane);
+        // Utilisation des textes récupérés, par exemple, en les imprimant
+        for (String text : textsToTranslate) {
+            System.out.println(text);
+        }
     }
+
+    // Méthode récursive pour récupérer tous les textes à traduire dans les nœuds enfants
+    private List<String> getAllTextsToTranslate(Node node) {
+        List<String> textsToTranslate = new ArrayList<>();
+        if (node instanceof Label) {
+            Label label = (Label) node;
+            textsToTranslate.add(label.getText());
+        } else if (node instanceof Button) {
+            Button button = (Button) node;
+            textsToTranslate.add(button.getText());
+        } else if (node instanceof Text) {
+            Text textNode = (Text) node;
+            textsToTranslate.add(textNode.getText());
+        }
+        if (node instanceof VBox || node instanceof HBox) {
+            for (Node child : ((VBox) node).getChildren()) {
+                textsToTranslate.addAll(getAllTextsToTranslate(child));
+            }
+        }
+        return textsToTranslate;
+    }
+
 
     private void loadPersonnels() {
         for (Personnel personnel : personnelService.getAll()) {
@@ -76,11 +145,8 @@ public class PersonnelFrontController implements Initializable {
         VBox card = new VBox(10);
         card.getStyleClass().add("personnel-card");
 
-        // Display image
 
 
-       // String image="C:\\Users\\Admin\\Desktop\\3A32HealthSwift\\public\\uploads\\gold.jpeg";
-        //String image1="C:\\Users\\Admin\\Desktop\\3A32HealthSwift\\public\\uploads\\f4d06b562184677a2a4a5c3e79f4e333.jpg";
 
 
         try {
@@ -165,7 +231,7 @@ public class PersonnelFrontController implements Initializable {
         Scene scene = new Scene(vbox, 400, 300);
         popupStage.setScene(scene);
 
-        // Show the stage
+
         popupStage.show();
 
     }
@@ -254,5 +320,25 @@ public class PersonnelFrontController implements Initializable {
         transition.play();
     }
 
+    // Définir une liste de toutes les langues cibles vers lesquelles vous souhaitez traduire votre contenu
+    List<String> allTargetLanguages = Arrays.asList("en", "fr", "es", "de");
+
+    @FXML
+    private void traduireContenu() {
+        // Récupérer tous les textes à traduire sur la page
+        List<String> textsToTranslate = getAllTextsToTranslate(rootPane);
+
+        // Parcourir chaque texte à traduire
+        for (String text : textsToTranslate) {
+            // Appeler l'API de traduction pour chaque texte dans toutes les langues cibles souhaitées
+            for (String targetLanguage : allTargetLanguages) {
+                // Appeler l'API de traduction et obtenir la traduction pour le texte et la langue cible
+                String translatedText = callTranslationAPI(text, targetLanguage);
+
+                // Mettre à jour l'interface utilisateur avec la traduction
+                updateUIWithTranslation(text, targetLanguage, translatedText);
+            }
+        }
+    }
 
 }

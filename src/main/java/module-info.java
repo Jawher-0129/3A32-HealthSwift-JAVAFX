@@ -1,11 +1,13 @@
 module com.example.noubez {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     requires java.sql;
     requires java.mail;
     requires org.apache.pdfbox;
+    requires twilio;
     opens com.example.noubez.Model;
     opens com.example.noubez to javafx.fxml;
 
