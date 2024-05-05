@@ -205,8 +205,13 @@
     -fx-font-size:10px;
     -fx-font-family:"Arial";
 }
-.stat-btn:hover{
-    -fx-background-color:#00b2a9;
+.stat-btn{
+    -fx-background-color:#2d658c;
+    -fx-background-radius:8px;
+    -fx-cursor:hand;
+    -fx-text-fill:#fff;
+    -fx-font-size:10px;
+    -fx-font-family:"Arial";
 }
 .sms-btn{
     -fx-background-color:#90242f;

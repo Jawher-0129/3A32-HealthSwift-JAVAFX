@@ -11,12 +11,14 @@ import javafx.scene.control.*;
 
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class ChambreController {
@@ -227,7 +229,28 @@ public class ChambreController {
             this.loadChambres();
         }
     }
+/*
+    @FXML
+    private void filterTable() {
+        String searchText = searchField.getText().trim(); // Remove toLowerCase() as integers aren't case-sensitive
+
+        if (searchText.isEmpty()) {
+            tableChambre.setItems(FXCollections.observableArrayList(chambreService.getAll()));
+            return;
+        }
+
+        ObservableList<Chambre> filteredList = FXCollections.observableArrayList(chambreService.getAll()).stream()
+                .filter(chambre ->
+                        Integer.toString(chambre.getNumero()).contains(searchText) ||  // Convert integer to String for comparison
+                                Integer.toString(chambre.getNombre_lits_total()).contains(searchText) ||
+                                Integer.toString(chambre.getNmbr_lits_disponible()).contains(searchText))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        tableChambre.setItems(filteredList);
     }
+*/
+}
+
 
 
 
