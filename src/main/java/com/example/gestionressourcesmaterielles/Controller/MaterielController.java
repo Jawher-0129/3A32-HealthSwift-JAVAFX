@@ -1,4 +1,5 @@
 package com.example.gestionressourcesmaterielles.Controller;
+import com.example.gestionressourcesmaterielles.Service.ExcelExporter;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.layout.borders.Border;
 import com.itextpdf.layout.property.TextAlignment;
@@ -65,6 +66,9 @@ public class MaterielController implements Initializable {
     private ImageView qrCodeImageView;
 
     @FXML
+    private Button excelbuttonmateriel;
+
+    @FXML
     private RadioButton TriCroissantMateriel;
 
     @FXML
@@ -122,6 +126,9 @@ public class MaterielController implements Initializable {
     private Button buttonCategorieAdmin;
 
     @FXML
+    private Button darkModeButton;
+
+    @FXML
     private TableColumn<Materiel,Integer> prixColumn;
 
 
@@ -158,13 +165,14 @@ public class MaterielController implements Initializable {
         int idCategorie = materiel.getId_categorie();
 
         String libelleCategorie=categorieService.getLibelleCategorieParId(idCategorie);
-
+        CategorieService categorieService=new CategorieService();
         ObservableList<String> categories = categorieChoiceBox.getItems();
         if (libelleCategorie != null) {
             categorieChoiceBox.setValue(libelleCategorie);
+
         }
-            String data = materiel.getLibelleMateriel() + "\n"
-                    + materiel.getDescription() + "\n"+ materiel.getPrix()+"\n"+materiel.getId_categorie()+"\n"+materiel.getDisponibilite();
+            String data ="Libelle:"+materiel.getLibelleMateriel() + "\n"
+                    +"Description:"+ materiel.getDescription() + "\n"+"Prix:"+ materiel.getPrix()+"\n"+"Categorie:"+categorieService.getLibelleCategorieParId(materiel.getId_categorie())+"\n"+"Disponibilite:"+materiel.getDisponibilite();
             // Set the size of the QR code image
             int width = 300;
             int height = 300;
@@ -402,6 +410,16 @@ public class MaterielController implements Initializable {
         }
     }
 
+   /* @FXML
+    public void toggleDarkMode(ActionEvent event) {
+        Scene scene = darkModeButton.getScene();
+        if (scene.getStylesheets().contains("/com/example/gestionressourcesmaterielles/darkMode.css")) {
+            scene.getStylesheets().remove("/com/example/gestionressourcesmaterielles/darkMode.css");
+        } else {
+            scene.getStylesheets().add("/com/example/gestionressourcesmaterielles/darkMode.css");
+        }
+    }*/
+
     @FXML
     void PageStatMateriel(ActionEvent event){
         try {
@@ -468,6 +486,24 @@ public class MaterielController implements Initializable {
             System.out.println("PDF généré avec succès !");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+
+
+    @FXML
+    void ExportExcelMateriel(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+            File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                ExcelExporter.exportToExcel(materielTableView, "Materiels Data", file.getAbsolutePath());
+                System.out.println("Excel téléchargée avec succèes");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erreur");
         }
     }
 
@@ -543,8 +579,6 @@ public class MaterielController implements Initializable {
             }
         }
     }
-
-
     private Image toFXImage(BitMatrix bitMatrix) {
         int width = bitMatrix.getWidth();
         int height = bitMatrix.getHeight();
@@ -572,10 +606,8 @@ public class MaterielController implements Initializable {
 
         ObservableList<Materiel> materiels = materielTableView.getItems();
 
-        // Créer un Comparator pour trier les objets Materiel selon le prix dans l'ordre croissant
         Comparator<Materiel> comparator = Comparator.comparingDouble(Materiel::getPrix);
 
-        // Trier la liste de matériel dans l'ordre croissant selon le prix
         Collections.sort(materiels, comparator);
 
         // Mettre à jour la TableView avec la nouvelle liste triée

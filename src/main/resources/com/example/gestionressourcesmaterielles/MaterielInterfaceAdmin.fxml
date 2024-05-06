@@ -12,7 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="748.0" prefWidth="1183.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionressourcesmaterielles.Controller.MaterielController">
+<AnchorPane prefHeight="748.0" prefWidth="1183.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionressourcesmaterielles.Controller.MaterielController">
 
     <!-- Libelle Materiel -->
     <Label layoutX="35.0" layoutY="509.0" stylesheets="@Style.css" text="Libellé Materiel:" />
@@ -65,6 +65,7 @@
    <ImageView fx:id="qrCodeImageView" fitHeight="263.0" fitWidth="281.0" layoutX="844.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
    <RadioButton fx:id="TriCroissantMateriel" layoutX="132.0" layoutY="345.0" mnemonicParsing="false" onAction="#TriCroissantMateriel" prefHeight="18.0" prefWidth="98.0" text="Tri Croissant" />
    <RadioButton fx:id="TriDecroissantMateriel" layoutX="130.0" layoutY="374.0" mnemonicParsing="false" onAction="#TriDecroissantMateriel" prefHeight="18.0" prefWidth="118.0" text="Tri Décroissant" />
-   <Button fx:id="buttonDateexpiration" layoutX="826.0" layoutY="460.0" mnemonicParsing="false" onAction="#DateexpirationClick" prefHeight="26.0" prefWidth="98.0" text="Date expiration" />
+   <Button fx:id="buttonDateexpiration" layoutX="833.0" layoutY="433.0" mnemonicParsing="false" onAction="#DateexpirationClick" prefHeight="26.0" prefWidth="98.0" text="Date expiration" />
+   <Button fx:id="excelbuttonmateriel" layoutX="835.0" layoutY="472.0" mnemonicParsing="false" onAction="#ExportExcelMateriel" prefHeight="26.0" prefWidth="91.0" text="Excel" />
 
 </AnchorPane>

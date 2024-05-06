@@ -69,6 +69,14 @@ public class CategorieInterfaceFrontController implements Initializable {
         Label label = new Label(category.getLibelle()); // Création du label avec le libellé de la catégorie
 
         Button voirMaterielButton = new Button("Voir Matériel");
+        voirMaterielButton.setStyle("-fx-background-color: #007bff; " + /* Couleur de fond */
+                "-fx-text-fill: white; " + /* Couleur du texte */
+                "-fx-font-weight: bold; " + /* Poids de la police */
+                "-fx-padding: 8 16; " + /* Rembourrage */
+                "-fx-border-radius: 5; " + /* Rayon des coins */
+                "-fx-background-radius: 5;"); /* Rayon des coins pour le fond */
+        voirMaterielButton.setOnMouseEntered(e -> voirMaterielButton.setStyle("-fx-background-color: #0056b3;")); /* Changement de couleur au survol */
+        voirMaterielButton.setOnMouseExited(e -> voirMaterielButton.setStyle("-fx-background-color: #007bff;")); /* Rétablir la couleur d'origine après le survol */
 
         voirMaterielButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

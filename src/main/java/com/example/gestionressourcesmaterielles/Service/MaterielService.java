@@ -226,7 +226,6 @@ public class MaterielService implements IService<Materiel> {
 
 
     public void envoyerSMS(String numeroDestinataire, String message) {
-        // Remplacez les valeurs suivantes par vos propres informations Twilio
         String ACCOUNT_SID = "ACebbc4d10fe699654c6ac232f8017525b";
         String AUTH_TOKEN = "1e5dbe62af4f7528fb67b3ecb4783108";
         String TWILIO_NUMERO = "+13342039180";

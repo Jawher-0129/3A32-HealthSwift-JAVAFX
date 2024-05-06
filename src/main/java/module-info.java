@@ -12,7 +12,10 @@ module com.example.gestionressourcesmaterielles {
     opens com.example.gestionressourcesmaterielles.Model;
     opens com.example.gestionressourcesmaterielles.Controller to javafx.fxml;
 
-
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
+    requires java.net.http;
+    requires org.json;
     opens com.example.gestionressourcesmaterielles to javafx.fxml;
     exports com.example.gestionressourcesmaterielles;
 }
