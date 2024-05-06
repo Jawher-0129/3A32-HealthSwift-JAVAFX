@@ -14,17 +14,17 @@
 
 <AnchorPane prefHeight="529.0" prefWidth="1137.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.noubez.ChambreController">
     <children>
-        <TextField fx:id="Numero" layoutX="476.0" layoutY="79.0" prefHeight="35.0" prefWidth="171.0" />
-        <TextField fx:id="LitsTotal" layoutX="476.0" layoutY="286.0" prefHeight="35.0" prefWidth="171.0" />
-        <Label layoutX="368.0" layoutY="83.0" text="Numero" />
-        <Label layoutX="354.0" layoutY="151.0" text="PersonnelChambre" />
-        <Label layoutX="357.0" layoutY="290.0" text="LitsTotal" />
-        <Label fx:id="Disponibilite" layoutX="357.0" layoutY="222.0" text="Disponibilite" />
-        <Label layoutX="355.0" layoutY="362.0" text="LitsDispo" />
-        <TextField fx:id="LitsDisponible" layoutX="476.0" layoutY="358.0" prefHeight="35.0" prefWidth="171.0" />
+        <TextField fx:id="Numero" layoutX="476.0" layoutY="79.0" prefHeight="35.0" prefWidth="171.0" styleClass="form-textarea" stylesheets="@../CSS/form.css" />
+        <TextField fx:id="LitsTotal" layoutX="476.0" layoutY="286.0" prefHeight="35.0" prefWidth="171.0" stylesheets="@../CSS/form.css" />
+        <Label layoutX="368.0" layoutY="83.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Numero" />
+        <Label layoutX="332.0" layoutY="151.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="PersonnelChambre" />
+        <Label layoutX="371.0" layoutY="291.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="LitsTotal" />
+        <Label fx:id="Disponibilite" layoutX="345.0" layoutY="218.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Disponibilite" />
+        <Label layoutX="364.0" layoutY="363.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="LitsDispo" />
+        <TextField fx:id="LitsDisponible" layoutX="476.0" layoutY="358.0" prefHeight="35.0" prefWidth="171.0" styleClass="form-textarea" stylesheets="@../CSS/form.css" />
         <RadioButton fx:id="DisponibleRadioButton" layoutX="465.0" layoutY="222.0" mnemonicParsing="false" text="Disponible" />
         <RadioButton fx:id="nonDisponibleRadioButton" layoutX="576.0" layoutY="222.0" mnemonicParsing="false" text="nonDisponible" />
-        <TableView fx:id="tableChambre" layoutX="721.0" layoutY="40.0" prefHeight="323.0" prefWidth="365.0">
+        <TableView fx:id="tableChambre" layoutX="721.0" layoutY="40.0" prefHeight="323.0" prefWidth="355.0" stylesheets="@../CSS/styk.css">
             <columns>
                 <TableColumn fx:id="NumeroChambre" prefWidth="70.0" text="Numero" />
                 <TableColumn fx:id="PersonnelChambre" prefWidth="70.0" text="PersonnelChambre" />
@@ -36,7 +36,7 @@
         <Button fx:id="AjouterChambreBtn" layoutX="760.0" layoutY="427.0" mnemonicParsing="false" onAction="#handleAjouterChambre" prefHeight="26.0" prefWidth="78.0" styleClass="add-btn" stylesheets="@../CSS/srylee.css" text="Ajouter" />
         <Button fx:id="ModifierChambreBtn" layoutX="874.0" layoutY="425.0" mnemonicParsing="false" onAction="#handleModifierChambre" prefHeight="26.0" prefWidth="78.0" styleClass="update-btn" stylesheets="@../CSS/srylee.css" text="Modifier" />
         <Button fx:id="SupprimerChambreBtn" layoutX="993.0" layoutY="427.0" mnemonicParsing="false" onAction="#handleSupprimerChambre" prefHeight="26.0" prefWidth="78.0" styleClass="delete-btn" stylesheets="@../CSS/srylee.css" text="Supprimer" />
-        <ChoiceBox fx:id="personnelChambre" layoutX="476.0" layoutY="142.0" prefHeight="35.0" prefWidth="171.0" />
+        <ChoiceBox fx:id="personnelChambre" layoutX="476.0" layoutY="142.0" prefHeight="35.0" prefWidth="171.0" styleClass="form-textarea" stylesheets="@../CSS/form.css" />
 
 
         <AnchorPane layoutX="-13.0" prefHeight="650.0" prefWidth="311.0" style="-fx-background-color: white;">

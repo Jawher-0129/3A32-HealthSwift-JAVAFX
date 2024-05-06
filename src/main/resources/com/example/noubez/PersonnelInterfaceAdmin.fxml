@@ -14,26 +14,26 @@
 
 <AnchorPane prefHeight="541.0" prefWidth="1389.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.noubez.PersonnelController">
     <children>
-        <TextField fx:id="Prenom_personnel" layoutX="434.0" layoutY="147.0" />
-        <TextField fx:id="Nom" layoutX="434.0" layoutY="100.0" />
-        <TextField fx:id="experiencePersonnel" layoutX="434.0" layoutY="195.0" />
-        <CheckBox fx:id="DisponibleRadioButton" layoutX="438.0" layoutY="338.0" mnemonicParsing="false" text="Disponible" />
+        <TextField fx:id="Prenom_personnel" layoutX="434.0" layoutY="147.0" styleClass="form-textfield" stylesheets="@../CSS/form.css" />
+        <TextField fx:id="Nom" layoutX="434.0" layoutY="100.0" styleClass="form-textfield" stylesheets="@../CSS/form.css" />
+        <TextField fx:id="experiencePersonnel" layoutX="434.0" layoutY="195.0" styleClass="form-textfield" stylesheets="@../CSS/form.css" />
+        <CheckBox fx:id="DisponibleRadioButton" layoutX="438.0" layoutY="338.0" mnemonicParsing="false" styleClass="arrow-button" stylesheets="@../CSS/form.css" text="Disponible" />
         <CheckBox fx:id="nonDisponibleRadioButton" layoutX="539.0" layoutY="338.0" mnemonicParsing="false" text="Non Disponible" />
-        <Label layoutX="351.0" layoutY="104.0" text="Nom" />
-        <Label layoutX="343.0" layoutY="151.0" text="Prénom" />
-        <Label layoutX="346.0" layoutY="190.0" text="Expérience" />
-        <TextField fx:id="RatingPersonnel" layoutX="434.0" layoutY="292.0" />
-        <Label layoutX="353.0" layoutY="248.0" text="Rôle" />
-        <Label fx:id="Disponibilite" layoutX="348.0" layoutY="342.0" text="Disponibilité" />
-        <Label layoutX="348.0" layoutY="296.0" text="Rating" />
-        <Label layoutX="348.0" layoutY="401.0" text="Image" />
+        <Label layoutX="360.0" layoutY="107.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Nom" />
+        <Label layoutX="343.0" layoutY="151.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Prénom" />
+        <Label layoutX="340.0" layoutY="203.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Expérience" />
+        <TextField fx:id="RatingPersonnel" layoutX="434.0" layoutY="292.0" styleClass="form-textfield" stylesheets="@../CSS/form.css" />
+        <Label layoutX="354.0" layoutY="256.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Rôle" />
+        <Label fx:id="Disponibilite" layoutX="319.0" layoutY="338.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Disponibilité" />
+        <Label layoutX="346.0" layoutY="296.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Rating" />
+        <Label layoutX="348.0" layoutY="401.0" styleClass="form-label" stylesheets="@../CSS/form.css" text="Image" />
         <Button fx:id="AjouterPersonnelBtn" layoutX="739.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleAjouterPersonnel" prefHeight="31.0" prefWidth="73.0" styleClass="add-btn" stylesheets="@../CSS/srylee.css" text="Ajouter" />
-        <Button fx:id="choisir" layoutX="440.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleChoisirImage" text="Choisir une image" />
-        <ChoiceBox fx:id="roleChoiceBox" layoutX="435.0" layoutY="243.0" prefWidth="150.0" />
+        <Button fx:id="choisir" layoutX="440.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleChoisirImage" styleClass="form-button" stylesheets="@../CSS/form.css" text="Choisir une image" />
+        <ChoiceBox fx:id="roleChoiceBox" layoutX="435.0" layoutY="243.0" prefHeight="44.0" prefWidth="176.0" styleClass="form-textfield" stylesheets="@../CSS/form.css" />
         <Button fx:id="ModifierPersonnelBtn" layoutX="841.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleModifierPersonnel" prefHeight="31.0" prefWidth="73.0" styleClass="update-btn" stylesheets="@../CSS/srylee.css" text="Modifier" />
         <Button fx:id="SupprimerPersonnelBtn" layoutX="951.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleSupprimerPersonnel" prefHeight="30.0" prefWidth="73.0" styleClass="delete-btn" stylesheets="@../CSS/srylee.css" text="Supprimer" />
         <ImageView fx:id="imageView" fitHeight="153.0" fitWidth="176.0" layoutX="412.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" />
-        <TableView fx:id="tablePersonnel" layoutX="683.0" layoutY="26.0" prefHeight="346.0" prefWidth="447.0">
+        <TableView fx:id="tablePersonnel" layoutX="683.0" layoutY="26.0" prefHeight="346.0" prefWidth="601.0" stylesheets="@../CSS/styk.css">
             <columns>
                 <TableColumn fx:id="idpersonnel" prefWidth="75.0" text="Id Personnel" />
                 <TableColumn fx:id="nompersonnel" prefWidth="75.0" text="Nom" />
