@@ -44,7 +44,7 @@
     <!-- Bouton Sauvegarder -->
     <Button fx:id="AjouterMaterielBtn" layoutX="829.0" layoutY="642.0" onAction="#handleAjouterMateriel" prefHeight="26.0" prefWidth="106.0" styleClass="add-btn" stylesheets="@Style.css" text="Ajouter" />
    <Button fx:id="choisir" layoutX="528.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleChoisirImage" prefHeight="38.0" prefWidth="182.0" styleClass="choose-image-btn" stylesheets="@Style.css" text="Choisir une image" />
-   <ImageView fx:id="imageView" fitHeight="99.0" fitWidth="118.0" layoutX="876.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="imageView" fitHeight="99.0" fitWidth="118.0" layoutX="978.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true" />
    <TableView fx:id="materielTableView" layoutX="91.0" layoutY="20.0" prefHeight="294.0" prefWidth="720.0" stylesheets="@Style.css">
      <columns>
        <TableColumn fx:id="idMaterielColumn" prefWidth="75.0" text="Identifiant" />
