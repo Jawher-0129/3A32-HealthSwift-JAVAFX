@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="sms event">
+    <list default="true" id="9ae1f55a-a411-456a-bd0e-7b02c2411465" name="Changes" comment="pdf">
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/PdfEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ActualiteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementFront.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/PaginationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/PaginationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SidebarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SidebarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Test/Main2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/Main2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EvenementController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test/MainFx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Actualites.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Actualites.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/EvenementFront.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Evenements.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Style.css" afterDir="false" />
     </list>
@@ -27,8 +26,8 @@
       <list>
         <option value="Interface" />
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -265,6 +264,10 @@
       <workItem from="1714771867274" duration="3234000" />
       <workItem from="1714776579201" duration="47000" />
       <workItem from="1714777205608" duration="465000" />
+      <workItem from="1714817383185" duration="208000" />
+      <workItem from="1714817957312" duration="10139000" />
+      <workItem from="1714911410732" duration="670000" />
+      <workItem from="1715031992929" duration="7119000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -306,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714685912960</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="final">
+      <option name="closed" value="true" />
+      <created>1714817447805</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1714817447805</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,6 +329,8 @@
     <MESSAGE value="thirdxl puch" />
     <MESSAGE value="semi final" />
     <MESSAGE value="sms event" />
-    <option name="LAST_COMMIT_MESSAGE" value="sms event" />
+    <MESSAGE value="final" />
+    <MESSAGE value="pdf" />
+    <option name="LAST_COMMIT_MESSAGE" value="pdf" />
   </component>
 </project>

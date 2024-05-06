@@ -83,7 +83,6 @@ public class ActualiteController implements Initializable {
     }
 
     private void configureTableView() {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id_actualite"));
         colTitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colTypepubcible.setCellValueFactory(new PropertyValueFactory<>("type_pub_cible"));

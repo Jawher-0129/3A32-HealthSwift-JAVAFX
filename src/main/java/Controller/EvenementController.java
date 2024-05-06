@@ -1,6 +1,5 @@
 package Controller;
 
-import entite.Actualite;
 import entite.Evenement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,14 +19,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import Service.EvenementService;
 import org.controlsfx.control.Notifications;
+import util.PdfEvent;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -117,6 +113,8 @@ public class EvenementController implements Initializable {
     private Label lieuErrorLabel;
     @FXML
     private Label objErrorLabel;
+    @FXML
+    private Button pdf_btn;
 
 
 
@@ -135,7 +133,6 @@ public class EvenementController implements Initializable {
 
 
     private void configureTableView() {
-        colIdEvent.setCellValueFactory(new PropertyValueFactory<>("id_evenement"));
         colTitreEvent.setCellValueFactory(new PropertyValueFactory<>("Titre"));
         colDateEvent.setCellValueFactory(new PropertyValueFactory<>("Date"));
         colDureeEvent.setCellValueFactory(new PropertyValueFactory<>("Duree"));
@@ -544,5 +541,22 @@ public class EvenementController implements Initializable {
                 .title(title)
                 .text(message)
                 .showInformation();
+    }
+    @FXML
+    void handleDownloadPdfButtonAction(ActionEvent event) {
+        ObservableList<Evenement> eventList = tableEvent.getItems();
+
+        // Check if there are any events to download
+        if (eventList.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "No Data", "No events to download", "Please add events before downloading the PDF.");
+            return;
+        }
+
+        String filePath = "C:\\Users\\user\\Desktop\\esprit 3éme\\pi\\Evenement.pdf";
+
+        // Call the method to generate the PDF with the retrieved data
+        PdfEvent pdfGenerator = new PdfEvent();
+        pdfGenerator.handleDownloadPdfButtonAction(filePath, eventList);
+        showAlert(Alert.AlertType.INFORMATION, "Download Successful", "PDF generated successfully", "The PDF has been saved successfully at: " + filePath);
     }
 }

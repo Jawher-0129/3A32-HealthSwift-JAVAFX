@@ -16,6 +16,7 @@ module com.example.gestionevenement {
     requires org.apache.poi.ooxml;
     requires java.mail;
     requires twilio;
+    requires org.apache.pdfbox;
     //requires java.sdk;//for mailling
 
 }

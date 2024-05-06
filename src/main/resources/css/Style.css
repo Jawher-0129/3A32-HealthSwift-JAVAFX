@@ -163,7 +163,21 @@
     -fx-background-color:#2d7755;
     -fx-text-fill: #fff;
 }
+.pdf-btn {
+    -fx-background-color: #fff;
+    -fx-text-fill: #c51f32;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-cursor: hand;
+    -fx-border-color: #c51f32;
+    -fx-border-radius: 8px;
+}
 
+.pdf-btn:hover{
+    -fx-background-color:#c51f32;
+    -fx-text-fill: #fff;
+}
 .delete-btn{
     -fx-background-color:#90242f;
     -fx-background-radius:8px;
