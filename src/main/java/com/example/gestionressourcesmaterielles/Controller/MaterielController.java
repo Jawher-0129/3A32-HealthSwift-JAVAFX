@@ -1,4 +1,8 @@
 package com.example.gestionressourcesmaterielles.Controller;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.layout.borders.Border;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
 import javafx.scene.chart.PieChart;
 import java.time.Duration;
 
@@ -33,8 +37,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.layout.element.Cell;
 
 import com.itextpdf.io.image.ImageDataFactory;
@@ -421,30 +428,49 @@ public class MaterielController implements Initializable {
         try (PdfWriter writer = new PdfWriter("materiels.pdf");
              PdfDocument pdf = new PdfDocument(writer);
              Document document = new Document(pdf)) {
-            document.add(new Paragraph("Liste des Matériels"));
-            Table table = new Table(6);
-            table.addCell("ID");
-            table.addCell("Libellé");
-            table.addCell("Description");
-            table.addCell("Disponibilité");
-            table.addCell("Prix");
+            // Ajouter des marges
+            document.setMargins(50, 50, 50, 50);
 
-            // Récupération des données des matériels depuis la TableView
+            // Style du titre
+            Paragraph title = new Paragraph("Liste des Matériels")
+                    .setFontSize(20)
+                    .setFontColor(ColorConstants.BLUE)
+                    .setTextAlignment(TextAlignment.CENTER);
+            document.add(title);
+
+            // Style de la table
+            Table table = new Table(UnitValue.createPercentArray(new float[]{10, 20, 30, 20, 20}))
+                    .setMarginBottom(20)
+                    .setFixedLayout()
+                    .setBorder(Border.NO_BORDER);
+            table.addHeaderCell("Libellé");
+            table.addHeaderCell("Description");
+            table.addHeaderCell("Disponibilité");
+            table.addHeaderCell("Prix");
+            table.addHeaderCell("Date Expiration");
+
             ObservableList<Materiel> materiels = materielTableView.getItems();
             for (Materiel materiel : materiels) {
-                table.addCell(String.valueOf(materiel.getId()));
                 table.addCell(materiel.getLibelleMateriel());
                 table.addCell(materiel.getDescription());
                 table.addCell(materiel.getDisponibilite() == 1 ? "Disponible" : "Non disponible");
                 table.addCell(String.valueOf(materiel.getPrix()));
+                table.addCell(materiel.getDate_expiration().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))); // Formater la date d'expiration en chaîne de caractères
             }
             document.add(table);
+
+            // Style du pied de page
+            Paragraph footer = new Paragraph("Centre : Healthswift\nDirecteur : Jawher Talbi")
+                    .setFontSize(10)
+                    .setFontColor(ColorConstants.BLACK);
+            document.add(footer);
 
             System.out.println("PDF généré avec succès !");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> CategoriesLibelle = categorieService.afficherLibellesCategories();
@@ -469,9 +495,7 @@ public class MaterielController implements Initializable {
                     imageView.setImage(null);
                 }
             }
-
         });
-
 
         LocalDateTime now = LocalDateTime.now();
         List<Materiel> listmateriel = materielService.getAll();
@@ -506,7 +530,7 @@ public class MaterielController implements Initializable {
             if (expirationDate != null) {
                 Duration difference = Duration.between(expirationDate, now);
                 long secondsDifference = difference.getSeconds();
-                if (secondsDifference > 60*5){
+                if (secondsDifference > 2){
                     try {
                         materielService.delete(materiel.getId());
                         String msg="Bonjour Mr(Mme) Jawher nous vous informe que le matériel que vous avez utilisé "+materiel.getLibelleMateriel()+"a été expiré";

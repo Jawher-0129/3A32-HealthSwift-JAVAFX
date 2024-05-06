@@ -243,6 +243,23 @@ public class MaterielService implements IService<Materiel> {
     }
 
 
+ /* public void envoyerSMS(String numeroDestinataire, String message) {
+        // Remplacez les valeurs suivantes par vos propres informations Twilio
+        String ACCOUNT_SID = "AC3631956341a7a96bd7f723b1066aa398";
+        String AUTH_TOKEN = "21800cf755383141ec0211a2dfa436c9";
+        String TWILIO_NUMERO = "+12569065620";
+
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+        Message twilioMessage = Message.creator(
+                        new PhoneNumber(numeroDestinataire),
+                        new PhoneNumber(TWILIO_NUMERO),
+                        message)
+                .create();
+
+        System.out.println("SMS envoyé avec succès avec l'ID : " + twilioMessage.getSid());
+    }*/
+
 
 
 
