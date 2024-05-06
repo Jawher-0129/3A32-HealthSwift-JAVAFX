@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminPage">
+    <children>
+        <AnchorPane prefHeight="503.0" prefWidth="210.0" style="-fx-background-color: #42A9E6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Button layoutX="47.0" layoutY="181.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" text="Users" />
+                <Button layoutX="47.0" layoutY="252.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" text="Donations" />
+              <Button layoutX="44.0" layoutY="110.0" mnemonicParsing="false" onAction="#statis" prefHeight="49.0" prefWidth="126.0" text="Dashboard" />
+            </children>
+        </AnchorPane>
+
+        <!-- Placeholder Pane for Potential Content on the Right Side -->
+        <Pane layoutX="488.0" layoutY="100.0" AnchorPane.bottomAnchor="73.0" AnchorPane.topAnchor="100.0" />
+
+        <!-- TableView to Display Users -->
+        <!-- TableView to Display Users -->
+        <TableView fx:id="UserTable" layoutX="229.0" layoutY="100.0" prefHeight="338.0" prefWidth="598.0">
+            <columns>
+                <!-- Add the Delete Button Column -->
+                <TableColumn fx:id="Nom" text="Nom" />
+                <TableColumn fx:id="Prenom" text="Prenom" />
+                <TableColumn fx:id="Email" text="Email" />
+                <TableColumn fx:id="Adresse" text="Adresse" />
+                <TableColumn fx:id="Telephone" text="Telephone" />
+                <TableColumn fx:id="Roles" text="Roles" />
+                <!-- Add more columns as needed -->
+            </columns>
+        </TableView>
+
+        <!-- Button to Delete User -->
+        <Button layoutX="744.0" layoutY="446.0" mnemonicParsing="false" onAction="#delete" text="Delete User" />
+
+        <ImageView fitHeight="80.0" fitWidth="85.0" layoutX="229.0" layoutY="9.0">
+            <image>
+                <Image url="file:/C:\Users\admin\Desktop\PIDEVJAVAFIRAS\PidevUserJava\src\main\images\Capture d'écran 2024-02-18 152610.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="searchField" layoutX="365.0" layoutY="16.0" onKeyReleased="#search" prefHeight="30.0" prefWidth="151.0" promptText="Search..." />
+        <Button fx:id="pdfButton" layoutX="229.0" layoutY="446.0" mnemonicParsing="false" onAction="#generatePDF" text="Pdf" />
+      <ImageView fitHeight="35.0" fitWidth="29.0" layoutX="327.0" layoutY="16.0">
+         <image>
+            <Image url="file:/C:\Users\admin\Desktop\PIDEVJAVAFIRAS\PidevUserJava\src\main\images\png-clipart-magnifying-glass-computer-icons-searching-glass-share-icon.png" />
+         </image>
+      </ImageView>
+          <HBox spacing="10" />
+
+      <ImageView fitHeight="49.0" fitWidth="47.0" layoutX="762.0" layoutY="7.0">
+         <image>
+            <Image url="file:/C:\Users\admin\Desktop\PIDEVJAVAFIRAS\PidevUserJava\src\main\images/png-clipart-computer-icons-privacy-policy-admin-icon-copyright-rim.png" />
+         </image>
+      </ImageView>
+
+              <!-- Display Name and Role of Connected User -->
+        <Label fx:id="NameUser" layoutX="651.0" layoutY="14.0" prefHeight="35.0" prefWidth="185.0" text="     John Doe" textFill="#2e1f3e">
+            <font>
+                <Font name="Segoe UI" size="18.0" />
+            </font>
+        </Label>
+      <Button layoutX="757.0" layoutY="61.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Button layoutX="664.0" layoutY="61.0" mnemonicParsing="false" onAction="#EditProfile" text="Edit Profile" />
+           <Button fx:id="ascButton" layoutX="365.0" layoutY="61.0" mnemonicParsing="false" onAction="#sortAsc" styleClass="sort-button" text="ASC" />
+           <Button fx:id="descButton" layoutX="461.0" layoutY="61.0" mnemonicParsing="false" onAction="#sortDesc" styleClass="sort-button" text="DESC" />
+
+    </children>
+</AnchorPane>

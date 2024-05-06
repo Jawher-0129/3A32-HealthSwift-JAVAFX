@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditProfileController">
+    <children>
+        <Label layoutX="549.0" layoutY="32.0" text="Edit Profile">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+        <Label layoutX="458.0" layoutY="182.0" text="Nom" />
+        <TextField fx:id="nomField" layoutX="457.0" layoutY="202.0" />
+        <Label layoutX="627.0" layoutY="182.0" text="Prenom" />
+        <TextField fx:id="prenomField" layoutX="630.0" layoutY="202.0" />
+        <Label layoutX="457.0" layoutY="250.0" text="Email" />
+        <TextField fx:id="emailField" layoutX="457.0" layoutY="276.0" />
+        <Label layoutX="450.0" layoutY="335.0" text="Adresse" />
+        <TextField fx:id="adresseField" layoutX="457.0" layoutY="360.0" />
+        <Label layoutX="627.0" layoutY="335.0" text="Telephone" />
+        <TextField fx:id="telephoneField" layoutX="630.0" layoutY="360.0" />
+        <Label layoutX="630.0" layoutY="250.0" text="Password" />
+        <TextField fx:id="passwordField" layoutX="630.0" layoutY="276.0" />
+        <Button layoutX="554.0" layoutY="413.0" mnemonicParsing="false" onAction="#saveChanges" text="Save Changes" textFill="#df1717">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <AnchorPane layoutY="-1.0" prefHeight="553.0" prefWidth="382.0" style="-fx-background-color: #42A9E6;" />
+      <ImageView fitHeight="101.0" fitWidth="105.0" layoutX="554.0" layoutY="81.0">
+         <image>
+            <Image url="@../images/Capture%20d'écran%202024-02-18%20152610.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="390.0" layoutY="30.0" mnemonicParsing="false" onAction="#AdminPage" prefHeight="40.0" prefWidth="105.0" text="Back" textFill="#df1717">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>

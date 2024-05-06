@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="547.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StatController">
+
+    <children>
+        <Button fx:id="displ" layoutX="485.0" layoutY="93.0" mnemonicParsing="false" onAction="#displaystats" prefHeight="26.0" prefWidth="143.0" text="Display Stat " />
+        <PieChart fx:id="pieChart" layoutX="413.0" layoutY="153.0" prefHeight="188.0" prefWidth="200.0" />
+      <AnchorPane layoutX="-3.0" prefHeight="558.0" prefWidth="254.0" style="-fx-background-color: #42A9E6;" />
+      <ImageView fitHeight="85.0" fitWidth="96.0" layoutX="271.0" layoutY="14.0">
+         <image>
+            <Image url="file:\C:/Users/admin/Desktop/PIDEVJAVAFIRAS/PidevUserJava/src/main/images/Capture%20d'écran%202024-02-18%20152610.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="-2.0" layoutY="-2.0" prefHeight="558.0" prefWidth="254.0" style="-fx-background-color: #42A9E6;">
+         <children>
+            <Button layoutX="47.0" layoutY="181.0" mnemonicParsing="false" onAction="#back" prefHeight="49.0" prefWidth="126.0" text="Users" />
+            <Button layoutX="47.0" layoutY="252.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" text="Donations" />
+            <Button layoutX="44.0" layoutY="110.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" text="Dashboard" />
+         </children>
+      </AnchorPane>
+    </children>
+
+</AnchorPane>
