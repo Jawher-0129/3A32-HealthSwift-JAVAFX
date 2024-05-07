@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +71,8 @@ public class ChambreController {
 
     @FXML
     private TableView<Chambre> tableChambre;
+    @FXML
+    private Button exportToExcelButton;
 
     private void populateFields(Chambre chambre) {
         this.Numero.setText(Integer.toString(chambre.getNumero()));
@@ -229,26 +232,21 @@ public class ChambreController {
             this.loadChambres();
         }
     }
-/*
     @FXML
-    private void filterTable() {
-        String searchText = searchField.getText().trim(); // Remove toLowerCase() as integers aren't case-sensitive
-
-        if (searchText.isEmpty()) {
-            tableChambre.setItems(FXCollections.observableArrayList(chambreService.getAll()));
-            return;
+    void handleExportToExcel(ActionEvent event) {
+        String filePath = "C:\\Users\\Admin\\Downloads\\ChambreExport.xlsx"; // Spécifiez le chemin de fichier souhaité
+        file:///C:/Users/Admin/Downloads/Personnel.pdf
+        try {
+            chambreService.exportToExcel(tableChambre, "Chambre Data", filePath);
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Chambre data exported to Excel", "Chambre data has been successfully exported to Excel file.");
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Export Error", "An error occurred while exporting Chambre data to Excel: " + e.getMessage());
         }
 
-        ObservableList<Chambre> filteredList = FXCollections.observableArrayList(chambreService.getAll()).stream()
-                .filter(chambre ->
-                        Integer.toString(chambre.getNumero()).contains(searchText) ||  // Convert integer to String for comparison
-                                Integer.toString(chambre.getNombre_lits_total()).contains(searchText) ||
-                                Integer.toString(chambre.getNmbr_lits_disponible()).contains(searchText))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-        tableChambre.setItems(filteredList);
     }
-*/
+
+
 }
 
 

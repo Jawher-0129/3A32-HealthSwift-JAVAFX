@@ -10,6 +10,8 @@ module com.example.noubez {
     requires twilio;
     requires com.google.zxing;
     requires com.google.zxing.javase;
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
     opens com.example.noubez.Model;
     opens com.example.noubez to javafx.fxml;
 
@@ -17,4 +19,5 @@ module com.example.noubez {
 
     opens com.example.noubez.util to javafx.fxml;
     exports com.example.noubez;
+    opens com.example.noubez.Service;
 }

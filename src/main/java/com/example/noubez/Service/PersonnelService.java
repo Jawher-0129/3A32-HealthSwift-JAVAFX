@@ -1,5 +1,6 @@
 package com.example.noubez.Service;
 
+import com.example.noubez.Model.Chambre;
 import com.example.noubez.Model.Personnel;
 import com.example.noubez.util.DataSource;
 
@@ -8,6 +9,8 @@ import java.util.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import java.io.IOException;
 
@@ -18,6 +21,10 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import javafx.scene.image.Image;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -146,8 +153,6 @@ public class PersonnelService implements com.example.noubez.Service.IService<Per
     public Personnel getById(int id_personnel) {
         return null;
     }
-
-
     public List<Personnel> getTopPersonnels(int rating) {
         List<Personnel> personnelList = new ArrayList<>();
         String query = "SELECT * FROM personnel WHERE rating = ?";

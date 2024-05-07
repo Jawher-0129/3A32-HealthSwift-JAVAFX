@@ -14,6 +14,7 @@
 
 <AnchorPane prefHeight="541.0" prefWidth="1389.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.noubez.PersonnelController">
     <children>
+        <TextField fx:id="searchField" layoutX="331.0" layoutY="48.0" prefHeight="25.0" prefWidth="338.0" promptText="Search..." />
         <TextField fx:id="Prenom_personnel" layoutX="434.0" layoutY="147.0" styleClass="form-textfield" stylesheets="@../CSS/form.css" />
         <TextField fx:id="Nom" layoutX="434.0" layoutY="100.0" styleClass="form-textfield" stylesheets="@../CSS/form.css" />
         <TextField fx:id="experiencePersonnel" layoutX="434.0" layoutY="195.0" styleClass="form-textfield" stylesheets="@../CSS/form.css" />

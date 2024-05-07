@@ -1,7 +1,12 @@
 package com.example.noubez.Service;
-import com.example.noubez.Model.Personnel;
 import com.example.noubez.Model.Chambre;
 import com.example.noubez.util.DataSource;
+
+import com.example.noubez.util.ExcelExporter;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +16,16 @@ import java.util.List;
         private Connection cnx;
         private Statement ste;
         private PreparedStatement pst;
-        public ChambreService(){
-            cnx= DataSource.getInstance().getConnection();
+
+        public ChambreService() {
+            cnx = DataSource.getInstance().getConnection();
         }
 
-        public void add(Chambre c){
-            String requete="insert into chambre(numero,personnel,disponibilite,nombre_lits_total,nmbr_lits_disponible) " +
-                    "values('"+c.getNumero()+"','"+c.getPersonnel()+"','"+c.getDisponibilite()+"','"+c.getNombre_lits_total()+"','"+c.getNmbr_lits_disponible()+"')";
+        public void add(Chambre c) {
+            String requete = "insert into chambre(numero,personnel,disponibilite,nombre_lits_total,nmbr_lits_disponible) " +
+                    "values('" + c.getNumero() + "','" + c.getPersonnel() + "','" + c.getDisponibilite() + "','" + c.getNombre_lits_total() + "','" + c.getNmbr_lits_disponible() + "')";
             try {
-                ste=cnx.createStatement();
+                ste = cnx.createStatement();
                 ste.executeUpdate(requete);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -31,14 +37,14 @@ import java.util.List;
 
         @Override
         public void delete(int numero) {
-            String requete="delete from chambre where numero=?";
+            String requete = "delete from chambre where numero=?";
             try {
-                pst=cnx.prepareStatement(requete);
+                pst = cnx.prepareStatement(requete);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             try {
-                pst.setInt(1,numero);
+                pst.setInt(1, numero);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -72,14 +78,13 @@ import java.util.List;
         }
 
 
-
         @Override
         public List<Chambre> getAll() {
-            String requete="Select * from Chambre";
-            List<Chambre> list=new ArrayList<>();
+            String requete = "Select * from Chambre";
+            List<Chambre> list = new ArrayList<>();
             try {
-                ste= cnx.createStatement();
-                ResultSet rs=ste.executeQuery(requete);
+                ste = cnx.createStatement();
+                ResultSet rs = ste.executeQuery(requete);
                 while (rs.next()) {
                     list.add(new Chambre(
                             rs.getInt("numero"),
@@ -96,7 +101,8 @@ import java.util.List;
             return list;
 
         }
-        public  List<Integer> afficherchambre() {
+
+        public List<Integer> afficherchambre() {
             List<Integer> numero = new ArrayList<>();
             String requete = "select numero from Chambre";
             try {
@@ -122,5 +128,13 @@ import java.util.List;
         public Chambre getById(int numero) {
             return null;
         }
-    }
 
+
+
+        public void exportToExcel(TableView<Chambre> tableView, String sheetName, String filePath) throws IOException {
+            ObservableList<Chambre> chambres = tableView.getItems();
+            ExcelExporter.exportChambresToExcel(chambres, filePath);
+        }
+
+
+    }

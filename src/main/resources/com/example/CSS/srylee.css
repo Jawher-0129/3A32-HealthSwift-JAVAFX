@@ -229,3 +229,11 @@
     -fx-font-size:10px;
     -fx-font-family:"Arial";
 }
+.excel-btn{
+    -fx-background-color:#4aa3df;
+    -fx-background-radius:8px;
+    -fx-cursor:hand;
+    -fx-text-fill:#fff;
+    -fx-font-size:10px;
+    -fx-font-family:"Arial";
+}

@@ -100,6 +100,8 @@ public class PersonnelController {
     private Button SMSButton;
     @FXML
     private Button EmailButton;
+    @FXML
+    private TextField searchField;
     private Image loadImage(String imageUrl) {
         // Implement your logic to load image from URL or file
         return new Image(imageUrl);
@@ -152,6 +154,20 @@ public class PersonnelController {
     void initialize() {
         configureTableView();
         initializePersonnelChoiceBox();
+        // Add a listener to the search field to trigger filtering
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterPersonnelList(newValue);
+        });
+        // Add a listener to reset the table when the search field is cleared
+        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                // Focus lost
+                if (searchField.getText().isEmpty()) {
+                    // Clear the search field, reload the original data
+                    loadPersonnels();
+                }
+            }
+        });
         // Ajouter un écouteur de sélection à la TableView
         tablePersonnel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -168,7 +184,11 @@ public class PersonnelController {
                 // Effacer les champs de texte si aucun personnel n'est sélectionné
                 clearPersonnelDetails();
             }
+
+
         });
+
+
     }
 
     private void showPersonnelQRCode(Personnel personnel) {
@@ -296,17 +316,6 @@ public class PersonnelController {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
     @FXML
     void handleChoisirImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -478,6 +487,27 @@ public class PersonnelController {
         }
     }
 
+
+
+@FXML
+    private void filterPersonnelList(String searchTerm) {
+        // Récupère la liste de tous les personnels
+        ObservableList<Personnel> allPersonnel = tablePersonnel.getItems();
+
+        // Crée une nouvelle liste pour stocker les personnels filtrés
+        ObservableList<Personnel> filteredPersonnel = FXCollections.observableArrayList();
+
+        // Parcourt tous les personnels et vérifie s'ils correspondent au terme de recherche
+        for (Personnel personnel : allPersonnel) {
+            if (personnel.getNom().toLowerCase().contains(searchTerm.toLowerCase()) ||
+                    personnel.getPrenom_personnel().toLowerCase().contains(searchTerm.toLowerCase())) {
+                filteredPersonnel.add(personnel);
+            }
+        }
+
+        // Affiche les personnels filtrés dans la TableView
+        tablePersonnel.setItems(filteredPersonnel);
+    }
 
 
 }

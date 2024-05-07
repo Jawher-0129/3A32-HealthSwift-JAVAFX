@@ -7,7 +7,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState;
+
 
 import java.awt.*;
 import java.io.IOException;
